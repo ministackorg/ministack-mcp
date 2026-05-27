@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ministack-mcp"
+version = "0.1.0"
+description = "MCP knowledge layer for MiniStack — plug into any IDE AI (Claude Desktop, Cursor, Continue, Windsurf, Cline)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Nahuel Nucera" }]
+keywords = ["mcp", "ministack", "aws", "localstack", "claude", "cursor", "ai", "agents"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Testing",
+]
+dependencies = [
+  "mcp>=1.2.0",
+  "requests>=2.31.0",
+]
+
+[project.urls]
+Homepage = "https://ministack.org"
+Repository = "https://github.com/ministackorg/ministack-mcp"
+Issues = "https://github.com/ministackorg/ministack-mcp/issues"
+
+[project.scripts]
+ministack-mcp = "ministack_mcp.server:main"
+
+[tool.setuptools]
+packages = ["ministack_mcp"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+ministack_mcp = ["catalog.json", "parity.json", "README.md"]

@@ -1,0 +1,2500 @@
+{
+  "schema_version": 1,
+  "ministack_version": "1.3.50",
+  "generated_at": "2026-05-27T07:14:19Z",
+  "endpoint": {
+    "default_url": "http://localhost:4566",
+    "default_port": 4566,
+    "auth_model": "SigV4 not validated; access key ID is read to derive account",
+    "default_account": "000000000000",
+    "default_region": "us-east-1"
+  },
+  "service_count": 67,
+  "services": {
+    "account": {
+      "name": "account",
+      "operations": [
+        "GetAccountInformation",
+        "GetContactInformation",
+        "GetRegionOptStatus",
+        "ListRegions"
+      ],
+      "operation_count": 4,
+      "extraction_sources": [
+        "url-paths (4)"
+      ]
+    },
+    "acm": {
+      "name": "acm",
+      "operations": [
+        "AddTagsToCertificate",
+        "DeleteCertificate",
+        "DescribeCertificate",
+        "GetCertificate",
+        "ImportCertificate",
+        "ListCertificates",
+        "ListTagsForCertificate",
+        "RemoveTagsFromCertificate",
+        "RenewCertificate",
+        "RequestCertificate",
+        "ResendValidationEmail",
+        "UpdateCertificateOptions"
+      ],
+      "operation_count": 12,
+      "extraction_sources": [
+        "dict-keys (12)"
+      ]
+    },
+    "alb": {
+      "name": "alb",
+      "operations": [
+        "AddTags",
+        "CreateListener",
+        "CreateLoadBalancer",
+        "CreateRule",
+        "CreateTargetGroup",
+        "DeleteListener",
+        "DeleteLoadBalancer",
+        "DeleteRule",
+        "DeleteTargetGroup",
+        "DeregisterTargets",
+        "DescribeListenerAttributes",
+        "DescribeListeners",
+        "DescribeLoadBalancerAttributes",
+        "DescribeLoadBalancers",
+        "DescribeRules",
+        "DescribeTags",
+        "DescribeTargetGroupAttributes",
+        "DescribeTargetGroups",
+        "DescribeTargetHealth",
+        "ModifyListener",
+        "ModifyListenerAttributes",
+        "ModifyLoadBalancerAttributes",
+        "ModifyRule",
+        "ModifyTargetGroup",
+        "ModifyTargetGroupAttributes",
+        "RegisterTargets",
+        "RemoveTags",
+        "SetRulePriorities"
+      ],
+      "operation_count": 28,
+      "extraction_sources": [
+        "dict-keys (28)"
+      ]
+    },
+    "apigateway": {
+      "name": "apigateway",
+      "operations": [
+        "CreateApi",
+        "CreateAuthorizer",
+        "CreateDeployment",
+        "CreateIntegration",
+        "CreateRoute",
+        "CreateStage",
+        "DeleteApi",
+        "DeleteAuthorizer",
+        "DeleteDeployment",
+        "DeleteIntegration",
+        "DeleteRoute",
+        "DeleteStage",
+        "GetApi",
+        "GetApis",
+        "GetAuthorizer",
+        "GetAuthorizers",
+        "GetDeployment",
+        "GetDeployments",
+        "GetIntegration",
+        "GetIntegrations",
+        "GetRoute",
+        "GetRoutes",
+        "GetStage",
+        "GetStages",
+        "GetTags",
+        "TagResource",
+        "UntagResource",
+        "UpdateApi",
+        "UpdateAuthorizer",
+        "UpdateIntegration",
+        "UpdateRoute",
+        "UpdateStage"
+      ],
+      "operation_count": 32,
+      "extraction_sources": [
+        "docstring (+32)"
+      ]
+    },
+    "apigateway_v1": {
+      "name": "apigateway_v1",
+      "operations": [
+        "CreateApiKey",
+        "CreateAuthorizer",
+        "CreateDeployment",
+        "CreateDomainName",
+        "CreateModel",
+        "CreateResource",
+        "CreateRestApi",
+        "CreateStage",
+        "CreateUsagePlan",
+        "CreateUsagePlanKey",
+        "DeleteApiKey",
+        "DeleteAuthorizer",
+        "DeleteDeployment",
+        "DeleteDomainName",
+        "DeleteIntegration",
+        "DeleteIntegrationResponse",
+        "DeleteMethod",
+        "DeleteMethodResponse",
+        "DeleteModel",
+        "DeleteResource",
+        "DeleteRestApi",
+        "DeleteStage",
+        "DeleteUsagePlan",
+        "DeleteUsagePlanKey",
+        "GetApiKey",
+        "GetApiKeys",
+        "GetAuthorizer",
+        "GetAuthorizers",
+        "GetDeployment",
+        "GetDeployments",
+        "GetDomainName",
+        "GetDomainNames",
+        "GetIntegration",
+        "GetIntegrationResponse",
+        "GetMethod",
+        "GetMethodResponse",
+        "GetModel",
+        "GetModels",
+        "GetResource",
+        "GetResources",
+        "GetRestApi",
+        "GetRestApis",
+        "GetStage",
+        "GetStages",
+        "GetTags",
+        "GetUsagePlan",
+        "GetUsagePlanKeys",
+        "GetUsagePlans",
+        "PutIntegration",
+        "PutIntegrationResponse",
+        "PutMethod",
+        "PutMethodResponse",
+        "TagResource",
+        "UntagResource",
+        "UpdateAuthorizer",
+        "UpdateDeployment",
+        "UpdateResource",
+        "UpdateRestApi",
+        "UpdateStage"
+      ],
+      "operation_count": 59,
+      "extraction_sources": [
+        "docstring (+59)"
+      ]
+    },
+    "appconfig": {
+      "name": "appconfig",
+      "operations": [
+        "CreateApplication",
+        "CreateConfigurationProfile",
+        "CreateDeploymentStrategy",
+        "CreateEnvironment",
+        "CreateHostedConfigurationVersion",
+        "DeleteApplication",
+        "DeleteConfigurationProfile",
+        "DeleteDeploymentStrategy",
+        "DeleteEnvironment",
+        "DeleteHostedConfigurationVersion",
+        "GetApplication",
+        "GetConfigurationProfile",
+        "GetDeployment",
+        "GetDeploymentStrategy",
+        "GetEnvironment",
+        "GetHostedConfigurationVersion",
+        "GetLatestConfiguration",
+        "ListApplications",
+        "ListConfigurationProfiles",
+        "ListDeploymentStrategies",
+        "ListDeployments",
+        "ListEnvironments",
+        "ListHostedConfigurationVersions",
+        "ListTagsForResource",
+        "StartConfigurationSession",
+        "StartDeployment",
+        "StopDeployment",
+        "TagResource",
+        "UntagResource",
+        "UpdateApplication",
+        "UpdateConfigurationProfile",
+        "UpdateDeploymentStrategy",
+        "UpdateEnvironment"
+      ],
+      "operation_count": 33,
+      "extraction_sources": [
+        "docstring (+33)"
+      ]
+    },
+    "appsync": {
+      "name": "appsync",
+      "operations": [
+        "CreateApiKey",
+        "CreateDataSource",
+        "CreateGraphQLApi",
+        "CreateResolver",
+        "CreateType",
+        "DeleteApiKey",
+        "DeleteDataSource",
+        "DeleteGraphQLApi",
+        "DeleteResolver",
+        "GetDataSource",
+        "GetGraphQLApi",
+        "GetResolver",
+        "GetType",
+        "ListApiKeys",
+        "ListDataSources",
+        "ListGraphQLApis",
+        "ListResolvers",
+        "ListTagsForResource",
+        "ListTypes",
+        "TagResource",
+        "UntagResource",
+        "UpdateGraphQLApi"
+      ],
+      "operation_count": 22,
+      "extraction_sources": [
+        "docstring (+22)"
+      ]
+    },
+    "appsync_events": {
+      "name": "appsync_events",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
+    "athena": {
+      "name": "athena",
+      "operations": [
+        "BatchGetNamedQuery",
+        "BatchGetQueryExecution",
+        "CreateDataCatalog",
+        "CreateNamedQuery",
+        "CreatePreparedStatement",
+        "CreateWorkGroup",
+        "DeleteDataCatalog",
+        "DeleteNamedQuery",
+        "DeletePreparedStatement",
+        "DeleteWorkGroup",
+        "GetDataCatalog",
+        "GetNamedQuery",
+        "GetPreparedStatement",
+        "GetQueryExecution",
+        "GetQueryResults",
+        "GetTableMetadata",
+        "GetWorkGroup",
+        "ListDataCatalogs",
+        "ListNamedQueries",
+        "ListPreparedStatements",
+        "ListQueryExecutions",
+        "ListTableMetadata",
+        "ListTagsForResource",
+        "ListWorkGroups",
+        "StartQueryExecution",
+        "StopQueryExecution",
+        "TagResource",
+        "UntagResource",
+        "UpdateDataCatalog",
+        "UpdateWorkGroup"
+      ],
+      "operation_count": 30,
+      "extraction_sources": [
+        "dict-keys (30)"
+      ]
+    },
+    "autoscaling": {
+      "name": "autoscaling",
+      "operations": [
+        "CompleteLifecycleAction",
+        "CreateAutoScalingGroup",
+        "CreateLaunchConfiguration",
+        "CreateOrUpdateTags",
+        "DeleteAutoScalingGroup",
+        "DeleteLaunchConfiguration",
+        "DeleteLifecycleHook",
+        "DeletePolicy",
+        "DeleteScheduledAction",
+        "DeleteTags",
+        "DescribeAutoScalingGroups",
+        "DescribeAutoScalingInstances",
+        "DescribeLaunchConfigurations",
+        "DescribeLifecycleHooks",
+        "DescribePolicies",
+        "DescribeScalingActivities",
+        "DescribeScheduledActions",
+        "DescribeTags",
+        "PutLifecycleHook",
+        "PutScalingPolicy",
+        "PutScheduledUpdateGroupAction",
+        "RecordLifecycleActionHeartbeat",
+        "UpdateAutoScalingGroup"
+      ],
+      "operation_count": 23,
+      "extraction_sources": [
+        "dict-keys (23)"
+      ]
+    },
+    "backup": {
+      "name": "backup",
+      "operations": [
+        "CreateBackupPlan",
+        "CreateBackupSelection",
+        "CreateBackupVault",
+        "DeleteBackupPlan",
+        "DeleteBackupSelection",
+        "DeleteBackupVault",
+        "DescribeBackupJob",
+        "DescribeBackupVault",
+        "GetBackupPlan",
+        "GetBackupSelection",
+        "ListBackupJobs",
+        "ListBackupPlanVersions",
+        "ListBackupPlans",
+        "ListBackupSelections",
+        "ListBackupVaults",
+        "ListTags",
+        "StartBackupJob",
+        "StopBackupJob",
+        "TagResource",
+        "UntagResource",
+        "UpdateBackupPlan"
+      ],
+      "operation_count": 21,
+      "extraction_sources": [
+        "docstring (+21)"
+      ]
+    },
+    "batch": {
+      "name": "batch",
+      "operations": [
+        "CreateComputeenvironment",
+        "CreateJobqueue",
+        "DescribeComputeenvironments",
+        "DescribeJobdefinitions",
+        "DescribeJobqueues",
+        "DescribeJobs",
+        "ListJobs",
+        "RegisterJobdefinition",
+        "SubmitJob"
+      ],
+      "operation_count": 9,
+      "extraction_sources": [
+        "url-paths (9)"
+      ]
+    },
+    "cloudfront": {
+      "name": "cloudfront",
+      "operations": [
+        "CreateDistribution",
+        "CreateDistributionWithTags",
+        "CreateFunction",
+        "CreateInvalidation",
+        "CreateKeyValueStore",
+        "CreateOriginAccessControl",
+        "DeleteDistribution",
+        "DeleteFunction",
+        "DeleteKeyValueStore",
+        "DeleteOriginAccessControl",
+        "DescribeFunction",
+        "DescribeKeyValueStore",
+        "GetDistribution",
+        "GetDistributionConfig",
+        "GetFunction",
+        "GetInvalidation",
+        "GetOriginAccessControl",
+        "GetOriginAccessControlConfig",
+        "ListDistributions",
+        "ListFunctions",
+        "ListInvalidations",
+        "ListKeyValueStores",
+        "ListOriginAccessControls",
+        "ListTagsForResource",
+        "PublishFunction",
+        "TagResource",
+        "UntagResource",
+        "UpdateDistribution",
+        "UpdateFunction",
+        "UpdateKeyValueStore",
+        "UpdateOriginAccessControl"
+      ],
+      "operation_count": 31,
+      "extraction_sources": [
+        "docstring (+31)"
+      ]
+    },
+    "cloudfront_keyvaluestore": {
+      "name": "cloudfront_keyvaluestore",
+      "operations": [
+        "DeleteKey",
+        "DescribeKeyValueStore",
+        "GetKey",
+        "ListKeys",
+        "PutKey",
+        "UpdateKeys"
+      ],
+      "operation_count": 6,
+      "extraction_sources": [
+        "docstring (+6)"
+      ]
+    },
+    "cloudtrail": {
+      "name": "cloudtrail",
+      "operations": [
+        "AddTags",
+        "CreateTrail",
+        "DeleteTrail",
+        "DescribeTrails",
+        "GetEventSelectors",
+        "GetTrail",
+        "GetTrailStatus",
+        "ListTags",
+        "ListTrails",
+        "LookupEvents",
+        "PutEventSelectors",
+        "RemoveTags",
+        "StartLogging",
+        "StopLogging",
+        "UpdateTrail"
+      ],
+      "operation_count": 15,
+      "extraction_sources": [
+        "dict-keys (15)"
+      ]
+    },
+    "cloudwatch": {
+      "name": "cloudwatch",
+      "operations": [
+        "DeleteAlarms",
+        "DeleteDashboards",
+        "DescribeAlarmHistory",
+        "DescribeAlarms",
+        "DescribeAlarmsForMetric",
+        "DisableAlarmActions",
+        "EnableAlarmActions",
+        "GetDashboard",
+        "GetMetricData",
+        "GetMetricStatistics",
+        "ListDashboards",
+        "ListMetrics",
+        "ListTagsForResource",
+        "PutCompositeAlarm",
+        "PutDashboard",
+        "PutMetricAlarm",
+        "PutMetricData",
+        "SetAlarmState",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 20,
+      "extraction_sources": [
+        "dict-keys (20)"
+      ]
+    },
+    "cloudwatch_logs": {
+      "name": "cloudwatch_logs",
+      "operations": [
+        "CreateDelivery",
+        "CreateLogGroup",
+        "CreateLogStream",
+        "DeleteDelivery",
+        "DeleteDeliveryDestination",
+        "DeleteDeliverySource",
+        "DeleteDestination",
+        "DeleteLogGroup",
+        "DeleteLogStream",
+        "DeleteMetricFilter",
+        "DeleteRetentionPolicy",
+        "DeleteSubscriptionFilter",
+        "DescribeDeliveries",
+        "DescribeDeliveryDestinations",
+        "DescribeDeliverySources",
+        "DescribeDestinations",
+        "DescribeLogGroups",
+        "DescribeLogStreams",
+        "DescribeMetricFilters",
+        "DescribeSubscriptionFilters",
+        "FilterLogEvents",
+        "GetDelivery",
+        "GetDeliveryDestination",
+        "GetDeliverySource",
+        "GetLogEvents",
+        "GetQueryResults",
+        "ListTagsForResource",
+        "ListTagsLogGroup",
+        "PutDeliveryDestination",
+        "PutDeliverySource",
+        "PutDestination",
+        "PutDestinationPolicy",
+        "PutLogEvents",
+        "PutMetricFilter",
+        "PutRetentionPolicy",
+        "PutSubscriptionFilter",
+        "StartQuery",
+        "StopQuery",
+        "TagLogGroup",
+        "TagResource",
+        "UntagLogGroup",
+        "UntagResource"
+      ],
+      "operation_count": 42,
+      "extraction_sources": [
+        "dict-keys (42)"
+      ]
+    },
+    "codebuild": {
+      "name": "codebuild",
+      "operations": [
+        "BatchDeleteBuilds",
+        "BatchGetBuilds",
+        "BatchGetProjects",
+        "CreateProject",
+        "DeleteProject",
+        "ListBuilds",
+        "ListBuildsForProject",
+        "ListProjects",
+        "StartBuild",
+        "StopBuild",
+        "UpdateProject"
+      ],
+      "operation_count": 11,
+      "extraction_sources": [
+        "dict-keys (11)"
+      ]
+    },
+    "cognito": {
+      "name": "cognito",
+      "operations": [
+        "AdminAddUserToGroup",
+        "AdminConfirmSignUp",
+        "AdminCreateUser",
+        "AdminDeleteUser",
+        "AdminDisableUser",
+        "AdminEnableUser",
+        "AdminGetUser",
+        "AdminInitiateAuth",
+        "AdminListGroupsForUser",
+        "AdminListUserAuthEvents",
+        "AdminRemoveUserFromGroup",
+        "AdminResetUserPassword",
+        "AdminRespondToAuthChallenge",
+        "AdminSetUserMFAPreference",
+        "AdminSetUserPassword",
+        "AdminUpdateUserAttributes",
+        "AdminUserGlobalSignOut",
+        "AssociateSoftwareToken",
+        "ChangePassword",
+        "ConfirmForgotPassword",
+        "ConfirmSignUp",
+        "CreateGroup",
+        "CreateIdentityPool",
+        "CreateIdentityProvider",
+        "CreateUserPool",
+        "CreateUserPoolClient",
+        "CreateUserPoolDomain",
+        "DeleteGroup",
+        "DeleteIdentityPool",
+        "DeleteIdentityProvider",
+        "DeleteUser",
+        "DeleteUserPool",
+        "DeleteUserPoolClient",
+        "DeleteUserPoolDomain",
+        "DescribeIdentity",
+        "DescribeIdentityPool",
+        "DescribeIdentityProvider",
+        "DescribeUserPool",
+        "DescribeUserPoolClient",
+        "DescribeUserPoolDomain",
+        "ForgotPassword",
+        "GetCredentialsForIdentity",
+        "GetGroup",
+        "GetId",
+        "GetIdentityPoolRoles",
+        "GetIdentityProviderByIdentifier",
+        "GetOpenIdToken",
+        "GetUser",
+        "GetUserPoolMfaConfig",
+        "GlobalSignOut",
+        "InitiateAuth",
+        "ListGroups",
+        "ListIdentities",
+        "ListIdentityPools",
+        "ListIdentityProviders",
+        "ListTagsForResource",
+        "ListUserPoolClients",
+        "ListUserPools",
+        "ListUsers",
+        "ListUsersInGroup",
+        "MergeDeveloperIdentities",
+        "ResendConfirmationCode",
+        "RespondToAuthChallenge",
+        "RevokeToken",
+        "SetIdentityPoolRoles",
+        "SetUserMFAPreference",
+        "SetUserPoolMfaConfig",
+        "SignUp",
+        "TagResource",
+        "UnlinkDeveloperIdentity",
+        "UnlinkIdentity",
+        "UntagResource",
+        "UpdateIdentityPool",
+        "UpdateIdentityProvider",
+        "UpdateUserAttributes",
+        "UpdateUserPool",
+        "UpdateUserPoolClient",
+        "VerifySoftwareToken"
+      ],
+      "operation_count": 78,
+      "extraction_sources": [
+        "dict-keys (81)"
+      ]
+    },
+    "cur": {
+      "name": "cur",
+      "operations": [
+        "DeleteReportDefinition",
+        "DescribeReportDefinitions",
+        "ListTagsForResource",
+        "ModifyReportDefinition",
+        "PutReportDefinition",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 7,
+      "extraction_sources": [
+        "dict-keys (7)"
+      ]
+    },
+    "dynamodb": {
+      "name": "dynamodb",
+      "operations": [
+        "BatchGetItem",
+        "BatchWriteItem",
+        "CreateTable",
+        "DeleteItem",
+        "DeleteTable",
+        "DescribeContinuousBackups",
+        "DescribeEndpoints",
+        "DescribeKinesisStreamingDestination",
+        "DescribeTable",
+        "DescribeTimeToLive",
+        "DisableKinesisStreamingDestination",
+        "EnableKinesisStreamingDestination",
+        "ExecuteStatement",
+        "GetItem",
+        "ListTables",
+        "ListTagsOfResource",
+        "PutItem",
+        "Query",
+        "QueryFilter",
+        "Scan",
+        "ScanFilter",
+        "TagResource",
+        "UntagResource",
+        "UpdateContinuousBackups",
+        "UpdateItem",
+        "UpdateKinesisStreamingDestination",
+        "UpdateTable",
+        "UpdateTimeToLive"
+      ],
+      "operation_count": 28,
+      "extraction_sources": [
+        "dict-keys (26)",
+        "docstring (+2)"
+      ]
+    },
+    "dynamodb_streams": {
+      "name": "dynamodb_streams",
+      "operations": [
+        "DescribeStream",
+        "GetRecords",
+        "GetShardIterator",
+        "ListStreams"
+      ],
+      "operation_count": 4,
+      "extraction_sources": [
+        "dict-keys (4)"
+      ]
+    },
+    "ec2": {
+      "name": "ec2",
+      "operations": [
+        "AcceptVpcPeeringConnection",
+        "AllocateAddress",
+        "AssociateAddress",
+        "AssociateDhcpOptions",
+        "AssociateRouteTable",
+        "AttachInternetGateway",
+        "AttachNetworkInterface",
+        "AttachVolume",
+        "AttachVpnGateway",
+        "AuthorizeSecurityGroupEgress",
+        "AuthorizeSecurityGroupIngress",
+        "CopySnapshot",
+        "CreateCustomerGateway",
+        "CreateDefaultVpc",
+        "CreateDhcpOptions",
+        "CreateEgressOnlyInternetGateway",
+        "CreateFlowLogs",
+        "CreateInternetGateway",
+        "CreateKeyPair",
+        "CreateLaunchTemplate",
+        "CreateLaunchTemplateVersion",
+        "CreateManagedPrefixList",
+        "CreateNatGateway",
+        "CreateNetworkAcl",
+        "CreateNetworkAclEntry",
+        "CreateNetworkInterface",
+        "CreateRoute",
+        "CreateRouteTable",
+        "CreateSecurityGroup",
+        "CreateSnapshot",
+        "CreateSubnet",
+        "CreateTags",
+        "CreateTime",
+        "CreateVolume",
+        "CreateVpc",
+        "CreateVpcEndpoint",
+        "CreateVpcPeeringConnection",
+        "CreateVpnConnection",
+        "CreateVpnConnectionRoute",
+        "CreateVpnGateway",
+        "DeleteCustomerGateway",
+        "DeleteDhcpOptions",
+        "DeleteEgressOnlyInternetGateway",
+        "DeleteFlowLogs",
+        "DeleteInternetGateway",
+        "DeleteKeyPair",
+        "DeleteLaunchTemplate",
+        "DeleteManagedPrefixList",
+        "DeleteNatGateway",
+        "DeleteNetworkAcl",
+        "DeleteNetworkAclEntry",
+        "DeleteNetworkInterface",
+        "DeleteRoute",
+        "DeleteRouteTable",
+        "DeleteSecurityGroup",
+        "DeleteSnapshot",
+        "DeleteSubnet",
+        "DeleteTags",
+        "DeleteVolume",
+        "DeleteVpc",
+        "DeleteVpcEndpoints",
+        "DeleteVpcPeeringConnection",
+        "DeleteVpnConnection",
+        "DeleteVpnConnectionRoute",
+        "DeleteVpnGateway",
+        "DescribeAddresses",
+        "DescribeAddressesAttribute",
+        "DescribeAvailabilityZones",
+        "DescribeCapacityReservations",
+        "DescribeCustomerGateways",
+        "DescribeDhcpOptions",
+        "DescribeEgressOnlyInternetGateways",
+        "DescribeFlowLogs",
+        "DescribeImages",
+        "DescribeInstanceAttribute",
+        "DescribeInstanceAutoRecoveryAttribute",
+        "DescribeInstanceCreditSpecifications",
+        "DescribeInstanceMaintenanceOptions",
+        "DescribeInstanceStatus",
+        "DescribeInstanceTopology",
+        "DescribeInstanceTypes",
+        "DescribeInstances",
+        "DescribeInternetGateways",
+        "DescribeKeyPairs",
+        "DescribeLaunchTemplateVersions",
+        "DescribeLaunchTemplates",
+        "DescribeManagedPrefixLists",
+        "DescribeNatGateways",
+        "DescribeNetworkAcls",
+        "DescribeNetworkInterfaces",
+        "DescribePrefixLists",
+        "DescribeRegions",
+        "DescribeRouteTables",
+        "DescribeSecurityGroupRules",
+        "DescribeSecurityGroups",
+        "DescribeSnapshotAttribute",
+        "DescribeSnapshots",
+        "DescribeSpotInstanceRequests",
+        "DescribeSubnets",
+        "DescribeTags",
+        "DescribeVolumeAttribute",
+        "DescribeVolumeStatus",
+        "DescribeVolumes",
+        "DescribeVolumesModifications",
+        "DescribeVpcAttribute",
+        "DescribeVpcClassicLink",
+        "DescribeVpcClassicLinkDnsSupport",
+        "DescribeVpcEndpointServices",
+        "DescribeVpcEndpoints",
+        "DescribeVpcPeeringConnections",
+        "DescribeVpcs",
+        "DescribeVpnConnections",
+        "DescribeVpnGateways",
+        "DetachInternetGateway",
+        "DetachNetworkInterface",
+        "DetachVolume",
+        "DetachVpnGateway",
+        "DisableVgwRoutePropagation",
+        "DisassociateAddress",
+        "DisassociateRouteTable",
+        "EnableVgwRoutePropagation",
+        "EnableVolumeIO",
+        "GetManagedPrefixListEntries",
+        "ImportKeyPair",
+        "LaunchTemplateData",
+        "LaunchTemplateId",
+        "LaunchTemplateName",
+        "ModifyInstanceMaintenanceOptions",
+        "ModifyLaunchTemplate",
+        "ModifyManagedPrefixList",
+        "ModifySnapshotAttribute",
+        "ModifySubnetAttribute",
+        "ModifyVolume",
+        "ModifyVolumeAttribute",
+        "ModifyVpcAttribute",
+        "ModifyVpcEndpoint",
+        "RebootInstances",
+        "ReleaseAddress",
+        "ReplaceNetworkAclAssociation",
+        "ReplaceNetworkAclEntry",
+        "ReplaceRoute",
+        "ReplaceRouteTableAssociation",
+        "RevokeSecurityGroupEgress",
+        "RevokeSecurityGroupIngress",
+        "RunInstances",
+        "StartInstances",
+        "StopInstances",
+        "TerminateInstances"
+      ],
+      "operation_count": 148,
+      "extraction_sources": [
+        "dict-keys (155)"
+      ]
+    },
+    "ecr": {
+      "name": "ecr",
+      "operations": [
+        "BatchCheckLayerAvailability",
+        "BatchDeleteImage",
+        "BatchGetImage",
+        "CompleteLayerUpload",
+        "CreateRepository",
+        "DeleteLifecyclePolicy",
+        "DeleteRepository",
+        "DeleteRepositoryPolicy",
+        "DescribeImages",
+        "DescribeRegistry",
+        "DescribeRepositories",
+        "GetAuthorizationToken",
+        "GetDownloadUrlForLayer",
+        "GetLifecyclePolicy",
+        "GetRepositoryPolicy",
+        "InitiateLayerUpload",
+        "ListImages",
+        "ListTagsForResource",
+        "PutImage",
+        "PutImageScanningConfiguration",
+        "PutImageTagMutability",
+        "PutLifecyclePolicy",
+        "SetRepositoryPolicy",
+        "TagResource",
+        "UntagResource",
+        "UploadLayerPart"
+      ],
+      "operation_count": 26,
+      "extraction_sources": [
+        "dict-keys (26)"
+      ]
+    },
+    "ecs": {
+      "name": "ecs",
+      "operations": [
+        "CreateCapacityProvider",
+        "CreateCluster",
+        "CreateService",
+        "DeleteAccountSetting",
+        "DeleteAttributes",
+        "DeleteCapacityProvider",
+        "DeleteCluster",
+        "DeleteService",
+        "DeleteTaskDefinitions",
+        "DeregisterTaskDefinition",
+        "DescribeCapacityProviders",
+        "DescribeClusters",
+        "DescribeContainerInstances",
+        "DescribeServiceDeployments",
+        "DescribeServiceRevisions",
+        "DescribeServices",
+        "DescribeTaskDefinition",
+        "DescribeTasks",
+        "DiscoverPollEndpoint",
+        "ExecuteCommand",
+        "GetTaskProtection",
+        "ListAccountSettings",
+        "ListAttributes",
+        "ListClusters",
+        "ListContainerInstances",
+        "ListServiceDeployments",
+        "ListServices",
+        "ListServicesByNamespace",
+        "ListTagsForResource",
+        "ListTaskDefinitionFamilies",
+        "ListTaskDefinitions",
+        "ListTasks",
+        "PutAccountSetting",
+        "PutAccountSettingDefault",
+        "PutAttributes",
+        "PutClusterCapacityProviders",
+        "RegisterTaskDefinition",
+        "RunTask",
+        "StopTask",
+        "SubmitAttachmentStateChanges",
+        "SubmitContainerStateChange",
+        "SubmitTaskStateChange",
+        "TagResource",
+        "UntagResource",
+        "UpdateCapacityProvider",
+        "UpdateCluster",
+        "UpdateClusterSettings",
+        "UpdateService",
+        "UpdateTaskProtection"
+      ],
+      "operation_count": 49,
+      "extraction_sources": [
+        "dict-keys (49)"
+      ]
+    },
+    "ecs_metadata": {
+      "name": "ecs_metadata",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
+    "efs": {
+      "name": "efs",
+      "operations": [
+        "CreateAccessPoint",
+        "CreateFileSystem",
+        "CreateMountTarget",
+        "CreateTags",
+        "DeleteAccessPoint",
+        "DeleteFileSystem",
+        "DeleteMountTarget",
+        "DeleteTags",
+        "DescribeAccessPoints",
+        "DescribeAccountPreferences",
+        "DescribeBackupPolicy",
+        "DescribeFileSystems",
+        "DescribeLifecycleConfiguration",
+        "DescribeMountTargetSecurityGroups",
+        "DescribeMountTargets",
+        "DescribeTags",
+        "ListTagsForResource",
+        "ModifyMountTargetSecurityGroups",
+        "PutAccountPreferences",
+        "PutBackupPolicy",
+        "PutLifecycleConfiguration",
+        "TagResource",
+        "UntagResource",
+        "UpdateFileSystem"
+      ],
+      "operation_count": 24,
+      "extraction_sources": [
+        "docstring (+24)"
+      ]
+    },
+    "eks": {
+      "name": "eks",
+      "operations": [
+        "CreateCluster",
+        "CreateNodegroup",
+        "DeleteCluster",
+        "DeleteNodegroup",
+        "DescribeCluster",
+        "DescribeNodegroup",
+        "ListClusters",
+        "ListNodegroups",
+        "ListTagsForResource",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 11,
+      "extraction_sources": [
+        "docstring (+11)"
+      ]
+    },
+    "elasticache": {
+      "name": "elasticache",
+      "operations": [
+        "AddTagsToResource",
+        "CreateCacheCluster",
+        "CreateCacheParameterGroup",
+        "CreateCacheSubnetGroup",
+        "CreateReplicationGroup",
+        "CreateSnapshot",
+        "CreateUser",
+        "CreateUserGroup",
+        "DecreaseReplicaCount",
+        "DeleteCacheCluster",
+        "DeleteCacheParameterGroup",
+        "DeleteCacheSubnetGroup",
+        "DeleteReplicationGroup",
+        "DeleteSnapshot",
+        "DeleteUser",
+        "DeleteUserGroup",
+        "DescribeCacheClusters",
+        "DescribeCacheEngineVersions",
+        "DescribeCacheParameterGroups",
+        "DescribeCacheParameters",
+        "DescribeCacheSubnetGroups",
+        "DescribeEvents",
+        "DescribeReplicationGroups",
+        "DescribeSnapshots",
+        "DescribeUserGroups",
+        "DescribeUsers",
+        "IncreaseReplicaCount",
+        "ListTagsForResource",
+        "ModifyCacheCluster",
+        "ModifyCacheParameterGroup",
+        "ModifyCacheSubnetGroup",
+        "ModifyReplicationGroup",
+        "ModifyUser",
+        "ModifyUserGroup",
+        "RebootCacheCluster",
+        "RemoveTagsFromResource",
+        "ResetCacheParameterGroup"
+      ],
+      "operation_count": 37,
+      "extraction_sources": [
+        "dict-keys (37)"
+      ]
+    },
+    "emr": {
+      "name": "emr",
+      "operations": [
+        "AddInstanceFleet",
+        "AddInstanceGroups",
+        "AddJobFlowSteps",
+        "AddTags",
+        "CancelSteps",
+        "DescribeCluster",
+        "DescribeStep",
+        "GetBlockPublicAccessConfiguration",
+        "ListBootstrapActions",
+        "ListClusters",
+        "ListInstanceFleets",
+        "ListInstanceGroups",
+        "ListSteps",
+        "ModifyCluster",
+        "ModifyInstanceFleet",
+        "ModifyInstanceGroups",
+        "PutBlockPublicAccessConfiguration",
+        "RemoveTags",
+        "RunJobFlow",
+        "SetTerminationProtection",
+        "SetVisibleToAllUsers",
+        "TerminateJobFlows"
+      ],
+      "operation_count": 22,
+      "extraction_sources": [
+        "dict-keys (22)"
+      ]
+    },
+    "eventbridge": {
+      "name": "eventbridge",
+      "operations": [
+        "ActivateEventSource",
+        "CancelReplay",
+        "CreateApiDestination",
+        "CreateArchive",
+        "CreateConnection",
+        "CreateEndpoint",
+        "CreateEventBus",
+        "CreatePartnerEventSource",
+        "DeactivateEventSource",
+        "DeauthorizeConnection",
+        "DeleteApiDestination",
+        "DeleteArchive",
+        "DeleteConnection",
+        "DeleteEndpoint",
+        "DeleteEventBus",
+        "DeletePartnerEventSource",
+        "DeleteRule",
+        "DescribeApiDestination",
+        "DescribeArchive",
+        "DescribeConnection",
+        "DescribeEndpoint",
+        "DescribeEventBus",
+        "DescribeEventSource",
+        "DescribePartnerEventSource",
+        "DescribeReplay",
+        "DescribeRule",
+        "DisableRule",
+        "EnableRule",
+        "ListApiDestinations",
+        "ListArchives",
+        "ListConnections",
+        "ListEndpoints",
+        "ListEventBuses",
+        "ListEventSources",
+        "ListPartnerEventSourceAccounts",
+        "ListPartnerEventSources",
+        "ListReplays",
+        "ListRuleNamesByTarget",
+        "ListRules",
+        "ListTagsForResource",
+        "ListTargetsByRule",
+        "PutEvents",
+        "PutPartnerEvents",
+        "PutPermission",
+        "PutRule",
+        "PutTargets",
+        "RemovePermission",
+        "RemoveTargets",
+        "StartReplay",
+        "TagResource",
+        "TestEventPattern",
+        "UntagResource",
+        "UpdateApiDestination",
+        "UpdateArchive",
+        "UpdateConnection",
+        "UpdateEndpoint",
+        "UpdateEventBus"
+      ],
+      "operation_count": 57,
+      "extraction_sources": [
+        "dict-keys (57)"
+      ]
+    },
+    "firehose": {
+      "name": "firehose",
+      "operations": [
+        "CreateDeliveryStream",
+        "DeleteDeliveryStream",
+        "DescribeDeliveryStream",
+        "ListDeliveryStreams",
+        "ListTagsForDeliveryStream",
+        "PutRecord",
+        "PutRecordBatch",
+        "StartDeliveryStreamEncryption",
+        "StopDeliveryStreamEncryption",
+        "TagDeliveryStream",
+        "UntagDeliveryStream",
+        "UpdateDestination"
+      ],
+      "operation_count": 12,
+      "extraction_sources": [
+        "dict-keys (12)"
+      ]
+    },
+    "glue": {
+      "name": "glue",
+      "operations": [
+        "BatchCreatePartition",
+        "BatchDeleteTable",
+        "BatchGetPartition",
+        "BatchGetTriggers",
+        "BatchStopJobRun",
+        "CreateClassifier",
+        "CreateConnection",
+        "CreateCrawler",
+        "CreateDatabase",
+        "CreateJob",
+        "CreatePartition",
+        "CreatePartitionIndex",
+        "CreateSecurityConfiguration",
+        "CreateTable",
+        "CreateTrigger",
+        "CreateWorkflow",
+        "DeleteClassifier",
+        "DeleteConnection",
+        "DeleteCrawler",
+        "DeleteDatabase",
+        "DeleteJob",
+        "DeletePartition",
+        "DeleteSecurityConfiguration",
+        "DeleteTable",
+        "DeleteTrigger",
+        "DeleteWorkflow",
+        "GetClassifier",
+        "GetClassifiers",
+        "GetConnection",
+        "GetConnections",
+        "GetCrawler",
+        "GetCrawlerMetrics",
+        "GetCrawlers",
+        "GetDatabase",
+        "GetDatabases",
+        "GetJob",
+        "GetJobRun",
+        "GetJobRuns",
+        "GetJobs",
+        "GetPartition",
+        "GetPartitionIndexes",
+        "GetPartitions",
+        "GetSecurityConfiguration",
+        "GetSecurityConfigurations",
+        "GetTable",
+        "GetTables",
+        "GetTags",
+        "GetTrigger",
+        "GetTriggers",
+        "GetWorkflow",
+        "ListTriggers",
+        "StartCrawler",
+        "StartJobRun",
+        "StartTrigger",
+        "StartWorkflowRun",
+        "StopCrawler",
+        "StopTrigger",
+        "TagResource",
+        "UntagResource",
+        "UpdateCrawler",
+        "UpdateDatabase",
+        "UpdateJob",
+        "UpdateTable",
+        "UpdateTrigger",
+        "UpdateWorkflow"
+      ],
+      "operation_count": 65,
+      "extraction_sources": [
+        "dict-keys (65)"
+      ]
+    },
+    "iam": {
+      "name": "iam",
+      "operations": [
+        "AddRoleToInstanceProfile",
+        "AddUserToGroup",
+        "AttachRolePolicy",
+        "AttachUserPolicy",
+        "CreateAccessKey",
+        "CreateGroup",
+        "CreateInstanceProfile",
+        "CreateOpenIDConnectProvider",
+        "CreatePolicy",
+        "CreatePolicyVersion",
+        "CreateRole",
+        "CreateServiceLinkedRole",
+        "CreateUser",
+        "DeleteAccessKey",
+        "DeleteGroup",
+        "DeleteInstanceProfile",
+        "DeleteOpenIDConnectProvider",
+        "DeletePolicy",
+        "DeletePolicyVersion",
+        "DeleteRole",
+        "DeleteRolePolicy",
+        "DeleteServiceLinkedRole",
+        "DeleteUser",
+        "DeleteUserPolicy",
+        "DetachRolePolicy",
+        "DetachUserPolicy",
+        "GetAccessKeyLastUsed",
+        "GetGroup",
+        "GetInstanceProfile",
+        "GetOpenIDConnectProvider",
+        "GetPolicy",
+        "GetPolicyVersion",
+        "GetRole",
+        "GetRolePolicy",
+        "GetServiceLinkedRoleDeletionStatus",
+        "GetUser",
+        "GetUserPolicy",
+        "ListAccessKeys",
+        "ListAttachedRolePolicies",
+        "ListAttachedUserPolicies",
+        "ListEntitiesForPolicy",
+        "ListGroups",
+        "ListGroupsForUser",
+        "ListInstanceProfiles",
+        "ListInstanceProfilesForRole",
+        "ListPolicies",
+        "ListPolicyTags",
+        "ListPolicyVersions",
+        "ListRolePolicies",
+        "ListRoleTags",
+        "ListRoles",
+        "ListUserPolicies",
+        "ListUserTags",
+        "ListUsers",
+        "PutRolePolicy",
+        "PutUserPolicy",
+        "RemoveRoleFromInstanceProfile",
+        "RemoveUserFromGroup",
+        "TagPolicy",
+        "TagRole",
+        "TagUser",
+        "UntagPolicy",
+        "UntagRole",
+        "UntagUser",
+        "UpdateAccessKey",
+        "UpdateAssumeRolePolicy",
+        "UpdateRole"
+      ],
+      "operation_count": 67,
+      "extraction_sources": [
+        "dict-keys (67)"
+      ]
+    },
+    "imds": {
+      "name": "imds",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
+    "inspector2": {
+      "name": "inspector2",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
+    "iot": {
+      "name": "iot",
+      "operations": [
+        "AttachPolicy",
+        "AttachThingPrincipal",
+        "CreateKeysAndCertificate",
+        "CreatePolicy",
+        "CreatePolicyVersion",
+        "CreateThing",
+        "CreateThingGroup",
+        "CreateThingType",
+        "DeleteCertificate",
+        "DeleteThing",
+        "DescribeEndpoint",
+        "DescribeThing",
+        "DetachPolicy",
+        "DetachThingPrincipal",
+        "ListThings",
+        "RegisterCertificate",
+        "UpdateCertificate",
+        "UpdateThing"
+      ],
+      "operation_count": 18,
+      "extraction_sources": [
+        "docstring (+18)"
+      ]
+    },
+    "iot_data": {
+      "name": "iot_data",
+      "operations": [
+        "GetRetainedMessage",
+        "ListRetainedMessages"
+      ],
+      "operation_count": 2,
+      "extraction_sources": [
+        "docstring (+2)"
+      ]
+    },
+    "kinesis": {
+      "name": "kinesis",
+      "operations": [
+        "AddTagsToStream",
+        "CreateStream",
+        "DecreaseStreamRetentionPeriod",
+        "DeleteStream",
+        "DeregisterStreamConsumer",
+        "DescribeStream",
+        "DescribeStreamConsumer",
+        "DescribeStreamSummary",
+        "DisableEnhancedMonitoring",
+        "EnableEnhancedMonitoring",
+        "GetRecords",
+        "GetShardIterator",
+        "IncreaseStreamRetentionPeriod",
+        "ListShards",
+        "ListStreamConsumers",
+        "ListStreams",
+        "ListTagsForStream",
+        "MergeShards",
+        "PutRecord",
+        "PutRecords",
+        "RegisterStreamConsumer",
+        "RemoveTagsFromStream",
+        "SplitShard",
+        "StartStreamEncryption",
+        "StopStreamEncryption",
+        "UpdateShardCount"
+      ],
+      "operation_count": 26,
+      "extraction_sources": [
+        "dict-keys (26)"
+      ]
+    },
+    "kms": {
+      "name": "kms",
+      "operations": [
+        "CancelKeyDeletion",
+        "CreateAlias",
+        "CreateKey",
+        "Decrypt",
+        "DeleteAlias",
+        "DescribeKey",
+        "DisableKey",
+        "DisableKeyRotation",
+        "EnableKey",
+        "EnableKeyRotation",
+        "Encrypt",
+        "GenerateDataKey",
+        "GenerateDataKeyWithoutPlaintext",
+        "GetKeyPolicy",
+        "GetKeyRotationStatus",
+        "GetPublicKey",
+        "ListAliases",
+        "ListKeyPolicies",
+        "ListKeys",
+        "ListResourceTags",
+        "PutKeyPolicy",
+        "ScheduleKeyDeletion",
+        "Sign",
+        "TagResource",
+        "UntagResource",
+        "UpdateAlias",
+        "Verify"
+      ],
+      "operation_count": 27,
+      "extraction_sources": [
+        "dict-keys (27)"
+      ]
+    },
+    "lambda_svc": {
+      "name": "lambda_svc",
+      "operations": [
+        "AddLayerVersionPermission",
+        "AddPermission",
+        "CreateAlias",
+        "CreateEventSourceMapping",
+        "CreateFunction",
+        "CreateFunctionUrlConfig",
+        "DeleteAlias",
+        "DeleteEventSourceMapping",
+        "DeleteFunction",
+        "DeleteFunctionConcurrency",
+        "DeleteFunctionUrlConfig",
+        "DeleteLayerVersion",
+        "GetAlias",
+        "GetEventSourceMapping",
+        "GetFunction",
+        "GetFunctionCodeSigningConfig",
+        "GetFunctionConcurrency",
+        "GetFunctionConfiguration",
+        "GetFunctionEventInvokeConfig",
+        "GetFunctionUrlConfig",
+        "GetLayerVersion",
+        "GetLayerVersionByArn",
+        "GetLayerVersionPolicy",
+        "GetPolicy",
+        "ListAliases",
+        "ListEventSourceMappings",
+        "ListFunctionUrlConfigs",
+        "ListFunctions",
+        "ListLayerVersions",
+        "ListLayers",
+        "ListTags",
+        "ListVersionsByFunction",
+        "PublishLayerVersion",
+        "PublishVersion",
+        "PutFunctionConcurrency",
+        "PutFunctionEventInvokeConfig",
+        "RemoveLayerVersionPermission",
+        "RemovePermission",
+        "RequestResponse",
+        "TagResource",
+        "UntagResource",
+        "UpdateAlias",
+        "UpdateEventSourceMapping",
+        "UpdateFunctionCode",
+        "UpdateFunctionConfiguration",
+        "UpdateFunctionUrlConfig"
+      ],
+      "operation_count": 46,
+      "extraction_sources": [
+        "docstring (+46)"
+      ]
+    },
+    "mwaa": {
+      "name": "mwaa",
+      "operations": [
+        "CreateCliToken",
+        "CreateEnvironment",
+        "CreateWebLoginToken",
+        "DeleteEnvironment",
+        "GetEnvironment",
+        "ListEnvironments",
+        "UpdateEnvironment"
+      ],
+      "operation_count": 7,
+      "extraction_sources": [
+        "docstring (+7)"
+      ]
+    },
+    "opensearch": {
+      "name": "opensearch",
+      "operations": [
+        "AddTags",
+        "CreateDomain",
+        "DeleteDomain",
+        "DescribeDomain",
+        "DescribeDomainChangeProgress",
+        "DescribeDomainConfig",
+        "DescribeDomains",
+        "GetCompatibleVersions",
+        "ListDomainNames",
+        "ListTags",
+        "ListVersions",
+        "OpenSearch",
+        "RemoveTags",
+        "UpdateDomainConfig"
+      ],
+      "operation_count": 14,
+      "extraction_sources": [
+        "docstring (+14)"
+      ]
+    },
+    "organizations": {
+      "name": "organizations",
+      "operations": [
+        "CreateOrganizationalUnit",
+        "DeleteOrganizationalUnit",
+        "DescribeAccount",
+        "DescribeOrganization",
+        "DescribeOrganizationalUnit",
+        "ListAccounts",
+        "ListAccountsForParent",
+        "ListOrganizationalUnitsForParent",
+        "ListRoots"
+      ],
+      "operation_count": 9,
+      "extraction_sources": [
+        "dict-keys (9)"
+      ]
+    },
+    "pipes": {
+      "name": "pipes",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
+    "rds": {
+      "name": "rds",
+      "operations": [
+        "AddTagsToResource",
+        "CreateDBCluster",
+        "CreateDBClusterParameterGroup",
+        "CreateDBClusterSnapshot",
+        "CreateDBInstance",
+        "CreateDBInstanceReadReplica",
+        "CreateDBParameterGroup",
+        "CreateDBSnapshot",
+        "CreateDBSubnetGroup",
+        "CreateGlobalCluster",
+        "CreateOptionGroup",
+        "DeleteDBCluster",
+        "DeleteDBClusterParameterGroup",
+        "DeleteDBClusterSnapshot",
+        "DeleteDBInstance",
+        "DeleteDBParameterGroup",
+        "DeleteDBSnapshot",
+        "DeleteDBSubnetGroup",
+        "DeleteGlobalCluster",
+        "DeleteOptionGroup",
+        "DescribeDBClusterParameterGroups",
+        "DescribeDBClusterParameters",
+        "DescribeDBClusterSnapshots",
+        "DescribeDBClusters",
+        "DescribeDBEngineVersions",
+        "DescribeDBInstances",
+        "DescribeDBParameterGroups",
+        "DescribeDBParameters",
+        "DescribeDBSnapshots",
+        "DescribeDBSubnetGroups",
+        "DescribeGlobalClusters",
+        "DescribeOptionGroupOptions",
+        "DescribeOptionGroups",
+        "DescribeOrderableDBInstanceOptions",
+        "DescribePendingMaintenanceActions",
+        "EnableHttpEndpoint",
+        "ListTagsForResource",
+        "ModifyDBCluster",
+        "ModifyDBClusterParameterGroup",
+        "ModifyDBInstance",
+        "ModifyDBParameterGroup",
+        "ModifyDBSubnetGroup",
+        "ModifyGlobalCluster",
+        "RebootDBInstance",
+        "RemoveFromGlobalCluster",
+        "RemoveTagsFromResource",
+        "ResetDBClusterParameterGroup",
+        "ResetDBParameterGroup",
+        "RestoreDBInstanceFromDBSnapshot",
+        "StartDBCluster",
+        "StartDBInstance",
+        "StopDBCluster",
+        "StopDBInstance"
+      ],
+      "operation_count": 53,
+      "extraction_sources": [
+        "dict-keys (53)"
+      ]
+    },
+    "rds_data": {
+      "name": "rds_data",
+      "operations": [
+        "BeginTransaction"
+      ],
+      "operation_count": 1,
+      "extraction_sources": [
+        "docstring (+1)"
+      ]
+    },
+    "resource_groups": {
+      "name": "resource_groups",
+      "operations": [
+        "CancelTagSyncTask",
+        "CreateGroup",
+        "DeleteGroup",
+        "GetAccountSettings",
+        "GetGroup",
+        "GetGroupConfiguration",
+        "GetGroupQuery",
+        "GetTagSyncTask",
+        "GetTags",
+        "ListGroupResources",
+        "ListGroupingStatuses",
+        "ListGroups",
+        "ListTagSyncTasks",
+        "PutGroupConfiguration",
+        "SearchResources",
+        "StartTagSyncTask",
+        "UpdateAccountSettings",
+        "UpdateGroup",
+        "UpdateGroupQuery"
+      ],
+      "operation_count": 19,
+      "extraction_sources": [
+        "docstring (+19)"
+      ]
+    },
+    "route53": {
+      "name": "route53",
+      "operations": [
+        "ChangeResourceRecordSets",
+        "ChangeTagsForResource",
+        "CreateHealthCheck",
+        "CreateHostedZone",
+        "DeleteHealthCheck",
+        "DeleteHostedZone",
+        "GetChange",
+        "GetHealthCheck",
+        "GetHostedZone",
+        "ListHealthChecks",
+        "ListHostedZones",
+        "ListHostedZonesByName",
+        "ListResourceRecordSets",
+        "ListTagsForResource",
+        "UpdateHealthCheck",
+        "UpdateHostedZoneComment"
+      ],
+      "operation_count": 16,
+      "extraction_sources": [
+        "docstring (+16)"
+      ]
+    },
+    "s3": {
+      "name": "s3",
+      "operations": [
+        "CopyObject",
+        "CreateBucket",
+        "DeleteBucket",
+        "DeleteBucketReplication",
+        "DeleteObject",
+        "DeleteObjects",
+        "GetBucketReplication",
+        "GetObject",
+        "GetObjectLegalHold",
+        "GetObjectLockConfiguration",
+        "GetObjectRetention",
+        "HeadBucket",
+        "HeadObject",
+        "ListBuckets",
+        "ListObjectVersions",
+        "ListObjectsV1",
+        "ListObjectsV2",
+        "ListParts",
+        "PutBucketReplication",
+        "PutObject",
+        "PutObjectLegalHold",
+        "PutObjectLockConfiguration",
+        "PutObjectRetention",
+        "RequestPayment",
+        "UploadPart"
+      ],
+      "operation_count": 25,
+      "extraction_sources": [
+        "docstring (+25)"
+      ]
+    },
+    "s3files": {
+      "name": "s3files",
+      "operations": [
+        "CreateAccessPoint",
+        "CreateFileSystem",
+        "CreateMountTarget",
+        "DeleteAccessPoint",
+        "DeleteFileSystem",
+        "DeleteFileSystemPolicy",
+        "DeleteMountTarget",
+        "GetAccessPoint",
+        "GetFileSystem",
+        "GetFileSystemPolicy",
+        "GetMountTarget",
+        "GetSynchronizationConfiguration",
+        "ListAccessPoints",
+        "ListFileSystems",
+        "ListMountTargets",
+        "ListTagsForResource",
+        "PutFileSystemPolicy",
+        "PutSynchronizationConfiguration",
+        "TagResource",
+        "UntagResource",
+        "UpdateMountTarget"
+      ],
+      "operation_count": 21,
+      "extraction_sources": [
+        "docstring (+21)"
+      ]
+    },
+    "s3tables": {
+      "name": "s3tables",
+      "operations": [
+        "CreateNamespace",
+        "CreateTable",
+        "CreateTableBucket",
+        "DeleteNamespace",
+        "DeleteTable",
+        "DeleteTableBucket",
+        "GetNamespace",
+        "GetTable",
+        "GetTableBucket",
+        "GetTableMetadataLocation",
+        "ListNamespaces",
+        "ListTableBuckets",
+        "ListTables",
+        "UpdateTableMetadataLocation"
+      ],
+      "operation_count": 14,
+      "extraction_sources": [
+        "docstring (+14)"
+      ]
+    },
+    "scheduler": {
+      "name": "scheduler",
+      "operations": [
+        "CreateSchedule",
+        "CreateScheduleGroup",
+        "DeleteSchedule",
+        "DeleteScheduleGroup",
+        "GetSchedule",
+        "GetScheduleGroup",
+        "ListScheduleGroups",
+        "ListSchedules",
+        "ListTagsForResource",
+        "TagResource",
+        "UntagResource",
+        "UpdateSchedule"
+      ],
+      "operation_count": 12,
+      "extraction_sources": [
+        "docstring (+12)"
+      ]
+    },
+    "secretsmanager": {
+      "name": "secretsmanager",
+      "operations": [
+        "BatchGetSecretValue",
+        "CreateSecret",
+        "DeleteResourcePolicy",
+        "DeleteSecret",
+        "DescribeSecret",
+        "GetRandomPassword",
+        "GetResourcePolicy",
+        "GetSecretValue",
+        "ListSecretVersionIds",
+        "ListSecrets",
+        "PutResourcePolicy",
+        "PutSecretValue",
+        "ReplicateSecretToRegions",
+        "RestoreSecret",
+        "RotateSecret",
+        "TagResource",
+        "UntagResource",
+        "UpdateSecret",
+        "UpdateSecretVersionStage",
+        "ValidateResourcePolicy"
+      ],
+      "operation_count": 20,
+      "extraction_sources": [
+        "dict-keys (20)"
+      ]
+    },
+    "servicediscovery": {
+      "name": "servicediscovery",
+      "operations": [
+        "CreateHttpNamespace",
+        "CreatePrivateDnsNamespace",
+        "CreatePublicDnsNamespace",
+        "CreateService",
+        "DeleteNamespace",
+        "DeleteService",
+        "DeleteServiceAttributes",
+        "DeregisterInstance",
+        "DiscoverInstances",
+        "DiscoverInstancesRevision",
+        "GetInstance",
+        "GetInstancesHealthStatus",
+        "GetNamespace",
+        "GetOperation",
+        "GetService",
+        "GetServiceAttributes",
+        "ListInstances",
+        "ListNamespaces",
+        "ListOperations",
+        "ListServices",
+        "ListTagsForResource",
+        "RegisterInstance",
+        "TagResource",
+        "UntagResource",
+        "UpdateHttpNamespace",
+        "UpdateInstanceCustomHealthStatus",
+        "UpdatePrivateDnsNamespace",
+        "UpdatePublicDnsNamespace",
+        "UpdateService",
+        "UpdateServiceAttributes"
+      ],
+      "operation_count": 30,
+      "extraction_sources": [
+        "dict-keys (30)",
+        "compare (3)"
+      ]
+    },
+    "ses": {
+      "name": "ses",
+      "operations": [
+        "CreateConfigurationSet",
+        "CreateTemplate",
+        "DeleteConfigurationSet",
+        "DeleteIdentity",
+        "DeleteTemplate",
+        "DescribeConfigurationSet",
+        "GetIdentityDkimAttributes",
+        "GetIdentityVerificationAttributes",
+        "GetSendQuota",
+        "GetSendStatistics",
+        "GetTemplate",
+        "ListConfigurationSets",
+        "ListIdentities",
+        "ListTemplates",
+        "ListVerifiedEmailAddresses",
+        "SendBulkTemplatedEmail",
+        "SendEmail",
+        "SendRawEmail",
+        "SendTemplatedEmail",
+        "SetIdentityFeedbackForwardingEnabled",
+        "SetIdentityNotificationTopic",
+        "UpdateTemplate",
+        "VerifyDomainDkim",
+        "VerifyDomainIdentity",
+        "VerifyEmailAddress",
+        "VerifyEmailIdentity"
+      ],
+      "operation_count": 26,
+      "extraction_sources": [
+        "dict-keys (26)"
+      ]
+    },
+    "ses_v2": {
+      "name": "ses_v2",
+      "operations": [
+        "CreateConfigurationSet",
+        "CreateEmailIdentity",
+        "DeleteConfigurationSet",
+        "DeleteEmailIdentity",
+        "GetAccount",
+        "GetConfigurationSet",
+        "GetEmailIdentity",
+        "ListConfigurationSets",
+        "ListEmailIdentities",
+        "ListSuppressedDestinations",
+        "ListTagsForResource",
+        "PutAccountSuppressionAttributes",
+        "SendEmail",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 15,
+      "extraction_sources": [
+        "docstring (+15)"
+      ]
+    },
+    "sns": {
+      "name": "sns",
+      "operations": [
+        "ConfirmSubscription",
+        "CreatePlatformApplication",
+        "CreatePlatformEndpoint",
+        "CreateTopic",
+        "DeleteTopic",
+        "GetSubscriptionAttributes",
+        "GetTopicAttributes",
+        "ListSubscriptions",
+        "ListSubscriptionsByTopic",
+        "ListTagsForResource",
+        "ListTopics",
+        "Publish",
+        "PublishBatch",
+        "SetSubscriptionAttributes",
+        "SetTopicAttributes",
+        "Subscribe",
+        "TagResource",
+        "Unsubscribe",
+        "UntagResource"
+      ],
+      "operation_count": 19,
+      "extraction_sources": [
+        "dict-keys (19)"
+      ]
+    },
+    "sqs": {
+      "name": "sqs",
+      "operations": [
+        "AddPermission",
+        "ChangeMessageVisibility",
+        "ChangeMessageVisibilityBatch",
+        "CreateQueue",
+        "DeleteMessage",
+        "DeleteMessageBatch",
+        "DeleteQueue",
+        "GetQueueAttributes",
+        "GetQueueUrl",
+        "ListQueueTags",
+        "ListQueues",
+        "PurgeQueue",
+        "ReceiveMessage",
+        "RemovePermission",
+        "SendMessage",
+        "SendMessageBatch",
+        "SetQueueAttributes",
+        "TagQueue",
+        "UntagQueue",
+        "WaitTimeSeconds"
+      ],
+      "operation_count": 20,
+      "extraction_sources": [
+        "dict-keys (19)",
+        "compare (20)",
+        "docstring (+1)"
+      ]
+    },
+    "ssm": {
+      "name": "ssm",
+      "operations": [
+        "AddTagsToResource",
+        "DeleteParameter",
+        "DeleteParameters",
+        "DescribeParameters",
+        "GetParameter",
+        "GetParameterHistory",
+        "GetParameters",
+        "GetParametersByPath",
+        "LabelParameterVersion",
+        "ListTagsForResource",
+        "PutParameter",
+        "RemoveTagsFromResource"
+      ],
+      "operation_count": 12,
+      "extraction_sources": [
+        "dict-keys (12)"
+      ]
+    },
+    "stepfunctions": {
+      "name": "stepfunctions",
+      "operations": [
+        "BatchExecuteStatement",
+        "BeginTransaction",
+        "CommitTransaction",
+        "CopyObject",
+        "CreateActivity",
+        "CreateBucket",
+        "CreateStateMachine",
+        "CreateStateMachineAlias",
+        "DeleteActivity",
+        "DeleteBucket",
+        "DeleteObject",
+        "DeleteStateMachine",
+        "DeleteStateMachineAlias",
+        "DeleteStateMachineVersion",
+        "DescribeActivity",
+        "DescribeExecution",
+        "DescribeSecurityGroups",
+        "DescribeStateMachine",
+        "DescribeStateMachineAlias",
+        "DescribeStateMachineForExecution",
+        "ExecuteStatement",
+        "GetActivityTask",
+        "GetBucketVersioning",
+        "GetExecutionHistory",
+        "GetObjectTagging",
+        "HeadBucket",
+        "HeadObject",
+        "ListActivities",
+        "ListBuckets",
+        "ListExecutions",
+        "ListObjects",
+        "ListObjectsV2",
+        "ListStateMachineAliases",
+        "ListStateMachineVersions",
+        "ListStateMachines",
+        "ListTagsForResource",
+        "PublishStateMachineVersion",
+        "PutObjectTagging",
+        "RollbackTransaction",
+        "SendTaskFailure",
+        "SendTaskHeartbeat",
+        "SendTaskSuccess",
+        "StartExecution",
+        "StartSyncExecution",
+        "StopExecution",
+        "TagResource",
+        "TestState",
+        "UntagResource",
+        "UpdateStateMachine",
+        "UpdateStateMachineAlias",
+        "ValidateStateMachineDefinition"
+      ],
+      "operation_count": 51,
+      "extraction_sources": [
+        "dict-keys (50)",
+        "compare (2)"
+      ]
+    },
+    "sts": {
+      "name": "sts",
+      "operations": [
+        "AssumeRole",
+        "AssumeRoleWithWebIdentity",
+        "GetAccessKeyInfo",
+        "GetCallerIdentity",
+        "GetSessionToken",
+        "GetWebIdentityToken"
+      ],
+      "operation_count": 6,
+      "extraction_sources": [
+        "compare (6)"
+      ]
+    },
+    "tagging": {
+      "name": "tagging",
+      "operations": [
+        "GetResources",
+        "GetTagKeys",
+        "GetTagValues",
+        "TagKey",
+        "TagResources",
+        "TagValue",
+        "UntagResources"
+      ],
+      "operation_count": 7,
+      "extraction_sources": [
+        "dict-keys (5)",
+        "docstring (+2)"
+      ]
+    },
+    "transfer": {
+      "name": "transfer",
+      "operations": [
+        "CreateServer",
+        "CreateUser",
+        "DeleteServer",
+        "DeleteSshPublicKey",
+        "DeleteUser",
+        "DescribeServer",
+        "DescribeUser",
+        "ImportSshPublicKey",
+        "ListServers",
+        "ListUsers",
+        "StartServer",
+        "StopServer",
+        "TransferService"
+      ],
+      "operation_count": 13,
+      "extraction_sources": [
+        "dict-keys (12)",
+        "docstring (+1)"
+      ]
+    },
+    "waf": {
+      "name": "waf",
+      "operations": [
+        "AssociateWebACL",
+        "CheckCapacity",
+        "CreateIPSet",
+        "CreateRuleGroup",
+        "CreateWebACL",
+        "DeleteIPSet",
+        "DeleteRuleGroup",
+        "DeleteWebACL",
+        "DescribeManagedRuleGroup",
+        "DisassociateWebACL",
+        "GetIPSet",
+        "GetRuleGroup",
+        "GetWebACL",
+        "GetWebACLForResource",
+        "ListIPSets",
+        "ListResourcesForWebACL",
+        "ListRuleGroups",
+        "ListTagsForResource",
+        "ListWebACLs",
+        "TagResource",
+        "UntagResource",
+        "UpdateIPSet",
+        "UpdateRuleGroup",
+        "UpdateWebACL"
+      ],
+      "operation_count": 24,
+      "extraction_sources": [
+        "dict-keys (24)"
+      ]
+    },
+    "waf_v1": {
+      "name": "waf_v1",
+      "operations": [
+        "GetChangeToken",
+        "GetChangeTokenStatus",
+        "GetPermissionPolicy",
+        "ListActivatedRulesInRuleGroup",
+        "ListByteMatchSets",
+        "ListGeoMatchSets",
+        "ListIPSets",
+        "ListLoggingConfigurations",
+        "ListRateBasedRules",
+        "ListRegexMatchSets",
+        "ListRegexPatternSets",
+        "ListResourcesForWebACL",
+        "ListRuleGroups",
+        "ListRules",
+        "ListSizeConstraintSets",
+        "ListSqlInjectionMatchSets",
+        "ListSubscribedRuleGroups",
+        "ListTagsForResource",
+        "ListWebACLs",
+        "ListXssMatchSets"
+      ],
+      "operation_count": 20,
+      "extraction_sources": [
+        "dict-keys (17)",
+        "compare (4)"
+      ]
+    },
+    "cloudformation": {
+      "name": "cloudformation",
+      "operations": [
+        "CreateChangeSet",
+        "CreateStack",
+        "CreateTime",
+        "DeleteChangeSet",
+        "DeleteStack",
+        "DescribeChangeSet",
+        "DescribeStackEvents",
+        "DescribeStackResource",
+        "DescribeStackResources",
+        "DescribeStacks",
+        "ExecuteChangeSet",
+        "GetTemplate",
+        "GetTemplateSummary",
+        "LaunchTemplateData",
+        "LaunchTemplateId",
+        "LaunchTemplateName",
+        "ListChangeSets",
+        "ListExports",
+        "ListStackResources",
+        "ListStacks",
+        "UpdateStack",
+        "ValidateTemplate"
+      ],
+      "operation_count": 22,
+      "extraction_sources": [
+        "docstring (+18)",
+        "dict-keys (18)",
+        "dict-keys (7)"
+      ]
+    }
+  },
+  "env_vars": {
+    "AWS_ACCESS_KEY_ID": {
+      "name": "AWS_ACCESS_KEY_ID",
+      "files": [
+        "ministack/core/lambda_runtime.py",
+        "ministack/services/glue.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "test"
+    },
+    "AWS_DEFAULT_REGION": {
+      "name": "AWS_DEFAULT_REGION",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "us-east-1"
+    },
+    "AWS_ENDPOINT_URL": {
+      "name": "AWS_ENDPOINT_URL",
+      "files": [
+        "ministack/services/lambda_svc.py",
+        "ministack/services/s3.py"
+      ],
+      "default": ""
+    },
+    "AWS_SECRET_ACCESS_KEY": {
+      "name": "AWS_SECRET_ACCESS_KEY",
+      "files": [
+        "ministack/core/lambda_runtime.py",
+        "ministack/services/glue.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "test"
+    },
+    "AWS_SESSION_TOKEN": {
+      "name": "AWS_SESSION_TOKEN",
+      "files": [
+        "ministack/core/lambda_runtime.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "AWS_SHARED_CREDENTIALS_FILE": {
+      "name": "AWS_SHARED_CREDENTIALS_FILE",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": null
+    },
+    "DOCKER_HOST": {
+      "name": "DOCKER_HOST",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": null
+    },
+    "MINISTACK_ACCOUNT_ID": {
+      "name": "MINISTACK_ACCOUNT_ID",
+      "files": [
+        "ministack/app.py",
+        "ministack/core/responses.py"
+      ],
+      "default": "000000000000"
+    },
+    "MINISTACK_AUTOCREATE_AWS_MANAGED": {
+      "name": "MINISTACK_AUTOCREATE_AWS_MANAGED",
+      "files": [
+        "ministack/services/iam.py"
+      ],
+      "default": "0"
+    },
+    "MINISTACK_COGNITO_PRETOKEN_STRICT": {
+      "name": "MINISTACK_COGNITO_PRETOKEN_STRICT",
+      "files": [
+        "ministack/services/cognito.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_EDITION": {
+      "name": "MINISTACK_EDITION",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": "light"
+    },
+    "MINISTACK_HOST": {
+      "name": "MINISTACK_HOST",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/dynamodb.py",
+        "ministack/services/cognito.py",
+        "ministack/services/sqs.py",
+        "ministack/services/appsync_events.py",
+        "ministack/services/apigateway.py",
+        "ministack/services/glue.py",
+        "ministack/services/lambda_svc.py",
+        "ministack/services/s3.py",
+        "ministack/services/iot.py",
+        "ministack/services/sns.py",
+        "ministack/services/cloudformation/provisioners.py",
+        "ministack/services/cloudformation/custom_resource.py"
+      ],
+      "default": "localhost"
+    },
+    "MINISTACK_IMAGE_PREFIX": {
+      "name": "MINISTACK_IMAGE_PREFIX",
+      "files": [
+        "ministack/core/responses.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_IMDS_V2_REQUIRED": {
+      "name": "MINISTACK_IMDS_V2_REQUIRED",
+      "files": [
+        "ministack/services/imds.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_OPENSEARCH_ENDPOINT": {
+      "name": "MINISTACK_OPENSEARCH_ENDPOINT",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_REGION": {
+      "name": "MINISTACK_REGION",
+      "files": [
+        "ministack/app.py",
+        "ministack/core/responses.py",
+        "ministack/core/router.py",
+        "ministack/services/rds.py",
+        "ministack/services/secretsmanager.py",
+        "ministack/services/elasticache.py",
+        "ministack/services/alb.py",
+        "ministack/services/ses.py",
+        "ministack/services/emr.py",
+        "ministack/services/dynamodb.py",
+        "ministack/services/cognito.py",
+        "ministack/services/waf.py",
+        "ministack/services/iam.py",
+        "ministack/services/sqs.py",
+        "ministack/services/eks.py",
+        "ministack/services/servicediscovery.py",
+        "ministack/services/ses_v2.py",
+        "ministack/services/cloudwatch_logs.py",
+        "ministack/services/stepfunctions.py",
+        "ministack/services/appconfig.py",
+        "ministack/services/kinesis.py",
+        "ministack/services/apigateway.py",
+        "ministack/services/apigateway_v1.py",
+        "ministack/services/codebuild.py",
+        "ministack/services/eventbridge.py",
+        "ministack/services/glue.py",
+        "ministack/services/transfer.py",
+        "ministack/services/appsync.py",
+        "ministack/services/pipes.py",
+        "ministack/services/acm.py",
+        "ministack/services/cloudwatch.py",
+        "ministack/services/ec2.py",
+        "ministack/services/lambda_svc.py",
+        "ministack/services/firehose.py",
+        "ministack/services/efs.py",
+        "ministack/services/scheduler.py",
+        "ministack/services/ecr.py",
+        "ministack/services/kms.py",
+        "ministack/services/athena.py",
+        "ministack/services/s3.py",
+        "ministack/services/tagging.py",
+        "ministack/services/autoscaling.py",
+        "ministack/services/ssm.py",
+        "ministack/services/rds_data.py",
+        "ministack/services/ecs.py",
+        "ministack/services/sns.py",
+        "ministack/services/cloudformation/__init__.py",
+        "ministack/services/cloudformation/engine.py",
+        "ministack/services/cloudformation/provisioners.py"
+      ],
+      "default": "us-east-1"
+    },
+    "MINISTACK_SSL_CERT": {
+      "name": "MINISTACK_SSL_CERT",
+      "files": [
+        "ministack/core/tls.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_SSL_KEY": {
+      "name": "MINISTACK_SSL_KEY",
+      "files": [
+        "ministack/core/tls.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_VERSION": {
+      "name": "MINISTACK_VERSION",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": null
+    },
+    "MINISTACK_WORKER_THREADS": {
+      "name": "MINISTACK_WORKER_THREADS",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": "64"
+    },
+    "OPENSEARCH_BASE_PORT": {
+      "name": "OPENSEARCH_BASE_PORT",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "14571"
+    },
+    "OPENSEARCH_DASHBOARDS": {
+      "name": "OPENSEARCH_DASHBOARDS",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "0"
+    },
+    "OPENSEARCH_DASHBOARDS_BASE_PORT": {
+      "name": "OPENSEARCH_DASHBOARDS_BASE_PORT",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "15601"
+    },
+    "OPENSEARCH_DASHBOARDS_IMAGE": {
+      "name": "OPENSEARCH_DASHBOARDS_IMAGE",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "opensearchproject/opensearch-dashboards:2.15.0"
+    },
+    "OPENSEARCH_DATAPLANE": {
+      "name": "OPENSEARCH_DATAPLANE",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "0"
+    },
+    "OPENSEARCH_IMAGE": {
+      "name": "OPENSEARCH_IMAGE",
+      "files": [
+        "ministack/services/opensearch.py"
+      ],
+      "default": "opensearchproject/opensearch:2.15.0"
+    },
+    "S3_PERSIST": {
+      "name": "S3_PERSIST",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/s3.py"
+      ],
+      "default": "0"
+    }
+  }
+}

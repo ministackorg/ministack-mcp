@@ -1,0 +1,5 @@
+mcp>=1.2.0
+requests>=2.31.0
+# Dev/build only:
+#   python build_catalog.py     regenerate catalog.json
+#   pip install build twine     to publish ministack-mcp to PyPI

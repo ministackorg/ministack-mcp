@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "_doc": "Curated parity notes per service. status: full | partial | stub | paid | unsupported | data-plane. Edit by hand; build_catalog.py does not regenerate this file.",
+  "services": {
+    "account": {
+      "status": "full",
+      "notes": "rest-json /getAccountInformation; returns AccountState=ACTIVE; 31-region opt-in matrix."
+    },
+    "acm": {"status": "full"},
+    "alb": {"status": "full", "notes": "Application Load Balancer (elbv2)."},
+    "apigateway": {"status": "full", "notes": "Module aggregator — see apigateway_v1 / apigateway_v2. HTTP API and WebSocket API; Lambda proxy / HTTP proxy / MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; $default stage served from URL root; per-API CORS; request parameter mapping; JWT data-plane authorization; qualified-alias integration URIs; WebSocket data plane with @connections management API; pin apiId via ms-custom-id tag."
+    },
+    "apigateway_v1": {
+      "status": "full",
+      "notes": "REST API protocol; Lambda proxy format 1.0, HTTP proxy, MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; qualified-alias integration URIs; resource tree with {param} and {proxy+}; JSON Patch for all PATCH operations; persistence; pin id via ms-custom-id tag."
+    },
+    "appconfig": {
+      "status": "full",
+      "notes": "33 operations; control plane + data plane; hosted configuration versions; deployments complete immediately; session-based configuration retrieval with token rotation."
+    },
+    "appsync": {"status": "full"},
+    "appsync_events": {
+      "status": "full",
+      "notes": "WebSocket realtime + HTTP publish on /event. Subprotocol aws-appsync-event-ws. Connection-scoped authorization via Sec-WebSocket-Protocol header-<base64> entry. Set APPSYNC_EVENTS_ENFORCE_AUTH=1 for strict mode."
+    },
+    "athena": {
+      "status": "partial",
+      "notes": "Real SQL via DuckDB when installed (pip install duckdb), otherwise mock results; result pagination; column type metadata."
+    },
+    "autoscaling": {
+      "status": "stub",
+      "notes": "23 actions; in-memory state, no real instance scaling; full ASG lifecycle (launch configs, scaling policies, lifecycle hooks, scheduled actions, tags); CDK/Terraform compatible."
+    },
+    "backup": {
+      "status": "stub",
+      "notes": "In-memory; jobs complete immediately; vaults and plans participate in Resource Groups Tagging API."
+    },
+    "batch": {
+      "status": "stub",
+      "notes": "Control-plane stub — submitted jobs immediately transition to SUCCEEDED; multi-revision job definitions; jobQueue lookup by name or ARN; account-scoped state."
+    },
+    "cloudformation": {
+      "status": "partial",
+      "notes": "Stack lifecycle, 15 intrinsics, 77 resource types; some resources couple directly to service modules."
+    },
+    "cloudfront": {"status": "full"},
+    "cloudfront_keyvaluestore": {
+      "status": "full",
+      "notes": "Separate cloudfront-keyvaluestore SDK service; ETag-based optimistic concurrency on every mutating op; UpdateKeys is atomic; ListKeys paginates with opaque NextToken capped at 50."
+    },
+    "cloudtrail": {"status": "stub", "notes": "Trail CRUD; no actual event capture."},
+    "cloudwatch": {
+      "status": "full",
+      "notes": "CBOR and JSON protocol."
+    },
+    "cloudwatch_logs": {
+      "status": "full",
+      "notes": "FilterLogEvents supports * / ? globs, multi-term AND, -term exclusion."
+    },
+    "codebuild": {"status": "full"},
+    "cognito": {"status": "full"},
+    "cur": {"status": "stub", "notes": "Cost & Usage Report definitions; no real billing data."},
+    "dynamodb": {
+      "status": "full",
+      "notes": "TTL enforced via thread-safe background reaper (60s cadence); DynamoDB Streams emit INSERT/MODIFY/REMOVE records on all write operations, respects StreamViewType; Kinesis streaming destinations fan item mutations into any Kinesis stream by ARN."
+    },
+    "dynamodb_streams": {"status": "full", "notes": "Stream records emitted by dynamodb writes; GetShardIterator / GetRecords."},
+    "ec2": {"status": "full"},
+    "ecr": {"status": "full"},
+    "ecs": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "47 actions; RunTask starts real Docker containers via Docker socket; full Terraform ECS coverage."
+    },
+    "ecs_metadata": {
+      "status": "data-plane",
+      "notes": "ECS Task Metadata V4 endpoint (/v4/<token>, /v4/<token>/task, /v4/<token>/stats). Tokens registered by ecs.RunTask."
+    },
+    "efs": {"status": "stub", "notes": "Control-plane CRUD only; no real filesystem."},
+    "eks": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "11 operations; CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work; cascading delete removes nodegroups and k3s container; CFN AWS::EKS::Cluster and Nodegroup supported."
+    },
+    "elasticache": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "CreateCacheCluster spins up real Redis/Memcached Docker container."
+    },
+    "emr": {"status": "stub", "notes": "Control-plane stub; clusters do not run."},
+    "eventbridge": {
+      "status": "full",
+      "notes": "Lambda target dispatch on PutEvents; S3 EventBridge notifications; archives capture matching events and StartReplay re-dispatches them in a background thread; SaaS/partner APIs are control-plane stubs."
+    },
+    "firehose": {"status": "full"},
+    "glue": {
+      "status": "full",
+      "notes": "Python shell jobs actually execute via subprocess; Spark jobs run on the official amazon/aws-glue-libs PySpark image (GlueVersion 4.0 / 3.0) on MiniStack's Docker network; override via GLUE_DOCKER_IMAGE."
+    },
+    "iam": {"status": "full", "notes": "Users, groups, roles, policies, access keys (UpdateAccessKey, GetAccessKeyLastUsed), attached/inline policies; no policy evaluation."},
+    "imds": {
+      "status": "data-plane",
+      "notes": "IMDSv1 + IMDSv2; default credential chain falls through to a ministack-instance-role document with ASIA* session creds. Point SDKs via AWS_EC2_METADATA_SERVICE_ENDPOINT=http://localhost:4566. Set MINISTACK_IMDS_V2_REQUIRED=1 to require the token PUT."
+    },
+    "inspector2": {
+      "status": "full",
+      "notes": "14 operations covering Enable/Disable/ListFindings/BatchGetFindingDetails/ListCoverage/ListCoverageStatistics/ListFindingAggregations/SearchVulnerabilities plus filter and tag CRUD; deterministic stub vulnerability findings for ECR images, Lambda functions, and EC2 instances."
+    },
+    "iot": {
+      "status": "full",
+      "notes": "AWS IoT Core Phase 1: Things, ThingTypes, ThingGroups, certificates via local CA, IoT Policies with versioning, DescribeEndpoint. MQTT 3.1.1 over WebSocket on the gateway port + HTTP iot-data Publish. Persistent sessions, QoS 1 with DUP-flag retransmits, LWT, retained messages. Multi-tenant by account-prefixed topics. Local CA at GET /_ministack/iot/ca.pem. Requires cryptography package (ships in [full])."
+    },
+    "kinesis": {
+      "status": "full",
+      "notes": "Partition key → shard routing; AWS limits enforced (1 MB/record, 500 records/batch, 5 MB payload, 256-char partition key)."
+    },
+    "kms": {"status": "full"},
+    "lambda_svc": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "Python and Node.js runtimes execute with warm worker pool; provided.al2023 / provided.al2 runtimes execute via Docker RIE (Go, Rust, C++); Publish=True creates immutable numbered versions; Code via ZipFile, S3Bucket/S3Key (with optional S3ObjectVersion), or ImageUri. SQS, Kinesis, and DynamoDB Streams event source mappings; Function URL CRUD; Layers; Aliases; Concurrency; EventInvokeConfig. Invoke LogResult returns user output + traceback on error."
+    },
+    "mwaa": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "Managed Workflows for Apache Airflow — real apache/airflow:<version> containers (2.x and 3.x), DAG sync from S3, InvokeRestApi proxy."
+    },
+    "opensearch": {
+      "status": "partial",
+      "real_backend": "docker",
+      "notes": "Management plane on /2021-01-01/* (boto3.client('opensearch'), SigV4 scope es). Default data plane is a stub (<domain>.ministack.local:9200). Set OPENSEARCH_DATAPLANE=1 to spawn one real opensearchproject/opensearch container per CreateDomain. Add OPENSEARCH_DASHBOARDS=1 for a per-domain dashboards sidecar."
+    },
+    "organizations": {
+      "status": "full",
+      "notes": "Single-master-account org auto-initialised; nested OUs with Path field; FeatureSet=ALL."
+    },
+    "pipes": {
+      "status": "stub",
+      "notes": "Minimal EventBridge Pipes for local CFN use. Source: DynamoDB Streams. Target: SNS. Lifecycle: create/delete via CloudFormation handlers."
+    },
+    "rds": {
+      "status": "full",
+      "real_backend": "docker",
+      "notes": "CreateDBInstance spins up real Postgres/MySQL Docker container; returns actual host:port endpoint. Non-blocking create; daemon thread waits for container liveness, sets DBInstanceStatus to 'available' or 'failed'. PERSIST_STATE=1 respawns containers on boot."
+    },
+    "rds_data": {
+      "status": "full",
+      "notes": "RDS Data API; routes SQL to real Docker-backed RDS containers when present; supports MySQL (pymysql) and PostgreSQL (psycopg2); REST paths (/Execute, /BeginTransaction, etc.). Surfaces DatabaseUnavailableException (504) when container-backed cluster isn't reachable, instead of silently acking via the in-memory stub."
+    },
+    "resource_groups": {"status": "full"},
+    "route53": {"status": "full"},
+    "s3": {
+      "status": "full",
+      "persistence": true,
+      "notes": "Object Lock with retention & legal hold enforcement on delete. GetObjectAcl / PutObjectAcl with canned ACLs and XML policy bodies (stored, not enforced).",
+      "gotchas": ["Optional disk persistence via S3_PERSIST=1."]
+    },
+    "s3files": {"status": "data-plane", "notes": "S3 disk-persistence helper module; no public ops."},
+    "s3tables": {
+      "status": "partial",
+      "notes": "14 of 30 botocore operations: table buckets, namespaces, Iceberg-format tables (Create/List/Get/Delete) + GetTableMetadataLocation / UpdateTableMetadataLocation. Embedded Iceberg REST catalog at /iceberg. Missing: policy CRUD (table-bucket + table), encryption CRUD, maintenance config CRUD, GetTableMaintenanceJobStatus, RenameTable."
+    },
+    "scheduler": {
+      "status": "full",
+      "notes": "12 actions; schedule groups with cascading deletes; rate(), cron(), at() expressions; group/prefix/state filters; CFN AWS::Scheduler::Schedule and ScheduleGroup supported."
+    },
+    "secretsmanager": {"status": "full"},
+    "servicediscovery": {"status": "full", "notes": "Cloud Map — namespaces, services, instance registration."},
+    "ses": {
+      "status": "stub",
+      "notes": "Emails stored in-memory, not sent."
+    },
+    "ses_v2": {"status": "full"},
+    "sns": {
+      "status": "full",
+      "notes": "SNS→SQS fanout delivery; SNS→Lambda fanout (synchronous invocation); FIFO topics with 5-minute deduplication, sequence numbers, content-based deduplication, and subscription validation."
+    },
+    "sqs": {
+      "status": "full",
+      "notes": "Both Query API and JSON protocol; FIFO queues with deduplication; DLQ support."
+    },
+    "ssm": {
+      "status": "full",
+      "notes": "Parameter Store supports String, SecureString, StringList."
+    },
+    "stepfunctions": {
+      "status": "full",
+      "notes": "Full ASL interpreter; Retry/Catch; waitForTaskToken; Activities (worker pattern); Pass/Task/Choice/Wait/Succeed/Fail/Map/Parallel; TestState API with mock and inspectionLevel; SFN_MOCK_CONFIG for AWS SFN Local compatible mocks; intrinsic functions; nested startExecution.sync; JSONata standard library (~30 built-in functions: string, numeric, array, object, type, date/time, utility)."
+    },
+    "sts": {"status": "full", "notes": "AssumeRole, GetCallerIdentity, GetSessionToken; signatures not validated."},
+    "tagging": {"status": "full", "notes": "Resource Groups Tagging API; cross-service tag aggregation."},
+    "transfer": {"status": "stub", "notes": "Transfer Family control-plane stub; no real SFTP/FTPS server."},
+    "waf": {"status": "full"},
+    "waf_v1": {"status": "stub", "notes": "Minimal WAF v1 stub — empty lists, valid ChangeToken. Use wafv2 for full features."}
+  }
+}
