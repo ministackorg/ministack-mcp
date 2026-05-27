@@ -4,193 +4,810 @@
   "services": {
     "account": {
       "status": "full",
-      "notes": "rest-json /getAccountInformation; returns AccountState=ACTIVE; 31-region opt-in matrix."
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "4 operations: GetAccountInformation, GetContactInformation, ListRegions, GetRegionOptStatus. Returns AccountState=ACTIVE; 31-region opt-in matrix with 14 opt-in-required regions.",
+      "gotchas": [
+        "No AccountScopedDict — state is global, not per-account",
+        "No persistence — state is not saved across restarts",
+        "ContactInformation is hardcoded, not configurable",
+        "Regions list is static — opt-in/opt-out actions are not supported"
+      ]
     },
-    "acm": {"status": "full"},
-    "alb": {"status": "full", "notes": "Application Load Balancer (elbv2)."},
-    "apigateway": {"status": "full", "notes": "Module aggregator — see apigateway_v1 / apigateway_v2. HTTP API and WebSocket API; Lambda proxy / HTTP proxy / MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; $default stage served from URL root; per-API CORS; request parameter mapping; JWT data-plane authorization; qualified-alias integration URIs; WebSocket data plane with @connections management API; pin apiId via ms-custom-id tag."
+    "acm": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "12 operations: RequestCertificate, DescribeCertificate, ListCertificates, DeleteCertificate, GetCertificate, ImportCertificate, AddTagsToCertificate, RemoveTagsFromCertificate, ListTagsForCertificate, UpdateCertificateOptions, RenewCertificate, ResendValidationEmail.",
+      "gotchas": [
+        "RequestCertificate issues immediately in ISSUED state — no DNS/email validation wait",
+        "Certificates are synthetic PEM placeholders, not real X.509 — ASN.1 parsing will fail",
+        "PrivateKey is stripped from persisted state — re-import required after restart for IMPORTED certs",
+        "ImportCertificate does not parse CN/SAN from the cert body — DomainName is synthetic",
+        "RenewCertificate and ResendValidationEmail are no-ops"
+      ]
+    },
+    "alb": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "27 actions covering load balancers, target groups, listeners, rules, target registration, and tags. Data-plane rule matching with path-pattern, host-header, http-method, query-string conditions. Lambda target invocation for target type 'lambda'. Fixed-response and redirect actions supported.",
+      "gotchas": [
+        "Only lambda target type is supported for forwarding — instance and ip targets are registered but not routable",
+        "source-ip condition always matches — no real network layer",
+        "Health checks always report targets as healthy",
+        "No real load balancing — first matching listener is used"
+      ]
+    },
+    "apigateway": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Module aggregator — see apigateway_v1 / apigateway_v2. HTTP API and WebSocket API; Lambda proxy / HTTP proxy / MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; $default stage served from URL root; per-API CORS; request parameter mapping; JWT data-plane authorization with RS256 signature verification; qualified-alias integration URIs; WebSocket data plane with @connections management API (PostToConnection/GetConnection/DeleteConnection); route responses and integration responses; pin apiId via ms-custom-id tag.",
+      "gotchas": [
+        "JWT authorizer only supports RS256 algorithm — other algorithms are not verified",
+        "JWKS cache is per-account — issuer URL collisions across accounts may serve different keys",
+        "WebSocket connections are in-process only and not persisted across restarts",
+        "HTTP_PROXY timeout defaults to 30s (configurable via MINISTACK_APIGW_PROXY_TIMEOUT_SECONDS)"
+      ]
     },
     "apigateway_v1": {
       "status": "full",
-      "notes": "REST API protocol; Lambda proxy format 1.0, HTTP proxy, MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; qualified-alias integration URIs; resource tree with {param} and {proxy+}; JSON Patch for all PATCH operations; persistence; pin id via ms-custom-id tag."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "REST API protocol with 60+ control-plane operations. Resources, methods, integrations, method/integration responses, deployments, stages, authorizers, models, API keys, usage plans, usage plan keys, domain names, base path mappings, tags, and account settings. Data plane with resource tree matching ({param} and {proxy+}), Lambda proxy format 1.0, HTTP proxy, MOCK integrations. JSON Patch for all PATCH operations. UpdateStage supports method-level settings (metrics, logging, throttling, caching). Pin id via ms-custom-id tag.",
+      "gotchas": [
+        "API key validation is not enforced on the data plane — apiKeyRequired is stored but not checked",
+        "Authorizer Lambda invocation is not implemented on the v1 data plane",
+        "Usage plan quotas and throttling are not enforced",
+        "Pagination uses opaque base64url tokens with a max of 500 items per page"
+      ]
     },
     "appconfig": {
       "status": "full",
-      "notes": "33 operations; control plane + data plane; hosted configuration versions; deployments complete immediately; session-based configuration retrieval with token rotation."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "33 operations covering control plane + data plane. Applications, environments, configuration profiles, hosted configuration versions, deployment strategies, deployments, tags. Data plane: StartConfigurationSession + GetLatestConfiguration with token rotation. Deployments complete immediately.",
+      "gotchas": [
+        "Deployments complete immediately — no gradual rollout, no bake time enforcement",
+        "Configuration session tokens are single-use — each GetLatestConfiguration consumes and rotates the token",
+        "Accepts botocore's misspelled /deployementstrategies path alongside the correct /deploymentstrategies"
+      ]
     },
-    "appsync": {"status": "full"},
+    "appsync": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "GraphQL API management: CreateGraphQLApi, GetGraphQLApi, ListGraphQLApis, UpdateGraphQLApi, DeleteGraphQLApi; API keys, data sources (DynamoDB, Lambda, HTTP, Elasticsearch, RelationalDB), resolvers (UNIT and PIPELINE), types, tags. GraphQL data plane auto-resolves DynamoDB and Lambda data sources — get/list/create/update/delete operations inferred from field name prefixes.",
+      "gotchas": [
+        "GraphQL data plane uses heuristic field-name matching (get*, list*, create*, update*, delete*) — custom resolver mapping templates are not executed",
+        "VTL request/response mapping templates are stored but not evaluated",
+        "No schema validation — any SDL string is accepted without parsing"
+      ]
+    },
     "appsync_events": {
       "status": "full",
-      "notes": "WebSocket realtime + HTTP publish on /event. Subprotocol aws-appsync-event-ws. Connection-scoped authorization via Sec-WebSocket-Protocol header-<base64> entry. Set APPSYNC_EVENTS_ENFORCE_AUTH=1 for strict mode."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AppSync Event APIs under /v2/apis. Control plane: CRUD for APIs, channel namespaces, API keys. Data plane: HTTP publish on POST /event and WebSocket realtime on {apiId}.appsync-realtime-api.* using aws-appsync-event-ws subprotocol. Connection-scoped authorization via header-<base64> entry. AWS_LAMBDA authorizer invocation supported. Channel path validation (1..5 segments). Set APPSYNC_EVENTS_ENFORCE_AUTH=1 for strict mode.",
+      "gotchas": [
+        "Realtime connections are in-process only — not persisted across restarts",
+        "Max 5 events per publish batch (matches AWS spec)",
+        "Subscribe wildcard only supports single-level trailing * — no multi-level globbing",
+        "Keep-alive interval defaults to 60s (configurable via APPSYNC_EVENTS_KA_INTERVAL_SECS)"
+      ]
     },
     "athena": {
       "status": "partial",
-      "notes": "Real SQL via DuckDB when installed (pip install duckdb), otherwise mock results; result pagination; column type metadata."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "30 operations: query execution (Start/Get/Stop/List/BatchGet), workgroups (Create/Delete/Get/List/Update), named queries (Create/Delete/Get/List/BatchGet), data catalogs (Create/Get/List/Delete/Update), prepared statements (Create/Get/Delete/List), table metadata (Get/List stubs), tags (Tag/Untag/List). Real SQL via DuckDB when installed (pip install duckdb) with Glue catalog integration and S3 path rewriting; otherwise mock results. Result pagination with column type metadata. Query results written to S3 as CSV.",
+      "gotchas": [
+        "DuckDB queries run in-memory per query — no shared catalog state between queries",
+        "Table metadata endpoints (GetTableMetadata, ListTableMetadata) return stubs, not real schema",
+        "S3 path rewriting maps s3:// URIs to local filesystem paths",
+        "Without DuckDB installed, all queries return mock/hardcoded results"
+      ]
     },
     "autoscaling": {
       "status": "stub",
-      "notes": "23 actions; in-memory state, no real instance scaling; full ASG lifecycle (launch configs, scaling policies, lifecycle hooks, scheduled actions, tags); CDK/Terraform compatible."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "23 actions; in-memory state, no real instance scaling. Full ASG lifecycle: launch configs, scaling policies, lifecycle hooks (Put/Describe/Delete/Complete/RecordHeartbeat), scheduled actions, tags (CreateOrUpdate/Describe/Delete). CDK/Terraform compatible.",
+      "gotchas": [
+        "No actual instances are launched or terminated — DesiredCapacity is stored but not acted on",
+        "DescribeAutoScalingInstances always returns empty — no synthetic instance records",
+        "DescribeScalingActivities always returns empty — no scaling activity tracking",
+        "Lifecycle hook actions (Complete/RecordHeartbeat) are no-ops"
+      ]
     },
     "backup": {
       "status": "stub",
-      "notes": "In-memory; jobs complete immediately; vaults and plans participate in Resource Groups Tagging API."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "19 operations: vaults (Create/Describe/Delete/List), plans (Create/Get/Update/Delete/List/ListVersions), selections (Create/Get/Delete/List), jobs (Start/Stop/Describe/List), tags (Tag/Untag/List). In-memory; jobs complete immediately with COMPLETED state. Vaults and plans participate in Resource Groups Tagging API.",
+      "gotchas": [
+        "Backup jobs complete instantly — no actual data backup occurs",
+        "Recovery points are synthetic ARNs with no real data behind them",
+        "StartBackupJob ignores the resource — no validation that the resource exists"
+      ]
     },
     "batch": {
       "status": "stub",
-      "notes": "Control-plane stub — submitted jobs immediately transition to SUCCEEDED; multi-revision job definitions; jobQueue lookup by name or ARN; account-scoped state."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "9 operations: compute environments (Create/Describe), job queues (Create/Describe), job definitions (Register/Describe with multi-revision), jobs (Submit/Describe/List). Control-plane stub — submitted jobs immediately transition to SUCCEEDED. Job queue lookup by name or ARN.",
+      "gotchas": [
+        "All submitted jobs immediately SUCCEED — no actual container execution",
+        "No job state transitions (SUBMITTED -> PENDING -> RUNNABLE -> etc.)",
+        "No delete operations for compute environments or job queues"
+      ]
     },
     "cloudformation": {
       "status": "partial",
       "notes": "Stack lifecycle, 15 intrinsics, 77 resource types; some resources couple directly to service modules."
     },
-    "cloudfront": {"status": "full"},
+    "cloudfront": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution.",
+      "gotchas": [
+        "Distributions deploy instantly — no real CDN edge propagation",
+        "CloudFront Functions code is stored but not executed",
+        "Invalidations complete immediately",
+        "No actual HTTP caching or origin fetching — distribution is metadata-only"
+      ]
+    },
     "cloudfront_keyvaluestore": {
       "status": "full",
-      "notes": "Separate cloudfront-keyvaluestore SDK service; ETag-based optimistic concurrency on every mutating op; UpdateKeys is atomic; ListKeys paginates with opaque NextToken capped at 50."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Separate cloudfront-keyvaluestore SDK service. 6 operations: DescribeKeyValueStore, ListKeys, GetKey, PutKey, DeleteKey, UpdateKeys. ETag-based optimistic concurrency on every mutating op; UpdateKeys is atomic (validate-then-commit). ListKeys paginates with opaque NextToken capped at 50.",
+      "gotchas": [
+        "KVS data is lazily initialized from the CloudFront _kvstores control-plane record",
+        "ImportSource on create is accepted but no actual S3 data import is performed"
+      ]
     },
-    "cloudtrail": {"status": "stub", "notes": "Trail CRUD; no actual event capture."},
+    "cloudtrail": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "12 operations: LookupEvents (audit log), CreateTrail, DeleteTrail, GetTrail, DescribeTrails, GetTrailStatus, StartLogging, StopLogging, PutEventSelectors, GetEventSelectors, AddTags, ListTags, RemoveTags. Recording off by default — enable with CLOUDTRAIL_RECORDING=1. Per-account ring buffer capped at CLOUDTRAIL_MAX_EVENTS (default 10000).",
+      "gotchas": [
+        "Event recording is off by default — must set CLOUDTRAIL_RECORDING=1",
+        "Events are stored in a per-account ring buffer, not delivered to S3",
+        "GetTrailStatus returns synthetic data, not real delivery metrics"
+      ]
+    },
     "cloudwatch": {
       "status": "full",
-      "notes": "CBOR and JSON protocol."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "CBOR and JSON protocol support.",
+      "gotchas": [
+        "Metric data is stored but no actual alarm evaluation or metric math is performed"
+      ]
     },
     "cloudwatch_logs": {
       "status": "full",
-      "notes": "FilterLogEvents supports * / ? globs, multi-term AND, -term exclusion."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "FilterLogEvents supports * / ? globs, multi-term AND, -term exclusion.",
+      "gotchas": [
+        "No real-time subscription filters — logs are stored but not streamed to destinations",
+        "Log retention is stored but not enforced — old log events are never automatically deleted"
+      ]
     },
-    "codebuild": {"status": "full"},
-    "cognito": {"status": "full"},
-    "cur": {"status": "stub", "notes": "Cost & Usage Report definitions; no real billing data."},
+    "codebuild": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "11 operations: CreateProject, BatchGetProjects, ListProjects, UpdateProject, DeleteProject, StartBuild, BatchGetBuilds, StopBuild, ListBuilds, ListBuildsForProject, BatchDeleteBuilds.",
+      "gotchas": [
+        "Builds complete immediately — no actual code compilation or container execution",
+        "Build logs are not generated"
+      ]
+    },
+    "cognito": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "50+ operations covering both cognito-idp (User Pools) and cognito-identity (Identity Pools). User pool lifecycle, clients, users (admin and self-service), groups, auth flows (AdminInitiateAuth, InitiateAuth, SignUp, ConfirmSignUp, ForgotPassword), domains, identity providers (OIDC/SAML), MFA (TOTP), tags. Issues real JWTs signed with RSA keys; JWKS endpoint at /{poolId}/.well-known/jwks.json.",
+      "gotchas": [
+        "JWTs are locally signed — not interchangeable with real AWS Cognito tokens",
+        "Email/SMS verification is auto-confirmed — no actual delivery",
+        "Identity pool credentials are synthetic — no real STS federation"
+      ]
+    },
+    "cur": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "7 operations: PutReportDefinition, DeleteReportDefinition, DescribeReportDefinitions, ModifyReportDefinition, ListTagsForResource, TagResource, UntagResource. Cost & Usage Report definitions stored in-memory; no real billing data generated.",
+      "gotchas": [
+        "No actual cost or usage data is generated — report definitions are metadata-only"
+      ]
+    },
     "dynamodb": {
       "status": "full",
-      "notes": "TTL enforced via thread-safe background reaper (60s cadence); DynamoDB Streams emit INSERT/MODIFY/REMOVE records on all write operations, respects StreamViewType; Kinesis streaming destinations fan item mutations into any Kinesis stream by ARN."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "26+ operations: CreateTable, DeleteTable, DescribeTable, ListTables, UpdateTable, PutItem, GetItem, DeleteItem, UpdateItem, Query, Scan, BatchWriteItem, BatchGetItem, TransactWriteItems, TransactGetItems, DescribeTimeToLive, UpdateTimeToLive, DescribeContinuousBackups, UpdateContinuousBackups, DescribeEndpoints, TagResource, UntagResource, ListTagsOfResource, EnableKinesisStreamingDestination, DisableKinesisStreamingDestination, DescribeKinesisStreamingDestination, UpdateKinesisStreamingDestination, ExecuteStatement (PartiQL). TTL enforced via thread-safe background reaper (60s cadence). DynamoDB Streams emit INSERT/MODIFY/REMOVE records on all write operations, respects StreamViewType. Kinesis streaming destinations fan item mutations into any Kinesis stream by ARN. Legacy conditional parameters (Expected, KeyConditions, ScanFilter, QueryFilter) supported.",
+      "gotchas": [
+        "TTL enforcement runs on 60s cadence, not real-time — items may persist up to 60s past expiry",
+        "PartiQL support covers SELECT/INSERT/UPDATE/DELETE but not all expression features",
+        "No provisioned throughput enforcement — reads/writes are unlimited",
+        "Single synthetic shard per DynamoDB Stream — no shard splitting"
+      ]
     },
-    "dynamodb_streams": {"status": "full", "notes": "Stream records emitted by dynamodb writes; GetShardIterator / GetRecords."},
-    "ec2": {"status": "full"},
-    "ecr": {"status": "full"},
+    "dynamodb_streams": {
+      "status": "full",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "4 operations: ListStreams, DescribeStream, GetShardIterator, GetRecords. Stream records emitted by dynamodb writes; shares dynamodb credential scope. Single synthetic shard per stream.",
+      "gotchas": [
+        "No AccountScopedDict — reads directly from the dynamodb module's stream state",
+        "Single synthetic shard per stream — no shard splitting modeled",
+        "Not in _state_map — no independent persistence (streams live inside dynamodb state)"
+      ]
+    },
+    "ec2": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "80+ actions covering instances, images (stub), security groups, key pairs, VPCs, subnets, availability zones, internet gateways, elastic IPs, tags, route tables, ENIs, VPC endpoints, EBS volumes, EBS snapshots, NAT gateways, network ACLs, flow logs, VPC peering, DHCP options, egress-only IGWs, managed prefix lists, VPN gateways/connections, launch templates, AMIs (register/deregister/describe). Instances exist in memory only — no real VMs launched.",
+      "gotchas": [
+        "No real instances are launched — RunInstances creates in-memory records only",
+        "DescribeImages returns a stub set of common AMI IDs",
+        "No actual networking — VPCs, subnets, security groups are metadata-only",
+        "EBS volumes are metadata-only — no real block storage"
+      ]
+    },
+    "ecr": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Repository CRUD, image lifecycle, lifecycle policies, image tagging, batch operations. Stores manifest and layer metadata in-memory.",
+      "gotchas": [
+        "Image layers are not stored — only manifests and metadata are tracked",
+        "No actual Docker registry protocol — images cannot be pushed/pulled via docker CLI",
+        "Lifecycle policy evaluation is not implemented"
+      ]
+    },
     "ecs": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "47 actions; RunTask starts real Docker containers via Docker socket; full Terraform ECS coverage."
+      "notes": "47 actions covering clusters, task definitions (multi-revision), services, tasks (RunTask with real Docker containers), capacity providers, tags, account settings, attributes, deployments, and agent state changes. RunTask starts real Docker containers via Docker socket when available; registers ECS Task Metadata V4 tokens.",
+      "gotchas": [
+        "Container execution requires Docker socket to be mounted",
+        "Without Docker, RunTask creates task records but no actual containers",
+        "Service desired count is stored but no auto-scaling or placement logic runs",
+        "ExecuteCommand returns a stub — no real interactive session"
+      ]
     },
     "ecs_metadata": {
       "status": "data-plane",
-      "notes": "ECS Task Metadata V4 endpoint (/v4/<token>, /v4/<token>/task, /v4/<token>/stats). Tokens registered by ecs.RunTask."
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "ECS Task Metadata V4 endpoint (/v4/<token>, /v4/<token>/task, /v4/<token>/stats). Tokens registered by ecs.RunTask. State is volatile by design — stripped on persistence, cleared on reset.",
+      "gotchas": [
+        "Stats endpoint returns empty/stub data — no real container metrics",
+        "Tokens are in-process only — not persisted across restarts"
+      ]
     },
-    "efs": {"status": "stub", "notes": "Control-plane CRUD only; no real filesystem."},
+    "efs": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "17 operations: file systems (Create/Describe/Delete/Update), mount targets (Create/Describe/Delete/DescribeSecurityGroups/ModifySecurityGroups), access points (Create/Describe/Delete), tags (Tag/Untag/List plus legacy Create/Delete/Describe), lifecycle configuration, backup policy, account preferences. Control-plane CRUD only; no real filesystem.",
+      "gotchas": [
+        "No real NFS filesystem — mount targets are metadata-only",
+        "Backup policy and lifecycle configuration are stored but not enforced"
+      ]
+    },
     "eks": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "11 operations; CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work; cascading delete removes nodegroups and k3s container; CFN AWS::EKS::Cluster and Nodegroup supported."
+      "notes": "11 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. CFN AWS::EKS::Cluster and Nodegroup supported.",
+      "gotchas": [
+        "Requires Docker socket for real k3s cluster creation",
+        "Cluster creation is async — status transitions from CREATING to ACTIVE in a background thread",
+        "Nodegroups are metadata-only — no actual worker nodes are provisioned",
+        "k3s container uses the ministack Docker network for inter-service communication"
+      ]
     },
     "elasticache": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "CreateCacheCluster spins up real Redis/Memcached Docker container."
+      "notes": "CreateCacheCluster spins up real Redis/Memcached Docker containers. Full replication group support with primary/replica topology. Subnet groups, parameter groups, user/user group CRUD, tags, describe events, failover.",
+      "gotchas": [
+        "Requires Docker socket for real Redis/Memcached container creation",
+        "Container startup is non-blocking — status transitions from 'creating' to 'available' asynchronously",
+        "Without Docker, clusters are metadata-only stubs",
+        "PERSIST_STATE=1 respawns containers on boot"
+      ]
     },
-    "emr": {"status": "stub", "notes": "Control-plane stub; clusters do not run."},
+    "emr": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "17+ operations: RunJobFlow, DescribeCluster, ListClusters, TerminateJobFlows, ModifyCluster, SetTerminationProtection, SetVisibleToAllUsers, AddJobFlowSteps, DescribeStep, ListSteps, CancelSteps, AddInstanceFleet, ListInstanceFleets, ModifyInstanceFleet, AddInstanceGroups, ListInstanceGroups, ModifyInstanceGroups, ListBootstrapActions, AddTags, RemoveTags, GetBlockPublicAccessConfiguration, PutBlockPublicAccessConfiguration. Control-plane stub; clusters do not run actual Spark/Hadoop.",
+      "gotchas": [
+        "No actual EMR cluster execution — clusters are metadata records only",
+        "Steps immediately complete — no real job processing",
+        "Instance fleets and groups are stored but no EC2 instances are launched"
+      ]
+    },
     "eventbridge": {
       "status": "full",
-      "notes": "Lambda target dispatch on PutEvents; S3 EventBridge notifications; archives capture matching events and StartReplay re-dispatches them in a background thread; SaaS/partner APIs are control-plane stubs."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "40+ operations: event buses (Create/Update/Delete/List/Describe), rules (Put/Delete/List/Describe/Enable/Disable), targets (Put/Remove/ListTargetsByRule/ListRuleNamesByTarget), PutEvents, TestEventPattern, tags, archives (Create/Delete/Describe/Update/List), permissions (Put/Remove), connections (Create/Describe/Delete/List/Update/Deauthorize), API destinations (Create/Describe/Delete/List/Update), replays (Start/Describe/List/Cancel), endpoints, partner/SaaS event sources. Lambda target dispatch on PutEvents; S3 EventBridge notifications; archives capture matching events and StartReplay re-dispatches them in a background thread.",
+      "gotchas": [
+        "SaaS/partner event source APIs are control-plane stubs — no real third-party integration",
+        "Connection authorization is stored but not used for actual API destination calls",
+        "Replay re-dispatches events in a background thread — timing is not guaranteed",
+        "TestEventPattern uses fnmatch-based matching, not the full AWS event pattern grammar"
+      ]
     },
-    "firehose": {"status": "full"},
+    "firehose": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "11 operations: CreateDeliveryStream, DeleteDeliveryStream, DescribeDeliveryStream, ListDeliveryStreams, PutRecord, PutRecordBatch, UpdateDestination, TagDeliveryStream, UntagDeliveryStream, ListTagsForDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption. Destinations: ExtendedS3, S3 (deprecated alias), HttpEndpoint. S3 destination records are written synchronously to the local S3 emulator.",
+      "gotchas": [
+        "HttpEndpoint destination buffers records in-memory — no actual HTTP delivery",
+        "S3 destination requires the target bucket to already exist in the S3 emulator",
+        "No buffering interval or size-based batching — S3 writes happen synchronously on each PutRecord"
+      ]
+    },
     "glue": {
       "status": "full",
-      "notes": "Python shell jobs actually execute via subprocess; Spark jobs run on the official amazon/aws-glue-libs PySpark image (GlueVersion 4.0 / 3.0) on MiniStack's Docker network; override via GLUE_DOCKER_IMAGE."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": "docker",
+      "notes": "Full Data Catalog: databases, tables, partitions, connections, crawlers, jobs, job runs, security configurations, classifiers, partition indexes, crawler metrics, tags, triggers, workflows. Python shell jobs execute via subprocess. Spark jobs (glueetl/gluestreaming) run on the official amazon/aws-glue-libs PySpark image (GlueVersion 4.0 / 3.0) on MiniStack's Docker network. Override image via GLUE_DOCKER_IMAGE. Crawlers transition through RUNNING state with configurable timer (GLUE_CRAWLER_RUN_SECONDS).",
+      "gotchas": [
+        "Spark jobs require Docker socket and pull the ~2GB amazon/aws-glue-libs image on first use",
+        "Python shell jobs run as local subprocesses — no isolation from the MiniStack process",
+        "Crawlers run a timer but do not actually crawl S3 data to infer schemas",
+        "Without Docker, Spark job runs will fail"
+      ]
     },
-    "iam": {"status": "full", "notes": "Users, groups, roles, policies, access keys (UpdateAccessKey, GetAccessKeyLastUsed), attached/inline policies; no policy evaluation."},
+    "iam": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "50+ actions: users, groups, roles, policies (managed + inline), access keys (Create/List/Delete/Update/GetLastUsed), instance profiles, service-linked roles, OIDC providers, attached/inline policies for users and roles, assume role policy updates, SimulatePrincipalPolicy, SimulateCustomPolicy, TagRole/UntagRole/ListRoleTags, TagUser/UntagUser/ListUserTags, TagPolicy/UntagPolicy/ListPolicyTags.",
+      "gotchas": [
+        "No policy evaluation — policies are stored but never enforced on API calls",
+        "SimulatePrincipalPolicy/SimulateCustomPolicy return stub results",
+        "Access key rotation is tracked but credentials are not validated on requests"
+      ]
+    },
     "imds": {
       "status": "data-plane",
-      "notes": "IMDSv1 + IMDSv2; default credential chain falls through to a ministack-instance-role document with ASIA* session creds. Point SDKs via AWS_EC2_METADATA_SERVICE_ENDPOINT=http://localhost:4566. Set MINISTACK_IMDS_V2_REQUIRED=1 to require the token PUT."
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "IMDSv1 + IMDSv2; default credential chain falls through to a ministack-instance-role document with ASIA* session creds. Point SDKs via AWS_EC2_METADATA_SERVICE_ENDPOINT=http://localhost:4566. Set MINISTACK_IMDS_V2_REQUIRED=1 to require the token PUT.",
+      "gotchas": [
+        "No AccountScopedDict — returns global credentials",
+        "Not persisted — tokens are in-process only",
+        "Credentials are synthetic — not tied to any real IAM role"
+      ]
     },
     "inspector2": {
       "status": "full",
-      "notes": "14 operations covering Enable/Disable/ListFindings/BatchGetFindingDetails/ListCoverage/ListCoverageStatistics/ListFindingAggregations/SearchVulnerabilities plus filter and tag CRUD; deterministic stub vulnerability findings for ECR images, Lambda functions, and EC2 instances."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "14 operations covering Enable/Disable/ListFindings/BatchGetFindingDetails/ListCoverage/ListCoverageStatistics/ListFindingAggregations/SearchVulnerabilities plus filter and tag CRUD. Deterministic stub vulnerability findings for ECR images, Lambda functions, and EC2 instances.",
+      "gotchas": [
+        "Findings are deterministic stubs — no actual vulnerability scanning is performed",
+        "SearchVulnerabilities returns pre-defined stub results"
+      ]
     },
     "iot": {
       "status": "full",
-      "notes": "AWS IoT Core Phase 1: Things, ThingTypes, ThingGroups, certificates via local CA, IoT Policies with versioning, DescribeEndpoint. MQTT 3.1.1 over WebSocket on the gateway port + HTTP iot-data Publish. Persistent sessions, QoS 1 with DUP-flag retransmits, LWT, retained messages. Multi-tenant by account-prefixed topics. Local CA at GET /_ministack/iot/ca.pem. Requires cryptography package (ships in [full])."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AWS IoT Core: Things, ThingTypes, ThingGroups, certificates via local CA, IoT Policies with versioning, DescribeEndpoint. MQTT 3.1.1 over WebSocket on the gateway port + HTTP iot-data Publish. Persistent sessions, QoS 1 with DUP-flag retransmits, LWT, retained messages. Multi-tenant by account-prefixed topics. Local CA at GET /_ministack/iot/ca.pem. Requires cryptography package (ships in [full]).",
+      "gotchas": [
+        "Requires the 'cryptography' Python package for certificate generation",
+        "MQTT broker is in-process — no external broker dependency",
+        "Certificate validation uses a local CA — not interchangeable with AWS IoT certificates",
+        "Topic prefixing is transparent but means raw MQTT clients must use account-prefixed topics"
+      ]
+    },
+    "iot_data": {
+      "status": "data-plane",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "IoT Data Plane HTTP API (iot-data service). Publish operation bridges into the in-memory MQTT broker via the iot module. Routed by credential scope (iotdata) or host pattern (data-ats.iot.{region}.{host}).",
+      "gotchas": [
+        "Only Publish is implemented — GetRetainedMessage/ListRetainedMessages are not yet available",
+        "No AccountScopedDict — delegates to the iot module for account scoping"
+      ]
     },
     "kinesis": {
       "status": "full",
-      "notes": "Partition key → shard routing; AWS limits enforced (1 MB/record, 500 records/batch, 5 MB payload, 256-char partition key)."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "26 operations: CreateStream, DeleteStream, DescribeStream, DescribeStreamSummary, ListStreams, PutRecord, PutRecords, GetShardIterator, GetRecords, MergeShards, SplitShard, UpdateShardCount, ListShards, IncreaseStreamRetentionPeriod, DecreaseStreamRetentionPeriod, AddTagsToStream, RemoveTagsFromStream, ListTagsForStream, RegisterStreamConsumer, DeregisterStreamConsumer, ListStreamConsumers, DescribeStreamConsumer, StartStreamEncryption, StopStreamEncryption, EnableEnhancedMonitoring, DisableEnhancedMonitoring. Partition key to shard routing; AWS limits enforced (1 MB/record, 500 records/batch, 5 MB payload, 256-char partition key).",
+      "gotchas": [
+        "Enhanced monitoring is stored but no actual CloudWatch metrics are emitted",
+        "Stream encryption is tracked as metadata but data is not actually encrypted",
+        "Consumer enhanced fan-out (SubscribeToShard) is not implemented"
+      ]
     },
-    "kms": {"status": "full"},
+    "kms": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "8 operations: CreateKey, ListKeys, DescribeKey, Sign, Verify, Encrypt, Decrypt, GenerateDataKey, GenerateDataKeyWithoutPlaintext. Uses the cryptography package for real RSA/EC key operations when available.",
+      "gotchas": [
+        "Sign/Verify with real cryptographic operations requires the 'cryptography' package",
+        "Without cryptography, encryption uses simplified/stub operations",
+        "Key rotation is not implemented",
+        "Key policies are not stored or evaluated"
+      ]
+    },
     "lambda_svc": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "Python and Node.js runtimes execute with warm worker pool; provided.al2023 / provided.al2 runtimes execute via Docker RIE (Go, Rust, C++); Publish=True creates immutable numbered versions; Code via ZipFile, S3Bucket/S3Key (with optional S3ObjectVersion), or ImageUri. SQS, Kinesis, and DynamoDB Streams event source mappings; Function URL CRUD; Layers; Aliases; Concurrency; EventInvokeConfig. Invoke LogResult returns user output + traceback on error."
+      "notes": "40+ operations: CreateFunction, DeleteFunction, GetFunction, GetFunctionConfiguration, ListFunctions (paginated), Invoke (RequestResponse/Event/DryRun), UpdateFunctionCode, UpdateFunctionConfiguration, PublishVersion, ListVersionsByFunction, CreateAlias, GetAlias, UpdateAlias, DeleteAlias, ListAliases, AddPermission, RemovePermission, GetPolicy, ListTags, TagResource, UntagResource, PublishLayerVersion, GetLayerVersion, GetLayerVersionByArn, ListLayerVersions, DeleteLayerVersion, ListLayers, AddLayerVersionPermission, RemoveLayerVersionPermission, GetLayerVersionPolicy, CreateEventSourceMapping, DeleteEventSourceMapping, GetEventSourceMapping, ListEventSourceMappings, UpdateEventSourceMapping, PutFunctionConcurrency, GetFunctionConcurrency, DeleteFunctionConcurrency, CreateFunctionUrlConfig, GetFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, ListFunctionUrlConfigs. Python and Node.js runtimes execute with warm worker pool; provided.al2023/provided.al2 runtimes execute via Docker RIE. Code via ZipFile, S3Bucket/S3Key, or ImageUri. SQS, Kinesis, and DynamoDB Streams event source mappings. Invoke LogResult returns user output + traceback on error.",
+      "gotchas": [
+        "Python/Node.js run in-process by default — no container isolation unless using provided.* runtimes",
+        "provided.* runtimes (Go, Rust, C++) require Docker socket for RIE execution",
+        "Event source mappings poll in background threads — timing is best-effort",
+        "ImageUri-based functions require Docker to pull and run the image",
+        "Warm worker pool reuses processes — global state can leak between invocations"
+      ]
     },
     "mwaa": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "Managed Workflows for Apache Airflow — real apache/airflow:<version> containers (2.x and 3.x), DAG sync from S3, InvokeRestApi proxy."
+      "notes": "7 operations: CreateEnvironment, GetEnvironment, DeleteEnvironment, UpdateEnvironment, ListEnvironments, CreateWebLoginToken, CreateCliToken. Managed Workflows for Apache Airflow — real apache/airflow:<version> containers (2.x and 3.x), DAG sync from S3, InvokeRestApi proxy.",
+      "gotchas": [
+        "Requires Docker socket for real Airflow container creation",
+        "DAG sync reads from the S3 emulator's DagS3Path — bucket must exist",
+        "Container startup is async — environment may take time to become AVAILABLE",
+        "CreateWebLoginToken/CreateCliToken return synthetic tokens"
+      ]
     },
     "opensearch": {
       "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "Management plane on /2021-01-01/* (boto3.client('opensearch'), SigV4 scope es). Default data plane is a stub (<domain>.ministack.local:9200). Set OPENSEARCH_DATAPLANE=1 to spawn one real opensearchproject/opensearch container per CreateDomain. Add OPENSEARCH_DASHBOARDS=1 for a per-domain dashboards sidecar."
+      "notes": "11 operations: CreateDomain, DescribeDomain, DescribeDomains, DeleteDomain, ListDomainNames, UpdateDomainConfig, DescribeDomainConfig, DescribeDomainChangeProgress, ListVersions, GetCompatibleVersions, AddTags/ListTags/RemoveTags. Management plane on /2021-01-01/* (boto3.client('opensearch'), SigV4 scope es). Default data plane is a stub (<domain>.ministack.local:9200). Set OPENSEARCH_DATAPLANE=1 to spawn one real opensearchproject/opensearch container per CreateDomain. Add OPENSEARCH_DASHBOARDS=1 for a per-domain dashboards sidecar.",
+      "gotchas": [
+        "Data plane is a stub endpoint by default — no actual Elasticsearch/OpenSearch queries",
+        "Real containers require Docker socket and OPENSEARCH_DATAPLANE=1",
+        "Domain creation is non-blocking — status transitions asynchronously",
+        "Access policies are stored but not enforced"
+      ]
     },
     "organizations": {
       "status": "full",
-      "notes": "Single-master-account org auto-initialised; nested OUs with Path field; FeatureSet=ALL."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Single-master-account org auto-initialised per tenant. Nested OUs with Path field (2026-03-31 AWS additive change). FeatureSet=ALL. CreateAccount, DescribeAccount, ListAccounts, CreateOrganizationalUnit, ListOrganizationalUnitsForParent, DescribeOrganization, etc.",
+      "gotchas": [
+        "Each tenant gets its own independent organization — no cross-account org structure",
+        "Created accounts are metadata-only — no real AWS account provisioning"
+      ]
     },
     "pipes": {
       "status": "stub",
-      "notes": "Minimal EventBridge Pipes for local CFN use. Source: DynamoDB Streams. Target: SNS. Lifecycle: create/delete via CloudFormation handlers."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Minimal EventBridge Pipes for local CFN use. Source: DynamoDB Streams. Target: SNS. Lifecycle: create/delete via CloudFormation handlers. Background poller thread reads DynamoDB Stream records and publishes to SNS target.",
+      "gotchas": [
+        "Only DynamoDB Streams source and SNS target are supported",
+        "Pipe is created and managed through CloudFormation handlers, not direct API calls",
+        "Background poller restarts on state restore for RUNNING pipes"
+      ]
     },
     "rds": {
       "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "CreateDBInstance spins up real Postgres/MySQL Docker container; returns actual host:port endpoint. Non-blocking create; daemon thread waits for container liveness, sets DBInstanceStatus to 'available' or 'failed'. PERSIST_STATE=1 respawns containers on boot."
+      "notes": "CreateDBInstance spins up real Postgres/MySQL Docker container; returns actual host:port endpoint. Non-blocking create; daemon thread waits for container liveness, sets DBInstanceStatus to 'available' or 'failed'. PERSIST_STATE=1 respawns containers on boot.",
+      "gotchas": [
+        "Requires Docker socket for real database container creation",
+        "Without Docker, instances are metadata-only stubs",
+        "Container startup is non-blocking — instance status transitions asynchronously",
+        "Database engine version selection maps to specific Docker image tags"
+      ]
     },
     "rds_data": {
       "status": "full",
-      "notes": "RDS Data API; routes SQL to real Docker-backed RDS containers when present; supports MySQL (pymysql) and PostgreSQL (psycopg2); REST paths (/Execute, /BeginTransaction, etc.). Surfaces DatabaseUnavailableException (504) when container-backed cluster isn't reachable, instead of silently acking via the in-memory stub."
+      "persistence": false,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "RDS Data API; routes SQL to real Docker-backed RDS containers when present; supports MySQL (pymysql) and PostgreSQL (psycopg2). REST paths: /Execute, /BeginTransaction, /CommitTransaction, /RollbackTransaction, /BatchExecute. Surfaces DatabaseUnavailableException (504) when container-backed cluster isn't reachable.",
+      "gotchas": [
+        "Requires pymysql (MySQL) or psycopg2 (PostgreSQL) Python packages for real SQL execution",
+        "Not in _state_map — no independent persistence",
+        "Falls back to in-memory stub when no Docker-backed RDS container is available"
+      ]
     },
-    "resource_groups": {"status": "full"},
-    "route53": {"status": "full"},
+    "resource_groups": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "13 operations: CreateGroup, GetGroup, DeleteGroup, UpdateGroup, ListGroups, GetGroupQuery, UpdateGroupQuery, GetGroupConfiguration, PutGroupConfiguration, GroupResources, UngroupResources, ListGroupResources, ListGroupingStatuses, SearchResources, Tag, Untag, GetTags, GetAccountSettings, UpdateAccountSettings.",
+      "gotchas": [
+        "Tag-sync operations are intentionally not implemented",
+        "SearchResources queries the in-memory tag state only"
+      ]
+    },
+    "route53": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Hosted zones (Create/Get/Delete/List/ListByName/UpdateComment), record sets (ChangeResourceRecordSets/List), changes (GetChange), health checks (Create/Get/Delete/List/Update), tags (ChangeTagsForResource/ListTagsForResource). REST/XML API under /2013-04-01/.",
+      "gotchas": [
+        "DNS records are metadata-only — no actual DNS resolution",
+        "Health checks are stored but never actually evaluated",
+        "GetChange always returns INSYNC — no propagation delay modeled"
+      ]
+    },
     "s3": {
       "status": "full",
       "persistence": true,
-      "notes": "Object Lock with retention & legal hold enforcement on delete. GetObjectAcl / PutObjectAcl with canned ACLs and XML policy bodies (stored, not enforced).",
-      "gotchas": ["Optional disk persistence via S3_PERSIST=1."]
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Full S3 implementation: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV1/V2, DeleteObjects (batch), multipart upload (Create/UploadPart/Complete/Abort/List/ListParts), object tagging, ListObjectVersions, bucket sub-resources (Policy/Versioning/Encryption/Lifecycle/CORS/ACL/Tagging/Notification/Logging/Accelerate/RequestPayment/Website), Object Lock (retention/legal hold enforcement on delete), replication (Put/Get/Delete), range requests (206), Content-MD5 validation, encoding-type=url.",
+      "gotchas": [
+        "Optional disk persistence via S3_PERSIST=1 or S3_DATA_DIR",
+        "ACLs are stored but not enforced on access",
+        "Bucket policies are stored but not evaluated",
+        "Lifecycle rules are stored but not automatically executed",
+        "Replication configuration is stored but objects are not actually replicated"
+      ]
     },
-    "s3files": {"status": "data-plane", "notes": "S3 disk-persistence helper module; no public ops."},
+    "s3files": {
+      "status": "data-plane",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "S3 disk-persistence helper module; no public ops. Internal helper for S3_PERSIST/S3_DATA_DIR functionality.",
+      "gotchas": [
+        "Internal module — not a standalone AWS service"
+      ]
+    },
     "s3tables": {
       "status": "partial",
-      "notes": "14 of 30 botocore operations: table buckets, namespaces, Iceberg-format tables (Create/List/Get/Delete) + GetTableMetadataLocation / UpdateTableMetadataLocation. Embedded Iceberg REST catalog at /iceberg. Missing: policy CRUD (table-bucket + table), encryption CRUD, maintenance config CRUD, GetTableMaintenanceJobStatus, RenameTable."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "14 of 30 botocore operations: table buckets (Create/List/Get/Delete), namespaces (Create/List/Get/Delete), Iceberg-format tables (Create/List/Get/Delete) + GetTableMetadataLocation / UpdateTableMetadataLocation. Embedded Iceberg REST catalog at /iceberg for Spark integration. Missing: policy CRUD (table-bucket + table), encryption CRUD, maintenance config CRUD, GetTableMaintenanceJobStatus, RenameTable.",
+      "gotchas": [
+        "16 operations are not yet implemented (policy, encryption, maintenance, rename)",
+        "Iceberg metadata is held in memory — no external metastore",
+        "Data files are stored in MiniStack's S3 service"
+      ]
     },
     "scheduler": {
       "status": "full",
-      "notes": "12 actions; schedule groups with cascading deletes; rate(), cron(), at() expressions; group/prefix/state filters; CFN AWS::Scheduler::Schedule and ScheduleGroup supported."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "12 actions: CreateSchedule, GetSchedule, ListSchedules, UpdateSchedule, DeleteSchedule, CreateScheduleGroup, GetScheduleGroup, ListScheduleGroups, DeleteScheduleGroup, TagResource, UntagResource, ListTagsForResource. Schedule groups with cascading deletes; rate(), cron(), at() expressions; group/prefix/state filters; CFN AWS::Scheduler::Schedule and ScheduleGroup supported.",
+      "gotchas": [
+        "Schedules are stored but not actually triggered — no background scheduler execution",
+        "rate()/cron()/at() expressions are parsed for validation but not evaluated"
+      ]
     },
-    "secretsmanager": {"status": "full"},
-    "servicediscovery": {"status": "full", "notes": "Cloud Map — namespaces, services, instance registration."},
+    "secretsmanager": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "14 operations: CreateSecret, GetSecretValue, ListSecrets, DeleteSecret, RestoreSecret, UpdateSecret, DescribeSecret, PutSecretValue, UpdateSecretVersionStage, TagResource, UntagResource, ListSecretVersionIds, RotateSecret, GetRandomPassword, ReplicateSecretToRegions, PutResourcePolicy, GetResourcePolicy, DeleteResourcePolicy, ValidateResourcePolicy.",
+      "gotchas": [
+        "RotateSecret stores the rotation config but does not invoke a Lambda rotation function",
+        "Resource policies are stored but not evaluated",
+        "ReplicateSecretToRegions is metadata-only — no cross-region replication"
+      ]
+    },
+    "servicediscovery": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Cloud Map — namespaces, services, instance registration. Integrates with Route 53 for DNS record management.",
+      "gotchas": [
+        "DNS records created via Cloud Map integration are metadata-only in the Route 53 emulator"
+      ]
+    },
     "ses": {
       "status": "stub",
-      "notes": "Emails stored in-memory, not sent."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "20+ v1 Query API actions: SendEmail, SendRawEmail, SendTemplatedEmail, SendBulkTemplatedEmail, VerifyEmailIdentity, VerifyEmailAddress, VerifyDomainIdentity, VerifyDomainDkim, ListIdentities, GetIdentityVerificationAttributes, DeleteIdentity, GetSendQuota, GetSendStatistics, ListVerifiedEmailAddresses, CreateConfigurationSet, DeleteConfigurationSet, DescribeConfigurationSet, ListConfigurationSets, CreateTemplate, GetTemplate, DeleteTemplate, ListTemplates, UpdateTemplate, GetIdentityDkimAttributes, SetIdentityNotificationTopic, SetIdentityFeedbackForwardingEnabled. Plus v2 REST endpoints under /v2/email/. All emails stored in-memory for test inspection. Send statistics aggregated into 15-minute buckets.",
+      "gotchas": [
+        "Emails are stored in-memory, not actually sent (unless SMTP relay is configured)",
+        "All identities auto-verify immediately",
+        "Send quotas are not enforced"
+      ]
     },
-    "ses_v2": {"status": "full"},
+    "ses_v2": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "13 operations: SendEmail, CreateEmailIdentity, GetEmailIdentity, DeleteEmailIdentity, ListEmailIdentities, CreateConfigurationSet, GetConfigurationSet, DeleteConfigurationSet, ListConfigurationSets, GetAccount, ListSuppressedDestinations, PutAccountSuppressionAttributes, TagResource, UntagResource, ListTagsForResource.",
+      "gotchas": [
+        "Shares _sent_emails_list with ses v1 module",
+        "Emails are stored in-memory, not sent (unless SMTP relay is configured)",
+        "Identities auto-verify immediately"
+      ]
+    },
     "sns": {
       "status": "full",
-      "notes": "SNS→SQS fanout delivery; SNS→Lambda fanout (synchronous invocation); FIFO topics with 5-minute deduplication, sequence numbers, content-based deduplication, and subscription validation."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "18 operations: CreateTopic, DeleteTopic, ListTopics, GetTopicAttributes, SetTopicAttributes, Subscribe, Unsubscribe, ConfirmSubscription, ListSubscriptions, ListSubscriptionsByTopic, GetSubscriptionAttributes, SetSubscriptionAttributes, Publish, PublishBatch, ListTagsForResource, TagResource, UntagResource, CreatePlatformApplication, CreatePlatformEndpoint. SNS to SQS fanout delivery; SNS to Lambda fanout (synchronous invocation). FIFO topics with 5-minute deduplication, sequence numbers, content-based deduplication, and subscription validation.",
+      "gotchas": [
+        "HTTP/HTTPS subscriptions are not actually called — messages are stored only",
+        "Platform applications and endpoints are metadata stubs",
+        "SMS delivery is not implemented"
+      ]
     },
     "sqs": {
       "status": "full",
-      "notes": "Both Query API and JSON protocol; FIFO queues with deduplication; DLQ support."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "17 actions: CreateQueue, DeleteQueue, ListQueues, GetQueueUrl, GetQueueAttributes, SetQueueAttributes, PurgeQueue, SendMessage, ReceiveMessage, DeleteMessage, ChangeMessageVisibility, ChangeMessageVisibilityBatch, SendMessageBatch, DeleteMessageBatch, ListQueueTags, TagQueue, UntagQueue. Both Query API and JSON protocol. FIFO queues with 5-minute deduplication, message-group ordering, one in-flight message per group. DLQ support with RedrivePolicy. Long polling (WaitTimeSeconds).",
+      "gotchas": [
+        "Long polling blocks the request for up to WaitTimeSeconds — no push notification",
+        "No real message retention enforcement — messages are not automatically deleted after retention period",
+        "ApproximateNumberOfMessages may not be perfectly accurate during concurrent access"
+      ]
     },
     "ssm": {
       "status": "full",
-      "notes": "Parameter Store supports String, SecureString, StringList."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "12 operations: PutParameter, GetParameter, GetParameters, GetParametersByPath, DeleteParameter, DeleteParameters, DescribeParameters, GetParameterHistory, LabelParameterVersion, AddTagsToResource, RemoveTagsFromResource, ListTagsForResource. Parameter Store supports String, SecureString, StringList types.",
+      "gotchas": [
+        "SecureString values are stored in plaintext — no actual KMS encryption",
+        "Parameter policies (expiration, notification) are not enforced"
+      ]
     },
     "stepfunctions": {
       "status": "full",
-      "notes": "Full ASL interpreter; Retry/Catch; waitForTaskToken; Activities (worker pattern); Pass/Task/Choice/Wait/Succeed/Fail/Map/Parallel; TestState API with mock and inspectionLevel; SFN_MOCK_CONFIG for AWS SFN Local compatible mocks; intrinsic functions; nested startExecution.sync; JSONata standard library (~30 built-in functions: string, numeric, array, object, type, date/time, utility)."
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "28+ operations: CreateStateMachine, DeleteStateMachine, DescribeStateMachine, UpdateStateMachine, ListStateMachines, StartExecution, StartSyncExecution, StopExecution, DescribeExecution, DescribeStateMachineForExecution, ListExecutions, GetExecutionHistory, SendTaskSuccess, SendTaskFailure, SendTaskHeartbeat, CreateActivity, DeleteActivity, DescribeActivity, ListActivities, GetActivityTask, TagResource, UntagResource, ListTagsForResource, PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, DescribeStateMachineAlias, ListStateMachineAliases. Full ASL interpreter: Pass/Task/Choice/Wait/Succeed/Fail/Map/Parallel; Retry/Catch; waitForTaskToken; Activities (worker pattern); TestState API with mock and inspectionLevel; SFN_MOCK_CONFIG for AWS SFN Local compatible mocks; intrinsic functions; nested startExecution.sync; JSONata standard library (~30 built-in functions).",
+      "gotchas": [
+        "Executions run in background threads — not truly parallel for Map/Parallel states",
+        "Wait states use real time.sleep — long waits block the execution thread",
+        "Task states invoke Lambda when available; otherwise return the input as output",
+        "JSONata is available but JSONPath is the default query language"
+      ]
     },
-    "sts": {"status": "full", "notes": "AssumeRole, GetCallerIdentity, GetSessionToken; signatures not validated."},
-    "tagging": {"status": "full", "notes": "Resource Groups Tagging API; cross-service tag aggregation."},
-    "transfer": {"status": "stub", "notes": "Transfer Family control-plane stub; no real SFTP/FTPS server."},
-    "waf": {"status": "full"},
-    "waf_v1": {"status": "stub", "notes": "Minimal WAF v1 stub — empty lists, valid ChangeToken. Use wafv2 for full features."}
+    "sts": {
+      "status": "full",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "6 actions: GetCallerIdentity, AssumeRole, AssumeRoleWithWebIdentity, GetSessionToken, GetAccessKeyInfo, GetWebIdentityToken. Shares IAM module's XML builders and credential generators. Signatures not validated.",
+      "gotchas": [
+        "No AccountScopedDict — stateless service, no per-account isolation",
+        "Signatures are never validated — any credential is accepted",
+        "AssumeRole does not check trust policies",
+        "Session tokens are synthetic and not tied to real IAM state"
+      ]
+    },
+    "tagging": {
+      "status": "full",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "5 operations: GetResources, GetTagKeys, GetTagValues, TagResources, UntagResources. Resource Groups Tagging API; cross-service tag aggregation by reading each service module's tag state directly.",
+      "gotchas": [
+        "No AccountScopedDict — reads from other services' AccountScopedDict stores",
+        "Not in _state_map — no independent persistence (reads live service state)",
+        "Tag writes delegate to each service's own tag storage format"
+      ]
+    },
+    "transfer": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Control-plane JSON API: CreateServer, DescribeServer, DeleteServer, ListServers, StartServer, StopServer, CreateUser, DescribeUser, DeleteUser, ListUsers, ImportSshPublicKey, DeleteSshPublicKey. Data-plane: real SFTP listener on :2222 (SFTP_PORT), key-authenticated, S3-backed virtual filesystem. SFTP_PORT_PER_SERVER=1 allocates per-server ports from SFTP_BASE_PORT.",
+      "gotchas": [
+        "SFTP data plane requires paramiko Python package",
+        "SFTP writes buffer entire file in memory before PUT to S3",
+        "rename is implemented as copy + delete (S3 has no atomic rename)",
+        "Authentication matches SSH public key across all users and servers"
+      ]
+    },
+    "waf": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "18 operations: CreateWebACL, GetWebACL, UpdateWebACL, DeleteWebACL, ListWebACLs, AssociateWebACL, DisassociateWebACL, GetWebACLForResource, ListResourcesForWebACL, CreateIPSet, GetIPSet, UpdateIPSet, DeleteIPSet, ListIPSets, CreateRuleGroup, GetRuleGroup, UpdateRuleGroup, DeleteRuleGroup, ListRuleGroups, TagResource, UntagResource, ListTagsForResource, CheckCapacity, DescribeManagedRuleGroup.",
+      "gotchas": [
+        "WAF rules are stored but never evaluated against incoming requests",
+        "CheckCapacity always returns a valid capacity — no limit enforcement",
+        "DescribeManagedRuleGroup returns stub rule descriptions"
+      ]
+    },
+    "waf_v1": {
+      "status": "stub",
+      "persistence": false,
+      "multi_tenant": false,
+      "real_backend": null,
+      "notes": "Minimal WAF v1 stub — empty lists, valid ChangeToken. Covers both AWSWAF_20150824 (waf classic/global) and AWSWAF_Regional_20161128 (waf-regional) target prefixes. Use wafv2 for full features.",
+      "gotchas": [
+        "No AccountScopedDict — returns empty stub responses for all accounts",
+        "No persistence — state is not saved",
+        "All list operations return empty results",
+        "ChangeToken is always valid but no rules can be created"
+      ]
+    }
   }
 }
