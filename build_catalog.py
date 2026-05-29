@@ -84,7 +84,7 @@ PYPROJECT: str | None = None
 _AWS_VERBS = (
     "Accept", "Acknowledge", "Activate", "Add", "Admin", "Allocate", "Apply",
     "Approve", "Associate", "Assume", "Attach", "Authenticate", "Authorize",
-    "Batch", "Begin", "Bulk", "Cancel", "Change", "Check", "Claim", "Clear",
+    "Batch", "Begin", "Bulk", "Cancel", "Change", "Check", "Checkpoint", "Claim", "Clear",
     "Clone", "Close", "Commit", "Complete", "Confirm", "Connect", "Copy",
     "Count", "Create", "Deactivate", "Deauthorize", "Decrease", "Decrypt",
     "Delete", "Deliver", "Deploy", "Deprecate", "Deregister", "Describe",
@@ -119,7 +119,10 @@ _BARE_VERB_OPS = frozenset({
 })
 _OP_RE = re.compile(r"^(?:" + "|".join(_AWS_VERBS) + r")[A-Z][A-Za-z0-9]*$")
 _OP_FIND_RE = re.compile(
-    r"\b(?:" + "|".join(_AWS_VERBS) + r")[A-Z][A-Za-z0-9]*\b"
+    # Use explicit lookaround so an underscore on the left (e.g. AWS doc URL
+    # paths like `API_CheckpointDurableExecution.html`) doesn't suppress the
+    # match — `\b` treats `_` as a word char so it wouldn't fire there.
+    r"(?<![A-Za-z0-9])(?:" + "|".join(_AWS_VERBS) + r")[A-Z][A-Za-z0-9]*(?![A-Za-z0-9])"
 )
 
 

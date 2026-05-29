@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.3.50",
-  "generated_at": "2026-05-27T14:41:03Z",
+  "ministack_version": "1.3.52",
+  "generated_at": "2026-05-29T01:27:58Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,8 +9,19 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 67,
+  "service_count": 69,
   "services": {
+    "_dynamodb_keywords": {
+      "name": "_dynamodb_keywords",
+      "operations": [
+        "FilterExpression",
+        "UpdateExpression"
+      ],
+      "operation_count": 2,
+      "extraction_sources": [
+        "docstring (+2)"
+      ]
+    },
     "account": {
       "name": "account",
       "operations": [
@@ -674,38 +685,67 @@
     "dynamodb": {
       "name": "dynamodb",
       "operations": [
+        "BatchExecuteStatement",
         "BatchGetItem",
         "BatchWriteItem",
+        "CreateBackup",
         "CreateTable",
+        "DeleteBackup",
         "DeleteItem",
+        "DeleteResourcePolicy",
         "DeleteTable",
+        "DescribeBackup",
         "DescribeContinuousBackups",
+        "DescribeContributorInsights",
         "DescribeEndpoints",
+        "DescribeExport",
+        "DescribeImport",
         "DescribeKinesisStreamingDestination",
+        "DescribeLimits",
         "DescribeTable",
         "DescribeTimeToLive",
         "DisableKinesisStreamingDestination",
         "EnableKinesisStreamingDestination",
+        "EndTime",
         "ExecuteStatement",
+        "ExecuteTransaction",
+        "ExportArn",
+        "ExportFormat",
+        "ExportStatus",
+        "ExportTableToPointInTime",
+        "ExportType",
         "GetItem",
+        "GetResourcePolicy",
+        "ImportArn",
+        "ImportStatus",
+        "ImportTable",
+        "ListBackups",
+        "ListContributorInsights",
+        "ListExports",
+        "ListImports",
         "ListTables",
         "ListTagsOfResource",
         "PutItem",
+        "PutResourcePolicy",
         "Query",
         "QueryFilter",
+        "RestoreTableFromBackup",
+        "RestoreTableToPointInTime",
         "Scan",
         "ScanFilter",
+        "StartTime",
         "TagResource",
         "UntagResource",
         "UpdateContinuousBackups",
+        "UpdateContributorInsights",
         "UpdateItem",
         "UpdateKinesisStreamingDestination",
         "UpdateTable",
         "UpdateTimeToLive"
       ],
-      "operation_count": 28,
+      "operation_count": 57,
       "extraction_sources": [
-        "dict-keys (26)",
+        "dict-keys (59)",
         "docstring (+2)"
       ]
     },
@@ -1464,6 +1504,23 @@
       "operation_count": 27,
       "extraction_sources": [
         "dict-keys (27)"
+      ]
+    },
+    "lambda_durable": {
+      "name": "lambda_durable",
+      "operations": [
+        "CheckpointDurableExecution",
+        "CreateFunction",
+        "GetDurableExecution",
+        "GetDurableExecutionHistory",
+        "GetDurableExecutionState",
+        "GetFunction",
+        "ListDurableExecutionsByFunction",
+        "StopDurableExecution"
+      ],
+      "operation_count": 8,
+      "extraction_sources": [
+        "docstring (+8)"
       ]
     },
     "lambda_svc": {

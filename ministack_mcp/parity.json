@@ -157,7 +157,7 @@
     },
     "cloudformation": {
       "status": "partial",
-      "notes": "Stack lifecycle, 15 intrinsics, 77 resource types; some resources couple directly to service modules."
+      "notes": "Stack lifecycle, 15 intrinsics, 78 resource types; some resources couple directly to service modules."
     },
     "cloudfront": {
       "status": "full",
@@ -499,13 +499,24 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "40+ operations: CreateFunction, DeleteFunction, GetFunction, GetFunctionConfiguration, ListFunctions (paginated), Invoke (RequestResponse/Event/DryRun), UpdateFunctionCode, UpdateFunctionConfiguration, PublishVersion, ListVersionsByFunction, CreateAlias, GetAlias, UpdateAlias, DeleteAlias, ListAliases, AddPermission, RemovePermission, GetPolicy, ListTags, TagResource, UntagResource, PublishLayerVersion, GetLayerVersion, GetLayerVersionByArn, ListLayerVersions, DeleteLayerVersion, ListLayers, AddLayerVersionPermission, RemoveLayerVersionPermission, GetLayerVersionPolicy, CreateEventSourceMapping, DeleteEventSourceMapping, GetEventSourceMapping, ListEventSourceMappings, UpdateEventSourceMapping, PutFunctionConcurrency, GetFunctionConcurrency, DeleteFunctionConcurrency, CreateFunctionUrlConfig, GetFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, ListFunctionUrlConfigs. Python and Node.js runtimes execute with warm worker pool; provided.al2023/provided.al2 runtimes execute via Docker RIE. Code via ZipFile, S3Bucket/S3Key, or ImageUri. SQS, Kinesis, and DynamoDB Streams event source mappings. Invoke LogResult returns user output + traceback on error.",
+      "notes": "40+ operations: CreateFunction (now accepts DurableConfig), DeleteFunction, GetFunction, GetFunctionConfiguration, ListFunctions (paginated), Invoke (RequestResponse/Event/DryRun), UpdateFunctionCode, UpdateFunctionConfiguration, PublishVersion, ListVersionsByFunction, CreateAlias, GetAlias, UpdateAlias, DeleteAlias, ListAliases, AddPermission, RemovePermission, GetPolicy, ListTags, TagResource, UntagResource, PublishLayerVersion, GetLayerVersion, GetLayerVersionByArn, ListLayerVersions, DeleteLayerVersion, ListLayers, AddLayerVersionPermission, RemoveLayerVersionPermission, GetLayerVersionPolicy, CreateEventSourceMapping, DeleteEventSourceMapping, GetEventSourceMapping, ListEventSourceMappings, UpdateEventSourceMapping, PutFunctionConcurrency, GetFunctionConcurrency, DeleteFunctionConcurrency, CreateFunctionUrlConfig, GetFunctionUrlConfig, UpdateFunctionUrlConfig, DeleteFunctionUrlConfig, ListFunctionUrlConfigs. **Durable Functions (Durable Execution)** — CheckpointDurableExecution, GetDurableExecutionState, GetDurableExecution, GetDurableExecutionHistory, ListDurableExecutionsByFunction, StopDurableExecution, plus the three external callback ops (SendDurableExecutionCallbackSuccess, SendDurableExecutionCallbackFailure, SendDurableExecutionCallbackHeartbeat). Resume scheduler fires WAIT expiries, callback timeouts, and step-retry backoffs. State persists across restarts. Python and Node.js runtimes execute with warm worker pool; provided.al2023/provided.al2 runtimes execute via Docker RIE. Code via ZipFile, S3Bucket/S3Key, or ImageUri. SQS, Kinesis, and DynamoDB Streams event source mappings. Invoke LogResult returns user output + traceback on error.",
       "gotchas": [
         "Python/Node.js run in-process by default — no container isolation unless using provided.* runtimes",
         "provided.* runtimes (Go, Rust, C++) require Docker socket for RIE execution",
         "Event source mappings poll in background threads — timing is best-effort",
         "ImageUri-based functions require Docker to pull and run the image",
         "Warm worker pool reuses processes — global state can leak between invocations"
+      ]
+    },
+    "lambda_durable": {
+      "status": "full",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AWS Lambda Durable Functions (Durable Execution) preview API (2025-12-01). 9 operations: CheckpointDurableExecution, GetDurableExecutionState, GetDurableExecution, GetDurableExecutionHistory, ListDurableExecutionsByFunction, StopDurableExecution, plus the three external callback ops SendDurableExecutionCallbackSuccess, SendDurableExecutionCallbackFailure, SendDurableExecutionCallbackHeartbeat. CreateFunction accepts DurableConfig. A resume scheduler fires WAIT expiries, callback timeouts (Callback.Timeout / Callback.Heartbeat), and step-retry backoffs (NextAttemptDelaySeconds). State persists across MiniStack restarts — the in-memory callback index is rebuilt from restored executions on boot and pending timers are re-armed. End-to-end verified against the official aws-durable-execution-sdk-python 1.5.0 and aws-durable-execution-sdk-java 2.44.13.",
+      "gotchas": [
+        "Preview API — AWS may revise the wire shapes before GA",
+        "Step-retry depends on cold-start behavior; examples that store attempt counters in module-level state (count() from itertools) won't progress across MiniStack's cold-start retries"
       ]
     },
     "mwaa": {
