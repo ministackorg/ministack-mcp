@@ -390,7 +390,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "11 operations: CreateDeliveryStream, DeleteDeliveryStream, DescribeDeliveryStream, ListDeliveryStreams, PutRecord, PutRecordBatch, UpdateDestination, TagDeliveryStream, UntagDeliveryStream, ListTagsForDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption. Destinations: ExtendedS3, S3 (deprecated alias), HttpEndpoint. S3 destination records are written synchronously to the local S3 emulator.",
+      "notes": "11 operations: CreateDeliveryStream, DeleteDeliveryStream, DescribeDeliveryStream, ListDeliveryStreams, PutRecord, PutRecordBatch, UpdateDestination, TagDeliveryStream, UntagDeliveryStream, ListTagsForDeliveryStream, StartDeliveryStreamEncryption, StopDeliveryStreamEncryption. Destinations: ExtendedS3, S3 (deprecated alias), HttpEndpoint. S3 destination records are written synchronously to the local S3 emulator. DeliveryStreamType=KinesisStreamAsSource is fully wired: records put into the source Kinesis stream are forwarded to the configured ExtendedS3 / S3 destination inline on PutRecord / PutRecords (same fan-out pattern as SNS→SQS), honoring Prefix and DeliveryStartTimestamp.",
       "gotchas": [
         "HttpEndpoint destination buffers records in-memory — no actual HTTP delivery",
         "S3 destination requires the target bucket to already exist in the S3 emulator",
