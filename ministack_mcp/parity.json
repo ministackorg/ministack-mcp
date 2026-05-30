@@ -339,11 +339,12 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "11 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. CFN AWS::EKS::Cluster and Nodegroup supported.",
+      "notes": "16 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, CreateAddon, DescribeAddon, ListAddons, UpdateAddon, DeleteAddon, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. CFN AWS::EKS::Cluster and Nodegroup supported.",
       "gotchas": [
         "Requires Docker socket for real k3s cluster creation",
         "Cluster creation is async — status transitions from CREATING to ACTIVE in a background thread",
         "Nodegroups are metadata-only — no actual worker nodes are provisioned",
+        "Addons are metadata-only — status flips to ACTIVE immediately, no real plugin installed in the k3s cluster",
         "k3s container uses the ministack Docker network for inter-service communication"
       ]
     },
