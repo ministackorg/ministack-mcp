@@ -339,7 +339,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "16 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, CreateAddon, DescribeAddon, ListAddons, UpdateAddon, DeleteAddon, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. CFN AWS::EKS::Cluster and Nodegroup supported.",
+      "notes": "17 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, CreateAddon, DescribeAddon, ListAddons, UpdateAddon, DeleteAddon, AssociateEncryptionConfig, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. AssociateEncryptionConfig at /clusters/{name}/encryption-config/associate records KMS encryption config (rejects re-association). OIDC discovery + JWKS served at the cluster's identity.oidc.issuer (now ministack-hosted at /oidc/id/{32-char-id}) so terraform's aws_iam_openid_connect_provider works against ministack. CFN AWS::EKS::Cluster and Nodegroup supported.",
       "gotchas": [
         "Requires Docker socket for real k3s cluster creation",
         "Cluster creation is async — status transitions from CREATING to ACTIVE in a background thread",
@@ -518,6 +518,18 @@
       "gotchas": [
         "Preview API — AWS may revise the wire shapes before GA",
         "Step-retry depends on cold-start behavior; examples that store attempt counters in module-level state (count() from itertools) won't progress across MiniStack's cold-start retries"
+      ]
+    },
+    "mediaconnect": {
+      "status": "stub",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "5 operations: CreateFlow, DescribeFlow, ListFlows, UpdateFlow, ListTagsForResource. Routes under /v1/flows[/{FlowArn}] and /tags/{ResourceArn}. Control-plane-only stub — flow records are metadata, no real streaming or transcoding. ListFlows returns the AWS-shape ListedFlow projection (no Outputs/Sources/Entitlements). UpdateFlow is narrow to AWS-allowed top-level fields (SourceFailoverConfig, Maintenance, SourceMonitoringConfig, NdiConfig).",
+      "gotchas": [
+        "No real flow streaming — flows are control-plane metadata only",
+        "Wire field names are camelCase per AWS REST-JSON; the in-memory record matches",
+        "Start/Stop/Pause/Resume flow lifecycle ops are out of scope; flows always read as STANDBY"
       ]
     },
     "mwaa": {
