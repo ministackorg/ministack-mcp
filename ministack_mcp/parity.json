@@ -254,12 +254,13 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "26+ operations: CreateTable, DeleteTable, DescribeTable, ListTables, UpdateTable, PutItem, GetItem, DeleteItem, UpdateItem, Query, Scan, BatchWriteItem, BatchGetItem, TransactWriteItems, TransactGetItems, DescribeTimeToLive, UpdateTimeToLive, DescribeContinuousBackups, UpdateContinuousBackups, DescribeEndpoints, TagResource, UntagResource, ListTagsOfResource, EnableKinesisStreamingDestination, DisableKinesisStreamingDestination, DescribeKinesisStreamingDestination, UpdateKinesisStreamingDestination, ExecuteStatement (PartiQL). TTL enforced via thread-safe background reaper (60s cadence). DynamoDB Streams emit INSERT/MODIFY/REMOVE records on all write operations, respects StreamViewType. Kinesis streaming destinations fan item mutations into any Kinesis stream by ARN. Legacy conditional parameters (Expected, KeyConditions, ScanFilter, QueryFilter) supported.",
+      "notes": "26+ operations: CreateTable, DeleteTable, DescribeTable, ListTables, UpdateTable, PutItem, GetItem, DeleteItem, UpdateItem, Query, Scan, BatchWriteItem, BatchGetItem, TransactWriteItems, TransactGetItems, DescribeTimeToLive, UpdateTimeToLive, DescribeContinuousBackups, UpdateContinuousBackups, DescribeEndpoints, TagResource, UntagResource, ListTagsOfResource, EnableKinesisStreamingDestination, DisableKinesisStreamingDestination, DescribeKinesisStreamingDestination, UpdateKinesisStreamingDestination, ExportTableToPointInTime, DescribeExport, ListExports, ImportTable, DescribeImport, ListImports, ExecuteStatement (PartiQL). TTL enforced via thread-safe background reaper (60s cadence). DynamoDB Streams emit INSERT/MODIFY/REMOVE records on all write operations, respects StreamViewType. Kinesis streaming destinations fan item mutations into any Kinesis stream by ARN. ExportTableToPointInTime / ImportTable return IN_PROGRESS at submit time and flip to COMPLETED only after MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC / MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC (default 1s) has elapsed — matching real AWS, which always reports IN_PROGRESS at submit. PartiQL UPDATE/DELETE require an = clause on every primary-key attribute (else ValidationException); non-key WHERE clauses act as a conditional check on the targeted item (missing item or failing non-key predicate → ConditionalCheckFailedException, item unchanged) instead of silently no-op'ing. Legacy conditional parameters (Expected, KeyConditions, ScanFilter, QueryFilter) supported.",
       "gotchas": [
         "TTL enforcement runs on 60s cadence, not real-time — items may persist up to 60s past expiry",
         "PartiQL support covers SELECT/INSERT/UPDATE/DELETE but not all expression features",
         "No provisioned throughput enforcement — reads/writes are unlimited",
-        "Single synthetic shard per DynamoDB Stream — no shard splitting"
+        "Single synthetic shard per DynamoDB Stream — no shard splitting",
+        "Export/Import grace window is fixed at submit time — for fast tests, set MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC / MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC to a small value (e.g. 0.05)"
       ]
     },
     "dynamodb_streams": {
@@ -279,7 +280,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "80+ actions covering instances, images (stub), security groups, key pairs, VPCs, subnets, availability zones, internet gateways, elastic IPs, tags, route tables, ENIs, VPC endpoints, EBS volumes, EBS snapshots, NAT gateways, network ACLs, flow logs, VPC peering, DHCP options, egress-only IGWs, managed prefix lists, VPN gateways/connections, launch templates, AMIs (register/deregister/describe). Instances exist in memory only — no real VMs launched.",
+      "notes": "80+ actions covering instances, images (stub), security groups, key pairs, VPCs, subnets, availability zones, internet gateways, elastic IPs, tags, route tables, ENIs, VPC endpoints, EBS volumes, EBS snapshots, NAT gateways, network ACLs, flow logs, VPC peering, DHCP options, egress-only IGWs, managed prefix lists, VPN gateways/connections, launch templates, AMIs (register/deregister/describe), EC2 Fleet (CreateFleet, DescribeFleets). Instances exist in memory only — no real VMs launched. EC2 Fleet: instant-type synchronously launches instances and emits the Instances/Errors blocks; maintain/request return FleetId alone (FulfilledCapacity=0, ActivityStatus=pending_fulfillment) matching AWS async-fulfilment semantics; DefaultTargetCapacityType drives spot vs on-demand (not the FleetType enum); TotalTargetCapacity is round-robin distributed across every LaunchTemplateConfigs[*]×Overrides[*] slot; DescribeFleets on an unknown FleetId returns InvalidFleetId.NotFound.",
       "gotchas": [
         "No real instances are launched — RunInstances creates in-memory records only",
         "DescribeImages returns a stub set of common AMI IDs",
@@ -339,14 +340,15 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "25 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, CreateAddon, DescribeAddon, ListAddons, UpdateAddon, DeleteAddon, AssociateEncryptionConfig, CreateAccessEntry, DescribeAccessEntry, ListAccessEntries, UpdateAccessEntry, DeleteAccessEntry, AssociateAccessPolicy, DisassociateAccessPolicy, ListAssociatedAccessPolicies, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. AssociateEncryptionConfig at /clusters/{name}/encryption-config/associate records KMS encryption config (rejects re-association). Access Entries (modern post-1.29 IAM bindings replacing the aws-auth ConfigMap) at /clusters/{name}/access-entries[/{principalArn}[/access-policies[/{policyArn}]]] support Crossplane accessentry.eks.aws.upbound.io and Terraform aws_eks_access_entry + aws_eks_access_policy_association; accessScope validated against {cluster, namespace}; deleting an access entry cascades its associated policies. OIDC discovery + JWKS served at the cluster's identity.oidc.issuer (now ministack-hosted at /oidc/id/{32-char-id}) so terraform's aws_iam_openid_connect_provider works against ministack. CFN AWS::EKS::Cluster and Nodegroup supported.",
+      "notes": "28 operations: CreateCluster, DescribeCluster, ListClusters, DeleteCluster, CreateNodegroup, DescribeNodegroup, ListNodegroups, DeleteNodegroup, CreateAddon, DescribeAddon, ListAddons, UpdateAddon, DeleteAddon, AssociateEncryptionConfig, CreateAccessEntry, DescribeAccessEntry, ListAccessEntries, UpdateAccessEntry, DeleteAccessEntry, AssociateAccessPolicy, DisassociateAccessPolicy, ListAssociatedAccessPolicies, AssociateIdentityProviderConfig, DescribeIdentityProviderConfig, DisassociateIdentityProviderConfig, TagResource, UntagResource, ListTagsForResource. CreateCluster spawns a real k3s container (75 MB) with full K8s API server; kubectl, Helm, any K8s tooling work. Cascading delete removes nodegroups and k3s container. AssociateEncryptionConfig at /clusters/{name}/encryption-config/associate records KMS encryption config (rejects re-association). Access Entries (modern post-1.29 IAM bindings replacing the aws-auth ConfigMap) at /clusters/{name}/access-entries[/{principalArn}[/access-policies[/{policyArn}]]] support Crossplane accessentry.eks.aws.upbound.io and Terraform aws_eks_access_entry + aws_eks_access_policy_association; accessScope validated against {cluster, namespace}; deleting an access entry cascades its associated policies. OIDC discovery + JWKS served at the cluster's identity.oidc.issuer (now ministack-hosted at /oidc/id/{32-char-id}) so terraform's aws_iam_openid_connect_provider works against ministack. OIDC Identity Provider Config (Associate/Describe/Disassociate) at /clusters/{name}/identity-provider-configs/{verb}: one OIDC IdP per cluster regardless of name (any second associate returns ResourceInUseException); issuer+clientId+claims forwarded to k3s via --kube-apiserver-arg=oidc-*; identityProviderConfigArn stable across describes so Terraform/CDK/Pulumi don't see drift; tags reachable via ListTagsForResource(resourceArn=idp_arn); cluster status stays ACTIVE throughout (the work is in the returned update record). CFN AWS::EKS::Cluster and Nodegroup supported.",
       "gotchas": [
         "Requires Docker socket for real k3s cluster creation",
         "Cluster creation is async — status transitions from CREATING to ACTIVE in a background thread",
         "Nodegroups are metadata-only — no actual worker nodes are provisioned",
         "Addons are metadata-only — status flips to ACTIVE immediately, no real plugin installed in the k3s cluster",
         "Access Entries are metadata-only — no real RBAC binding is created on the k3s cluster",
-        "k3s container uses the ministack Docker network for inter-service communication"
+        "k3s container uses the ministack Docker network for inter-service communication",
+        "AssociateIdentityProviderConfig / DisassociateIdentityProviderConfig restart the k3s container to apply --kube-apiserver-arg=oidc-* flags — this wipes in-cluster workloads (Pods/Deployments/Services); a warning is logged. Real AWS rolls config without affecting the data plane."
       ]
     },
     "elasticache": {
@@ -588,12 +590,13 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "docker",
-      "notes": "CreateDBInstance spins up real Postgres/MySQL Docker container; returns actual host:port endpoint. Non-blocking create; daemon thread waits for container liveness, sets DBInstanceStatus to 'available' or 'failed'. PERSIST_STATE=1 respawns containers on boot.",
+      "notes": "CreateDBInstance spins up real Postgres/MySQL Docker container; returns actual host:port endpoint. Non-blocking create; daemon thread waits for container liveness, sets DBInstanceStatus to 'available' or 'failed'. PERSIST_STATE=1 respawns containers on boot. When ministack itself runs in Docker, the auto-detected ministack Docker network is used and DescribeDBInstances reports container_ip:container_port (reachable from apps on the same network). For remote-ministack-in-Docker deployments where external clients can't reach that network, set MINISTACK_RDS_PUBLIC_ENDPOINT=1 (and MINISTACK_HOST=<remote-ip>) — DescribeDBInstances then returns {MINISTACK_HOST, host_port}, the externally-reachable host-published Docker port. Off by default, so existing deployments are unchanged. AWS-shape compatible: Endpoint.Port is an arbitrary integer (1150-65535) per botocore.",
       "gotchas": [
         "Requires Docker socket for real database container creation",
         "Without Docker, instances are metadata-only stubs",
         "Container startup is non-blocking — instance status transitions asynchronously",
-        "Database engine version selection maps to specific Docker image tags"
+        "Database engine version selection maps to specific Docker image tags",
+        "Default DescribeDBInstances endpoint is the Docker-internal address when ministack runs in a Docker network — set MINISTACK_RDS_PUBLIC_ENDPOINT=1 for external-client deployments"
       ]
     },
     "rds_data": {

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.3.56",
-  "generated_at": "2026-06-02T17:46:43Z",
+  "ministack_version": "1.3.57",
+  "generated_at": "2026-06-03T22:59:36Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -781,6 +781,7 @@
         "CreateDefaultVpc",
         "CreateDhcpOptions",
         "CreateEgressOnlyInternetGateway",
+        "CreateFleet",
         "CreateFlowLogs",
         "CreateInternetGateway",
         "CreateKeyPair",
@@ -837,6 +838,7 @@
         "DescribeCustomerGateways",
         "DescribeDhcpOptions",
         "DescribeEgressOnlyInternetGateways",
+        "DescribeFleets",
         "DescribeFlowLogs",
         "DescribeImages",
         "DescribeInstanceAttribute",
@@ -914,9 +916,9 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 148,
+      "operation_count": 150,
       "extraction_sources": [
-        "dict-keys (155)"
+        "dict-keys (157)"
       ]
     },
     "ecr": {
@@ -2387,6 +2389,20 @@
       ],
       "default": ""
     },
+    "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC": {
+      "name": "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC",
+      "files": [
+        "ministack/services/dynamodb.py"
+      ],
+      "default": "1"
+    },
+    "MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC": {
+      "name": "MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC",
+      "files": [
+        "ministack/services/dynamodb.py"
+      ],
+      "default": "1"
+    },
     "MINISTACK_EDITION": {
       "name": "MINISTACK_EDITION",
       "files": [
@@ -2398,7 +2414,10 @@
       "name": "MINISTACK_HOST",
       "files": [
         "ministack/app.py",
+        "ministack/services/rds.py",
+        "ministack/services/elasticache.py",
         "ministack/services/dynamodb.py",
+        "ministack/services/opensearch.py",
         "ministack/services/cognito.py",
         "ministack/services/sqs.py",
         "ministack/services/eks.py",
@@ -2406,8 +2425,10 @@
         "ministack/services/apigateway.py",
         "ministack/services/glue.py",
         "ministack/services/lambda_svc.py",
+        "ministack/services/s3tables.py",
         "ministack/services/s3.py",
         "ministack/services/iot.py",
+        "ministack/services/ecs.py",
         "ministack/services/sns.py",
         "ministack/services/cloudformation/provisioners.py",
         "ministack/services/cloudformation/custom_resource.py"
@@ -2434,6 +2455,13 @@
         "ministack/services/opensearch.py"
       ],
       "default": ""
+    },
+    "MINISTACK_RDS_PUBLIC_ENDPOINT": {
+      "name": "MINISTACK_RDS_PUBLIC_ENDPOINT",
+      "files": [
+        "ministack/services/rds.py"
+      ],
+      "default": "0"
     },
     "MINISTACK_REGION": {
       "name": "MINISTACK_REGION",
