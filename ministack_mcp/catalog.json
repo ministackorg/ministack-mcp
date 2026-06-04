@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.3.57",
-  "generated_at": "2026-06-03T22:59:36Z",
+  "ministack_version": "1.3.58",
+  "generated_at": "2026-06-04T22:34:02Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -86,11 +86,14 @@
         "ModifyTargetGroupAttributes",
         "RegisterTargets",
         "RemoveTags",
-        "SetRulePriorities"
+        "SetIpAddressType",
+        "SetRulePriorities",
+        "SetSecurityGroups",
+        "SetSubnets"
       ],
-      "operation_count": 28,
+      "operation_count": 31,
       "extraction_sources": [
-        "dict-keys (28)"
+        "dict-keys (31)"
       ]
     },
     "apigateway": {
@@ -1255,6 +1258,7 @@
         "CreateSecurityConfiguration",
         "CreateTable",
         "CreateTrigger",
+        "CreateUserDefinedFunction",
         "CreateWorkflow",
         "DeleteClassifier",
         "DeleteConnection",
@@ -1265,6 +1269,7 @@
         "DeleteSecurityConfiguration",
         "DeleteTable",
         "DeleteTrigger",
+        "DeleteUserDefinedFunction",
         "DeleteWorkflow",
         "GetClassifier",
         "GetClassifiers",
@@ -1289,6 +1294,8 @@
         "GetTags",
         "GetTrigger",
         "GetTriggers",
+        "GetUserDefinedFunction",
+        "GetUserDefinedFunctions",
         "GetWorkflow",
         "ListTriggers",
         "StartCrawler",
@@ -1304,11 +1311,12 @@
         "UpdateJob",
         "UpdateTable",
         "UpdateTrigger",
+        "UpdateUserDefinedFunction",
         "UpdateWorkflow"
       ],
-      "operation_count": 65,
+      "operation_count": 70,
       "extraction_sources": [
-        "dict-keys (65)"
+        "dict-keys (70)"
       ]
     },
     "iam": {
