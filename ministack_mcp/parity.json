@@ -536,6 +536,20 @@
         "Start/Stop/Pause/Resume flow lifecycle ops are out of scope; flows always read as STANDBY"
       ]
     },
+    "mq": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "16 of 24 spec operations, covering both RabbitMQ and ActiveMQ engines. Brokers: CreateBroker, ListBrokers, DescribeBroker, UpdateBroker, DeleteBroker, RebootBroker. Metadata: DescribeBrokerEngineTypes, DescribeBrokerInstanceOptions. ActiveMQ user management: CreateUser, DescribeUser, UpdateUser, DeleteUser, ListUsers. Broker tagging: CreateTags, ListTags, DeleteTags. rest-json protocol, account-scoped state, persisted across restarts. catalog.json shows 0 operations because routing is path-based (the AST scanner only extracts ops from dispatch dicts).",
+      "gotchas": [
+        "Metadata only — no real RabbitMQ/ActiveMQ container; brokers come up RUNNING immediately instead of CREATION_IN_PROGRESS",
+        "Configurations API (CreateConfiguration/DescribeConfiguration/UpdateConfiguration/...) and Promote are not implemented",
+        "DescribeBrokerEngineTypes / DescribeBrokerInstanceOptions return a curated engine/instance/storage matrix sourced from real AWS output, not the full live AWS catalog",
+        "maxResults is validated 5–100 (matches the AWS ListBrokers docs)",
+        "User passwords are stored and persisted in plaintext (local emulator)"
+      ]
+    },
     "mwaa": {
       "status": "full",
       "persistence": true,
