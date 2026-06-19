@@ -60,6 +60,51 @@ The agent uses 38 tools to act on your behalf. MiniStack runs 67 AWS services lo
 }
 ```
 
+## Codex configuration
+
+Codex uses the same local MCP contract as the other agents in this repo.
+Keep `MINISTACK_ENDPOINT_URL` pointed at the MiniStack instance you want to use.
+
+### Codex CLI
+
+Register the server with the local `uvx` entry point:
+
+```json
+{
+  "mcpServers": {
+    "ministack": {
+      "command": "uvx",
+      "args": ["ministack-mcp"]
+    }
+  }
+}
+```
+
+If you need a non-default backend:
+
+```bash
+export MINISTACK_ENDPOINT_URL=http://localhost:4566
+uvx ministack-mcp
+```
+
+### Codex app
+
+Use the same MCP server definition in the Codex app settings:
+
+```json
+{
+  "mcpServers": {
+    "ministack": {
+      "command": "uvx",
+      "args": ["ministack-mcp"]
+    }
+  }
+}
+```
+
+If the app exposes a separate MCP settings screen, add the same `command` and
+`args` pair there.
+
 ### Continue / Windsurf / Cline
 
 Same pattern — `"command": "uvx", "args": ["ministack-mcp"]` in your MCP config.
