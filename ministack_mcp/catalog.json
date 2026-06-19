@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.3.61",
-  "generated_at": "2026-06-10T09:59:25Z",
+  "ministack_version": "1.3.65",
+  "generated_at": "2026-06-19T01:52:24Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -326,6 +326,7 @@
     "autoscaling": {
       "name": "autoscaling",
       "operations": [
+        "CancelInstanceRefresh",
         "CompleteLifecycleAction",
         "CreateAutoScalingGroup",
         "CreateLaunchConfiguration",
@@ -338,6 +339,7 @@
         "DeleteTags",
         "DescribeAutoScalingGroups",
         "DescribeAutoScalingInstances",
+        "DescribeInstanceRefreshes",
         "DescribeLaunchConfigurations",
         "DescribeLifecycleHooks",
         "DescribePolicies",
@@ -348,11 +350,12 @@
         "PutScalingPolicy",
         "PutScheduledUpdateGroupAction",
         "RecordLifecycleActionHeartbeat",
+        "StartInstanceRefresh",
         "UpdateAutoScalingGroup"
       ],
-      "operation_count": 23,
+      "operation_count": 26,
       "extraction_sources": [
-        "dict-keys (23)"
+        "dict-keys (26)"
       ]
     },
     "backup": {
@@ -1262,6 +1265,8 @@
         "CreateUserDefinedFunction",
         "CreateWorkflow",
         "DeleteClassifier",
+        "DeleteColumnStatisticsForPartition",
+        "DeleteColumnStatisticsForTable",
         "DeleteConnection",
         "DeleteCrawler",
         "DeleteDatabase",
@@ -1274,6 +1279,8 @@
         "DeleteWorkflow",
         "GetClassifier",
         "GetClassifiers",
+        "GetColumnStatisticsForPartition",
+        "GetColumnStatisticsForTable",
         "GetConnection",
         "GetConnections",
         "GetCrawler",
@@ -1307,6 +1314,8 @@
         "StopTrigger",
         "TagResource",
         "UntagResource",
+        "UpdateColumnStatisticsForPartition",
+        "UpdateColumnStatisticsForTable",
         "UpdateCrawler",
         "UpdateDatabase",
         "UpdateJob",
@@ -1315,9 +1324,9 @@
         "UpdateUserDefinedFunction",
         "UpdateWorkflow"
       ],
-      "operation_count": 71,
+      "operation_count": 77,
       "extraction_sources": [
-        "dict-keys (71)"
+        "dict-keys (77)"
       ]
     },
     "iam": {
@@ -1387,6 +1396,7 @@
         "ListEntitiesForPolicy",
         "ListGroups",
         "ListGroupsForUser",
+        "ListInstanceProfileTags",
         "ListInstanceProfiles",
         "ListInstanceProfilesForRole",
         "ListMFADevices",
@@ -1406,9 +1416,11 @@
         "PutUserPolicy",
         "RemoveRoleFromInstanceProfile",
         "RemoveUserFromGroup",
+        "TagInstanceProfile",
         "TagPolicy",
         "TagRole",
         "TagUser",
+        "UntagInstanceProfile",
         "UntagPolicy",
         "UntagRole",
         "UntagUser",
@@ -1419,9 +1431,9 @@
         "UpdateRole",
         "UpdateSAMLProvider"
       ],
-      "operation_count": 95,
+      "operation_count": 98,
       "extraction_sources": [
-        "dict-keys (95)"
+        "dict-keys (98)"
       ]
     },
     "imds": {
