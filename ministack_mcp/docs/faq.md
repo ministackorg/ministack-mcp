@@ -63,13 +63,13 @@ status is `available`. This can take 10-30 seconds.
 A: Service names are lowercase and may differ from boto3 client names.
 Use `list_services` to see all available names.
 
-**Q: SAM templates fail with "Unsupported resource type"**
-A: MiniStack's CloudFormation engine does not apply the
-`AWS::Serverless-2016-10-31` transform, so `AWS::Serverless::*` resources aren't
-recognized (on real AWS the transform runs server-side). Convert the SAM
-template to plain CloudFormation first: `sam build`, then `sam package` (uploads
-code to S3 and rewrites `CodeUri`), then `sam validate --debug` on the
-*packaged* template — its debug output is the translated CloudFormation
-(`AWS::Lambda::Function`, `AWS::IAM::Role`, …). Deploy that expanded template
-with `aws cloudformation deploy`, which uses only resource types MiniStack
-supports.
+**Q: Do SAM templates work?**
+A: Yes, on the full image. MiniStack's CloudFormation engine applies the
+`AWS::Serverless-2016-10-31` transform, expanding `AWS::Serverless::*` resources
+into native CloudFormation before provisioning (via the canonical
+`aws-sam-translator`, the same library the SAM CLI uses) on create, update, and
+change-set. The translator ships in the full image only
+(`ministackorg/ministack:full`); a lean image that receives a SAM template
+returns a clear error pointing at the full image. Basic
+`AWS::Serverless::Function` / `SimpleTable` / `Api` shapes work; SAM
+managed-policy templates are not fully expanded yet.
