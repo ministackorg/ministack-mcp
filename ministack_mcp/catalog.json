@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.3.71",
-  "generated_at": "2026-07-05T23:54:10Z",
+  "ministack_version": "1.4.0",
+  "generated_at": "2026-07-08T20:43:43Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 71,
+  "service_count": 76,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -350,12 +350,13 @@
         "PutScalingPolicy",
         "PutScheduledUpdateGroupAction",
         "RecordLifecycleActionHeartbeat",
+        "SetDesiredCapacity",
         "StartInstanceRefresh",
         "UpdateAutoScalingGroup"
       ],
-      "operation_count": 26,
+      "operation_count": 27,
       "extraction_sources": [
-        "dict-keys (26)"
+        "dict-keys (27)"
       ]
     },
     "backup": {
@@ -404,6 +405,77 @@
       "operation_count": 9,
       "extraction_sources": [
         "url-paths (9)"
+      ]
+    },
+    "bedrock": {
+      "name": "bedrock",
+      "operations": [
+        "UseCaseForModelAccess"
+      ],
+      "operation_count": 1,
+      "extraction_sources": [
+        "docstring (+1)"
+      ]
+    },
+    "bedrock_agent": {
+      "name": "bedrock_agent",
+      "operations": [
+        "PrepareAgent",
+        "PrepareFlow",
+        "ValidateFlowDefinition"
+      ],
+      "operation_count": 3,
+      "extraction_sources": [
+        "docstring (+3)"
+      ]
+    },
+    "bedrock_agent_runtime": {
+      "name": "bedrock_agent_runtime",
+      "operations": [
+        "CreateInvocation",
+        "CreateSession",
+        "DeleteAgentMemory",
+        "DeleteSession",
+        "EndSession",
+        "GenerateQuery",
+        "GetAgentMemory",
+        "GetExecutionFlowSnapshot",
+        "GetFlowExecution",
+        "GetInvocationStep",
+        "GetSession",
+        "InvokeAgent",
+        "InvokeFlow",
+        "InvokeInlineAgent",
+        "ListFlowExecutionEvents",
+        "ListFlowExecutions",
+        "ListInvocationSteps",
+        "ListInvocations",
+        "ListSessions",
+        "PutInvocationStep",
+        "StartFlowExecution",
+        "StopFlowExecution",
+        "UpdateSession"
+      ],
+      "operation_count": 23,
+      "extraction_sources": [
+        "docstring (+23)"
+      ]
+    },
+    "bedrock_runtime": {
+      "name": "bedrock_runtime",
+      "operations": [
+        "ApplyGuardrail",
+        "GetAsyncInvoke",
+        "InvokeModel",
+        "InvokeModelWithBidirectionalStream",
+        "InvokeModelWithResponseStream",
+        "ListAsyncInvokes",
+        "OpenAI",
+        "StartAsyncInvoke"
+      ],
+      "operation_count": 8,
+      "extraction_sources": [
+        "docstring (+8)"
       ]
     },
     "cloudfront": {
@@ -799,6 +871,7 @@
         "CreateNetworkAcl",
         "CreateNetworkAclEntry",
         "CreateNetworkInterface",
+        "CreatePlacementGroup",
         "CreateRoute",
         "CreateRouteTable",
         "CreateSecurityGroup",
@@ -825,6 +898,7 @@
         "DeleteNetworkAcl",
         "DeleteNetworkAclEntry",
         "DeleteNetworkInterface",
+        "DeletePlacementGroup",
         "DeleteRoute",
         "DeleteRouteTable",
         "DeleteSecurityGroup",
@@ -865,6 +939,7 @@
         "DescribeNatGateways",
         "DescribeNetworkAcls",
         "DescribeNetworkInterfaces",
+        "DescribePlacementGroups",
         "DescribePrefixLists",
         "DescribeRegions",
         "DescribeRouteTables",
@@ -926,9 +1001,9 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 154,
+      "operation_count": 157,
       "extraction_sources": [
-        "dict-keys (161)"
+        "dict-keys (164)"
       ]
     },
     "ecr": {
@@ -1659,6 +1734,32 @@
       "operations": [],
       "operation_count": 0,
       "extraction_sources": []
+    },
+    "msk": {
+      "name": "msk",
+      "operations": [
+        "BatchAssociateScramSecret",
+        "BatchDisassociateScramSecret",
+        "CreateCluster",
+        "CreateConfiguration",
+        "DeleteCluster",
+        "DescribeCluster",
+        "DescribeConfiguration",
+        "DescribeConfigurationRevision",
+        "GetBootstrapBrokers",
+        "ListClusters",
+        "ListConfigurationRevisions",
+        "ListConfigurations",
+        "ListNodes",
+        "ListScramSecrets",
+        "ListTagsForResource",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 17,
+      "extraction_sources": [
+        "docstring (+17)"
+      ]
     },
     "mwaa": {
       "name": "mwaa",
@@ -2457,6 +2558,20 @@
       ],
       "default": "0"
     },
+    "MINISTACK_BEDROCK_PROXY_TIMEOUT_SECONDS": {
+      "name": "MINISTACK_BEDROCK_PROXY_TIMEOUT_SECONDS",
+      "files": [
+        "ministack/services/bedrock_runtime.py"
+      ],
+      "default": "30"
+    },
+    "MINISTACK_BEDROCK_PROXY_URL": {
+      "name": "MINISTACK_BEDROCK_PROXY_URL",
+      "files": [
+        "ministack/services/bedrock_runtime.py"
+      ],
+      "default": ""
+    },
     "MINISTACK_COGNITO_PRETOKEN_STRICT": {
       "name": "MINISTACK_COGNITO_PRETOKEN_STRICT",
       "files": [
@@ -2524,6 +2639,34 @@
       ],
       "default": ""
     },
+    "MINISTACK_MSK_BOOTSTRAP": {
+      "name": "MINISTACK_MSK_BOOTSTRAP",
+      "files": [
+        "ministack/services/msk.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_MSK_BOOTSTRAP_SASL_IAM": {
+      "name": "MINISTACK_MSK_BOOTSTRAP_SASL_IAM",
+      "files": [
+        "ministack/services/msk.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_MSK_BOOTSTRAP_SASL_SCRAM": {
+      "name": "MINISTACK_MSK_BOOTSTRAP_SASL_SCRAM",
+      "files": [
+        "ministack/services/msk.py"
+      ],
+      "default": ""
+    },
+    "MINISTACK_MSK_BOOTSTRAP_TLS": {
+      "name": "MINISTACK_MSK_BOOTSTRAP_TLS",
+      "files": [
+        "ministack/services/msk.py"
+      ],
+      "default": ""
+    },
     "MINISTACK_OPENSEARCH_ENDPOINT": {
       "name": "MINISTACK_OPENSEARCH_ENDPOINT",
       "files": [
@@ -2581,10 +2724,8 @@
         "ministack/services/kms.py",
         "ministack/services/athena.py",
         "ministack/services/s3.py",
-        "ministack/services/tagging.py",
         "ministack/services/autoscaling.py",
         "ministack/services/ssm.py",
-        "ministack/services/rds_data.py",
         "ministack/services/ecs.py",
         "ministack/services/sns.py",
         "ministack/services/cloudformation/__init__.py",
