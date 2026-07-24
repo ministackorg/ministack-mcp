@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.3",
-  "generated_at": "2026-07-18T11:51:47Z",
+  "ministack_version": "1.4.6",
+  "generated_at": "2026-07-24T01:46:13Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -143,6 +143,7 @@
         "CreateApiKey",
         "CreateAuthorizer",
         "CreateDeployment",
+        "CreateDocumentationPart",
         "CreateDomainName",
         "CreateModel",
         "CreateResource",
@@ -153,7 +154,9 @@
         "DeleteApiKey",
         "DeleteAuthorizer",
         "DeleteDeployment",
+        "DeleteDocumentationPart",
         "DeleteDomainName",
+        "DeleteGatewayResponse",
         "DeleteIntegration",
         "DeleteIntegrationResponse",
         "DeleteMethod",
@@ -170,8 +173,13 @@
         "GetAuthorizers",
         "GetDeployment",
         "GetDeployments",
+        "GetDocumentationPart",
+        "GetDocumentationParts",
         "GetDomainName",
         "GetDomainNames",
+        "GetExport",
+        "GetGatewayResponse",
+        "GetGatewayResponses",
         "GetIntegration",
         "GetIntegrationResponse",
         "GetMethod",
@@ -188,6 +196,7 @@
         "GetUsagePlan",
         "GetUsagePlanKeys",
         "GetUsagePlans",
+        "PutGatewayResponse",
         "PutIntegration",
         "PutIntegrationResponse",
         "PutMethod",
@@ -196,13 +205,14 @@
         "UntagResource",
         "UpdateAuthorizer",
         "UpdateDeployment",
+        "UpdateDocumentationPart",
         "UpdateResource",
         "UpdateRestApi",
         "UpdateStage"
       ],
-      "operation_count": 59,
+      "operation_count": 69,
       "extraction_sources": [
-        "docstring (+59)"
+        "docstring (+69)"
       ]
     },
     "appconfig": {
@@ -400,11 +410,12 @@
         "DescribeJobs",
         "ListJobs",
         "RegisterJobdefinition",
-        "SubmitJob"
+        "SubmitJob",
+        "UpdateComputeenvironment"
       ],
-      "operation_count": 9,
+      "operation_count": 10,
       "extraction_sources": [
-        "url-paths (9)"
+        "url-paths (10)"
       ]
     },
     "bedrock": {
@@ -684,12 +695,14 @@
         "CreateGroup",
         "CreateIdentityPool",
         "CreateIdentityProvider",
+        "CreateResourceServer",
         "CreateUserPool",
         "CreateUserPoolClient",
         "CreateUserPoolDomain",
         "DeleteGroup",
         "DeleteIdentityPool",
         "DeleteIdentityProvider",
+        "DeleteResourceServer",
         "DeleteUser",
         "DeleteUserPool",
         "DeleteUserPoolClient",
@@ -697,6 +710,7 @@
         "DescribeIdentity",
         "DescribeIdentityPool",
         "DescribeIdentityProvider",
+        "DescribeResourceServer",
         "DescribeUserPool",
         "DescribeUserPoolClient",
         "DescribeUserPoolDomain",
@@ -707,6 +721,7 @@
         "GetIdentityPoolRoles",
         "GetIdentityProviderByIdentifier",
         "GetOpenIdToken",
+        "GetTokensFromRefreshToken",
         "GetUser",
         "GetUserPoolMfaConfig",
         "GlobalSignOut",
@@ -715,6 +730,7 @@
         "ListIdentities",
         "ListIdentityPools",
         "ListIdentityProviders",
+        "ListResourceServers",
         "ListTagsForResource",
         "ListUserPoolClients",
         "ListUserPools",
@@ -734,14 +750,15 @@
         "UntagResource",
         "UpdateIdentityPool",
         "UpdateIdentityProvider",
+        "UpdateResourceServer",
         "UpdateUserAttributes",
         "UpdateUserPool",
         "UpdateUserPoolClient",
         "VerifySoftwareToken"
       ],
-      "operation_count": 78,
+      "operation_count": 84,
       "extraction_sources": [
-        "dict-keys (81)"
+        "dict-keys (87)"
       ]
     },
     "cur": {
@@ -1622,6 +1639,8 @@
         "EnableKeyRotation",
         "Encrypt",
         "GenerateDataKey",
+        "GenerateDataKeyPair",
+        "GenerateDataKeyPairWithoutPlaintext",
         "GenerateDataKeyWithoutPlaintext",
         "GetKeyPolicy",
         "GetKeyRotationStatus",
@@ -1638,9 +1657,9 @@
         "UpdateAlias",
         "Verify"
       ],
-      "operation_count": 27,
+      "operation_count": 29,
       "extraction_sources": [
-        "dict-keys (27)"
+        "dict-keys (29)"
       ]
     },
     "lambda_durable": {
@@ -1866,6 +1885,7 @@
         "DescribeOptionGroups",
         "DescribeOrderableDBInstanceOptions",
         "DescribePendingMaintenanceActions",
+        "DisableHttpEndpoint",
         "EnableHttpEndpoint",
         "ListTagsForResource",
         "ModifyDBCluster",
@@ -1885,9 +1905,9 @@
         "StopDBCluster",
         "StopDBInstance"
       ],
-      "operation_count": 53,
+      "operation_count": 54,
       "extraction_sources": [
-        "dict-keys (53)"
+        "dict-keys (54)"
       ]
     },
     "rds_data": {
