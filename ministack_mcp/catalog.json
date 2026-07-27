@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.6",
-  "generated_at": "2026-07-24T01:46:13Z",
+  "ministack_version": "1.4.7",
+  "generated_at": "2026-07-26T22:05:47Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 76,
+  "service_count": 77,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -470,6 +470,27 @@
       "operation_count": 23,
       "extraction_sources": [
         "docstring (+23)"
+      ]
+    },
+    "bedrock_agentcore": {
+      "name": "bedrock_agentcore",
+      "operations": [
+        "CreateAgentRuntime",
+        "CreateAgentRuntimeEndpoint",
+        "DeleteAgentRuntime",
+        "DeleteAgentRuntimeEndpoint",
+        "GetAgentRuntime",
+        "GetAgentRuntimeEndpoint",
+        "InvokeAgentRuntime",
+        "ListAgentRuntimeEndpoints",
+        "ListAgentRuntimeVersions",
+        "ListAgentRuntimes",
+        "UpdateAgentRuntime",
+        "UpdateAgentRuntimeEndpoint"
+      ],
+      "operation_count": 12,
+      "extraction_sources": [
+        "docstring (+12)"
       ]
     },
     "bedrock_runtime": {
@@ -1984,6 +2005,7 @@
         "DeleteObjects",
         "GetBucketReplication",
         "GetObject",
+        "GetObjectAttributes",
         "GetObjectLegalHold",
         "GetObjectLockConfiguration",
         "GetObjectRetention",
@@ -2002,9 +2024,9 @@
         "RequestPayment",
         "UploadPart"
       ],
-      "operation_count": 25,
+      "operation_count": 26,
       "extraction_sources": [
-        "docstring (+25)"
+        "docstring (+26)"
       ]
     },
     "s3files": {
@@ -2222,6 +2244,7 @@
         "GetEndpointAttributes",
         "GetSubscriptionAttributes",
         "GetTopicAttributes",
+        "ListPlatformApplications",
         "ListSubscriptions",
         "ListSubscriptionsByTopic",
         "ListTagsForResource",
@@ -2236,9 +2259,9 @@
         "Unsubscribe",
         "UntagResource"
       ],
-      "operation_count": 23,
+      "operation_count": 24,
       "extraction_sources": [
-        "dict-keys (23)"
+        "dict-keys (24)"
       ]
     },
     "sqs": {
