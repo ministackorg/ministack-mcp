@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.8",
-  "generated_at": "2026-07-28T22:35:44Z",
+  "ministack_version": "1.4.9",
+  "generated_at": "2026-08-01T00:27:49Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 77,
+  "service_count": 78,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -1019,6 +1019,7 @@
         "ModifyInstanceMaintenanceOptions",
         "ModifyLaunchTemplate",
         "ModifyManagedPrefixList",
+        "ModifySecurityGroupRules",
         "ModifySnapshotAttribute",
         "ModifySubnetAttribute",
         "ModifyVolume",
@@ -1039,9 +1040,9 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 157,
+      "operation_count": 158,
       "extraction_sources": [
-        "dict-keys (164)"
+        "dict-keys (165)"
       ]
     },
     "ecr": {
@@ -1479,6 +1480,7 @@
         "DeletePolicy",
         "DeletePolicyVersion",
         "DeleteRole",
+        "DeleteRolePermissionsBoundary",
         "DeleteRolePolicy",
         "DeleteSAMLProvider",
         "DeleteServiceLinkedRole",
@@ -1536,6 +1538,7 @@
         "ListUsers",
         "ListVirtualMFADevices",
         "PutGroupPolicy",
+        "PutRolePermissionsBoundary",
         "PutRolePolicy",
         "PutUserPolicy",
         "RemoveRoleFromInstanceProfile",
@@ -1553,11 +1556,12 @@
         "UpdateAssumeRolePolicy",
         "UpdateLoginProfile",
         "UpdateRole",
+        "UpdateRoleDescription",
         "UpdateSAMLProvider"
       ],
-      "operation_count": 105,
+      "operation_count": 108,
       "extraction_sources": [
-        "dict-keys (105)"
+        "dict-keys (108)"
       ]
     },
     "imds": {
@@ -1698,6 +1702,25 @@
       "operation_count": 8,
       "extraction_sources": [
         "docstring (+8)"
+      ]
+    },
+    "lambda_microvms": {
+      "name": "lambda_microvms",
+      "operations": [
+        "CreateMicrovmAuthToken",
+        "CreateMicrovmImage",
+        "CreateMicrovmShellAuthToken",
+        "GetMicrovm",
+        "GetMicrovmImage",
+        "ListMicrovms",
+        "ResumeMicrovm",
+        "RunMicrovm",
+        "SuspendMicrovm",
+        "TerminateMicrovm"
+      ],
+      "operation_count": 10,
+      "extraction_sources": [
+        "docstring (+10)"
       ]
     },
     "lambda_svc": {
@@ -2344,6 +2367,7 @@
         "GetBucketVersioning",
         "GetExecutionHistory",
         "GetObjectTagging",
+        "GetQueueAttributes",
         "HeadBucket",
         "HeadObject",
         "ListActivities",
@@ -2371,10 +2395,10 @@
         "UpdateStateMachineAlias",
         "ValidateStateMachineDefinition"
       ],
-      "operation_count": 51,
+      "operation_count": 52,
       "extraction_sources": [
         "dict-keys (50)",
-        "compare (2)"
+        "compare (3)"
       ]
     },
     "sts": {
@@ -2560,7 +2584,8 @@
       "files": [
         "ministack/core/lambda_runtime.py",
         "ministack/services/glue.py",
-        "ministack/services/lambda_svc.py"
+        "ministack/services/lambda_svc.py",
+        "ministack/services/s3.py"
       ],
       "default": "test"
     },
