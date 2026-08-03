@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.9",
-  "generated_at": "2026-08-01T00:42:20Z",
+  "ministack_version": "1.4.10",
+  "generated_at": "2026-08-03T22:17:11Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -13,13 +13,10 @@
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
-      "operations": [
-        "FilterExpression",
-        "UpdateExpression"
-      ],
-      "operation_count": 2,
+      "operations": [],
+      "operation_count": 0,
       "extraction_sources": [
-        "docstring (+2)"
+        "pinned"
       ]
     },
     "account": {
@@ -32,7 +29,7 @@
       ],
       "operation_count": 4,
       "extraction_sources": [
-        "url-paths (4)"
+        "pinned"
       ]
     },
     "acm": {
@@ -53,7 +50,7 @@
       ],
       "operation_count": 12,
       "extraction_sources": [
-        "dict-keys (12)"
+        "pinned"
       ]
     },
     "alb": {
@@ -93,7 +90,7 @@
       ],
       "operation_count": 31,
       "extraction_sources": [
-        "dict-keys (31)"
+        "pinned"
       ]
     },
     "apigateway": {
@@ -103,13 +100,17 @@
         "CreateAuthorizer",
         "CreateDeployment",
         "CreateIntegration",
+        "CreateIntegrationResponse",
         "CreateRoute",
+        "CreateRouteResponse",
         "CreateStage",
         "DeleteApi",
         "DeleteAuthorizer",
         "DeleteDeployment",
         "DeleteIntegration",
+        "DeleteIntegrationResponse",
         "DeleteRoute",
+        "DeleteRouteResponse",
         "DeleteStage",
         "GetApi",
         "GetApis",
@@ -118,8 +119,12 @@
         "GetDeployment",
         "GetDeployments",
         "GetIntegration",
+        "GetIntegrationResponse",
+        "GetIntegrationResponses",
         "GetIntegrations",
         "GetRoute",
+        "GetRouteResponse",
+        "GetRouteResponses",
         "GetRoutes",
         "GetStage",
         "GetStages",
@@ -129,12 +134,14 @@
         "UpdateApi",
         "UpdateAuthorizer",
         "UpdateIntegration",
+        "UpdateIntegrationResponse",
         "UpdateRoute",
+        "UpdateRouteResponse",
         "UpdateStage"
       ],
-      "operation_count": 32,
+      "operation_count": 42,
       "extraction_sources": [
-        "docstring (+32)"
+        "pinned"
       ]
     },
     "apigateway_v1": {
@@ -142,6 +149,7 @@
       "operations": [
         "CreateApiKey",
         "CreateAuthorizer",
+        "CreateBasePathMapping",
         "CreateDeployment",
         "CreateDocumentationPart",
         "CreateDomainName",
@@ -153,6 +161,7 @@
         "CreateUsagePlanKey",
         "DeleteApiKey",
         "DeleteAuthorizer",
+        "DeleteBasePathMapping",
         "DeleteDeployment",
         "DeleteDocumentationPart",
         "DeleteDomainName",
@@ -167,10 +176,13 @@
         "DeleteStage",
         "DeleteUsagePlan",
         "DeleteUsagePlanKey",
+        "GetAccount",
         "GetApiKey",
         "GetApiKeys",
         "GetAuthorizer",
         "GetAuthorizers",
+        "GetBasePathMapping",
+        "GetBasePathMappings",
         "GetDeployment",
         "GetDeployments",
         "GetDocumentationPart",
@@ -194,6 +206,7 @@
         "GetStages",
         "GetTags",
         "GetUsagePlan",
+        "GetUsagePlanKey",
         "GetUsagePlanKeys",
         "GetUsagePlans",
         "PutGatewayResponse",
@@ -203,16 +216,22 @@
         "PutMethodResponse",
         "TagResource",
         "UntagResource",
+        "UpdateAccount",
+        "UpdateApiKey",
         "UpdateAuthorizer",
         "UpdateDeployment",
         "UpdateDocumentationPart",
+        "UpdateIntegration",
+        "UpdateMethod",
+        "UpdateModel",
         "UpdateResource",
         "UpdateRestApi",
-        "UpdateStage"
+        "UpdateStage",
+        "UpdateUsagePlan"
       ],
-      "operation_count": 69,
+      "operation_count": 81,
       "extraction_sources": [
-        "docstring (+69)"
+        "pinned"
       ]
     },
     "appconfig": {
@@ -254,7 +273,7 @@
       ],
       "operation_count": 33,
       "extraction_sources": [
-        "docstring (+33)"
+        "pinned"
       ]
     },
     "appsync": {
@@ -262,37 +281,50 @@
       "operations": [
         "CreateApiKey",
         "CreateDataSource",
-        "CreateGraphQLApi",
+        "CreateGraphqlApi",
         "CreateResolver",
         "CreateType",
         "DeleteApiKey",
         "DeleteDataSource",
-        "DeleteGraphQLApi",
+        "DeleteGraphqlApi",
         "DeleteResolver",
         "GetDataSource",
-        "GetGraphQLApi",
+        "GetGraphqlApi",
         "GetResolver",
         "GetType",
         "ListApiKeys",
         "ListDataSources",
-        "ListGraphQLApis",
+        "ListGraphqlApis",
         "ListResolvers",
         "ListTagsForResource",
         "ListTypes",
         "TagResource",
         "UntagResource",
-        "UpdateGraphQLApi"
+        "UpdateGraphqlApi"
       ],
       "operation_count": 22,
       "extraction_sources": [
-        "docstring (+22)"
+        "pinned"
       ]
     },
     "appsync_events": {
       "name": "appsync_events",
-      "operations": [],
-      "operation_count": 0,
-      "extraction_sources": []
+      "operations": [
+        "CreateApi",
+        "CreateChannelNamespace",
+        "DeleteApi",
+        "DeleteChannelNamespace",
+        "GetApi",
+        "GetChannelNamespace",
+        "ListApis",
+        "ListChannelNamespaces",
+        "UpdateApi",
+        "UpdateChannelNamespace"
+      ],
+      "operation_count": 10,
+      "extraction_sources": [
+        "pinned"
+      ]
     },
     "athena": {
       "name": "athena",
@@ -330,7 +362,7 @@
       ],
       "operation_count": 30,
       "extraction_sources": [
-        "dict-keys (30)"
+        "pinned"
       ]
     },
     "autoscaling": {
@@ -366,7 +398,7 @@
       ],
       "operation_count": 27,
       "extraction_sources": [
-        "dict-keys (27)"
+        "pinned"
       ]
     },
     "backup": {
@@ -396,48 +428,182 @@
       ],
       "operation_count": 21,
       "extraction_sources": [
-        "docstring (+21)"
+        "pinned"
       ]
     },
     "batch": {
       "name": "batch",
       "operations": [
-        "CreateComputeenvironment",
-        "CreateJobqueue",
-        "DescribeComputeenvironments",
-        "DescribeJobdefinitions",
-        "DescribeJobqueues",
+        "CreateComputeEnvironment",
+        "CreateJobQueue",
+        "DescribeComputeEnvironments",
+        "DescribeJobDefinitions",
+        "DescribeJobQueues",
         "DescribeJobs",
         "ListJobs",
-        "RegisterJobdefinition",
+        "RegisterJobDefinition",
         "SubmitJob",
-        "UpdateComputeenvironment"
+        "UpdateComputeEnvironment"
       ],
       "operation_count": 10,
       "extraction_sources": [
-        "url-paths (10)"
+        "pinned"
       ]
     },
     "bedrock": {
       "name": "bedrock",
       "operations": [
-        "UseCaseForModelAccess"
+        "BatchDeleteEvaluationJob",
+        "CreateCustomModel",
+        "CreateEvaluationJob",
+        "CreateFoundationModelAgreement",
+        "CreateGuardrail",
+        "CreateGuardrailVersion",
+        "CreateInferenceProfile",
+        "CreateMarketplaceModelEndpoint",
+        "CreateModelCopyJob",
+        "CreateModelCustomizationJob",
+        "CreateModelImportJob",
+        "CreateModelInvocationJob",
+        "CreatePromptRouter",
+        "CreateProvisionedModelThroughput",
+        "DeleteCustomModel",
+        "DeleteFoundationModelAgreement",
+        "DeleteGuardrail",
+        "DeleteImportedModel",
+        "DeleteInferenceProfile",
+        "DeleteMarketplaceModelEndpoint",
+        "DeleteModelInvocationLoggingConfiguration",
+        "DeletePromptRouter",
+        "DeleteProvisionedModelThroughput",
+        "DeregisterMarketplaceModelEndpoint",
+        "GetCustomModel",
+        "GetEvaluationJob",
+        "GetFoundationModel",
+        "GetFoundationModelAvailability",
+        "GetGuardrail",
+        "GetImportedModel",
+        "GetInferenceProfile",
+        "GetMarketplaceModelEndpoint",
+        "GetModelCopyJob",
+        "GetModelCustomizationJob",
+        "GetModelImportJob",
+        "GetModelInvocationJob",
+        "GetModelInvocationLoggingConfiguration",
+        "GetPromptRouter",
+        "GetProvisionedModelThroughput",
+        "GetUseCaseForModelAccess",
+        "ListCustomModels",
+        "ListEvaluationJobs",
+        "ListFoundationModelAgreementOffers",
+        "ListFoundationModels",
+        "ListGuardrails",
+        "ListImportedModels",
+        "ListInferenceProfiles",
+        "ListMarketplaceModelEndpoints",
+        "ListModelCopyJobs",
+        "ListModelCustomizationJobs",
+        "ListModelImportJobs",
+        "ListModelInvocationJobs",
+        "ListPromptRouters",
+        "ListProvisionedModelThroughputs",
+        "ListTagsForResource",
+        "PutModelInvocationLoggingConfiguration",
+        "PutUseCaseForModelAccess",
+        "RegisterMarketplaceModelEndpoint",
+        "StopEvaluationJob",
+        "StopModelCustomizationJob",
+        "StopModelInvocationJob",
+        "TagResource",
+        "UntagResource",
+        "UpdateGuardrail",
+        "UpdateMarketplaceModelEndpoint",
+        "UpdateProvisionedModelThroughput"
       ],
-      "operation_count": 1,
+      "operation_count": 66,
       "extraction_sources": [
-        "docstring (+1)"
+        "pinned"
       ]
     },
     "bedrock_agent": {
       "name": "bedrock_agent",
       "operations": [
+        "AssociateAgentCollaborator",
+        "AssociateAgentKnowledgeBase",
+        "CreateAgent",
+        "CreateAgentActionGroup",
+        "CreateAgentAlias",
+        "CreateDataSource",
+        "CreateFlow",
+        "CreateFlowAlias",
+        "CreateFlowVersion",
+        "CreateKnowledgeBase",
+        "CreatePrompt",
+        "CreatePromptVersion",
+        "DeleteAgent",
+        "DeleteAgentActionGroup",
+        "DeleteAgentAlias",
+        "DeleteAgentVersion",
+        "DeleteDataSource",
+        "DeleteFlow",
+        "DeleteFlowAlias",
+        "DeleteFlowVersion",
+        "DeleteKnowledgeBase",
+        "DeleteKnowledgeBaseDocuments",
+        "DeletePrompt",
+        "DisassociateAgentCollaborator",
+        "DisassociateAgentKnowledgeBase",
+        "GetAgent",
+        "GetAgentActionGroup",
+        "GetAgentAlias",
+        "GetAgentCollaborator",
+        "GetAgentKnowledgeBase",
+        "GetAgentVersion",
+        "GetDataSource",
+        "GetFlow",
+        "GetFlowAlias",
+        "GetFlowVersion",
+        "GetIngestionJob",
+        "GetKnowledgeBase",
+        "GetKnowledgeBaseDocuments",
+        "GetPrompt",
+        "IngestKnowledgeBaseDocuments",
+        "ListAgentActionGroups",
+        "ListAgentAliases",
+        "ListAgentCollaborators",
+        "ListAgentKnowledgeBases",
+        "ListAgentVersions",
+        "ListAgents",
+        "ListDataSources",
+        "ListFlowAliases",
+        "ListFlowVersions",
+        "ListFlows",
+        "ListIngestionJobs",
+        "ListKnowledgeBaseDocuments",
+        "ListKnowledgeBases",
+        "ListPrompts",
+        "ListTagsForResource",
         "PrepareAgent",
         "PrepareFlow",
+        "StartIngestionJob",
+        "StopIngestionJob",
+        "TagResource",
+        "UntagResource",
+        "UpdateAgent",
+        "UpdateAgentActionGroup",
+        "UpdateAgentAlias",
+        "UpdateAgentCollaborator",
+        "UpdateAgentKnowledgeBase",
+        "UpdateDataSource",
+        "UpdateFlow",
+        "UpdateFlowAlias",
+        "UpdateKnowledgeBase",
+        "UpdatePrompt",
         "ValidateFlowDefinition"
       ],
-      "operation_count": 3,
+      "operation_count": 72,
       "extraction_sources": [
-        "docstring (+3)"
+        "pinned"
       ]
     },
     "bedrock_agent_runtime": {
@@ -462,14 +628,22 @@
         "ListInvocationSteps",
         "ListInvocations",
         "ListSessions",
+        "ListTagsForResource",
+        "OptimizePrompt",
         "PutInvocationStep",
+        "Rerank",
+        "Retrieve",
+        "RetrieveAndGenerate",
+        "RetrieveAndGenerateStream",
         "StartFlowExecution",
         "StopFlowExecution",
+        "TagResource",
+        "UntagResource",
         "UpdateSession"
       ],
-      "operation_count": 23,
+      "operation_count": 31,
       "extraction_sources": [
-        "docstring (+23)"
+        "pinned"
       ]
     },
     "bedrock_agentcore": {
@@ -490,48 +664,62 @@
       ],
       "operation_count": 12,
       "extraction_sources": [
-        "docstring (+12)"
+        "pinned"
       ]
     },
     "bedrock_runtime": {
       "name": "bedrock_runtime",
       "operations": [
         "ApplyGuardrail",
+        "Converse",
+        "ConverseStream",
         "GetAsyncInvoke",
         "InvokeModel",
-        "InvokeModelWithBidirectionalStream",
         "InvokeModelWithResponseStream",
         "ListAsyncInvokes",
-        "OpenAI",
         "StartAsyncInvoke"
       ],
       "operation_count": 8,
       "extraction_sources": [
-        "docstring (+8)"
+        "pinned"
       ]
     },
     "cloudfront": {
       "name": "cloudfront",
       "operations": [
+        "CreateCachePolicy",
         "CreateDistribution",
-        "CreateDistributionWithTags",
         "CreateFunction",
         "CreateInvalidation",
         "CreateKeyValueStore",
         "CreateOriginAccessControl",
+        "CreateOriginRequestPolicy",
+        "CreateResponseHeadersPolicy",
+        "DeleteCachePolicy",
         "DeleteDistribution",
         "DeleteFunction",
         "DeleteKeyValueStore",
         "DeleteOriginAccessControl",
+        "DeleteOriginRequestPolicy",
+        "DeleteResponseHeadersPolicy",
         "DescribeFunction",
         "DescribeKeyValueStore",
+        "GetCachePolicy",
+        "GetCachePolicyConfig",
         "GetDistribution",
         "GetDistributionConfig",
         "GetFunction",
         "GetInvalidation",
         "GetOriginAccessControl",
         "GetOriginAccessControlConfig",
+        "GetOriginRequestPolicy",
+        "GetOriginRequestPolicyConfig",
+        "GetResponseHeadersPolicy",
+        "GetResponseHeadersPolicyConfig",
         "ListDistributions",
+        "ListDistributionsByCachePolicyId",
+        "ListDistributionsByOriginRequestPolicyId",
+        "ListDistributionsByResponseHeadersPolicyId",
         "ListFunctions",
         "ListInvalidations",
         "ListKeyValueStores",
@@ -540,14 +728,17 @@
         "PublishFunction",
         "TagResource",
         "UntagResource",
+        "UpdateCachePolicy",
         "UpdateDistribution",
         "UpdateFunction",
         "UpdateKeyValueStore",
-        "UpdateOriginAccessControl"
+        "UpdateOriginAccessControl",
+        "UpdateOriginRequestPolicy",
+        "UpdateResponseHeadersPolicy"
       ],
-      "operation_count": 31,
+      "operation_count": 48,
       "extraction_sources": [
-        "docstring (+31)"
+        "pinned"
       ]
     },
     "cloudfront_keyvaluestore": {
@@ -562,7 +753,7 @@
       ],
       "operation_count": 6,
       "extraction_sources": [
-        "docstring (+6)"
+        "pinned"
       ]
     },
     "cloudtrail": {
@@ -586,7 +777,7 @@
       ],
       "operation_count": 15,
       "extraction_sources": [
-        "dict-keys (15)"
+        "pinned"
       ]
     },
     "cloudwatch": {
@@ -615,7 +806,7 @@
       ],
       "operation_count": 20,
       "extraction_sources": [
-        "dict-keys (20)"
+        "pinned"
       ]
     },
     "cloudwatch_logs": {
@@ -666,7 +857,7 @@
       ],
       "operation_count": 42,
       "extraction_sources": [
-        "dict-keys (42)"
+        "pinned"
       ]
     },
     "codebuild": {
@@ -686,7 +877,7 @@
       ],
       "operation_count": 11,
       "extraction_sources": [
-        "dict-keys (11)"
+        "pinned"
       ]
     },
     "cognito": {
@@ -779,7 +970,7 @@
       ],
       "operation_count": 84,
       "extraction_sources": [
-        "dict-keys (87)"
+        "pinned"
       ]
     },
     "cur": {
@@ -795,7 +986,7 @@
       ],
       "operation_count": 7,
       "extraction_sources": [
-        "dict-keys (7)"
+        "pinned"
       ]
     },
     "dynamodb": {
@@ -822,18 +1013,11 @@
         "DescribeTimeToLive",
         "DisableKinesisStreamingDestination",
         "EnableKinesisStreamingDestination",
-        "EndTime",
         "ExecuteStatement",
         "ExecuteTransaction",
-        "ExportArn",
-        "ExportFormat",
-        "ExportStatus",
         "ExportTableToPointInTime",
-        "ExportType",
         "GetItem",
         "GetResourcePolicy",
-        "ImportArn",
-        "ImportStatus",
         "ImportTable",
         "ListBackups",
         "ListContributorInsights",
@@ -844,13 +1028,12 @@
         "PutItem",
         "PutResourcePolicy",
         "Query",
-        "QueryFilter",
         "RestoreTableFromBackup",
         "RestoreTableToPointInTime",
         "Scan",
-        "ScanFilter",
-        "StartTime",
         "TagResource",
+        "TransactGetItems",
+        "TransactWriteItems",
         "UntagResource",
         "UpdateContinuousBackups",
         "UpdateContributorInsights",
@@ -859,10 +1042,9 @@
         "UpdateTable",
         "UpdateTimeToLive"
       ],
-      "operation_count": 57,
+      "operation_count": 49,
       "extraction_sources": [
-        "dict-keys (59)",
-        "docstring (+2)"
+        "pinned"
       ]
     },
     "dynamodb_streams": {
@@ -875,7 +1057,7 @@
       ],
       "operation_count": 4,
       "extraction_sources": [
-        "dict-keys (4)"
+        "pinned"
       ]
     },
     "ec2": {
@@ -916,7 +1098,6 @@
         "CreateSnapshot",
         "CreateSubnet",
         "CreateTags",
-        "CreateTime",
         "CreateVolume",
         "CreateVpc",
         "CreateVpcEndpoint",
@@ -1013,9 +1194,6 @@
         "EnableVolumeIO",
         "GetManagedPrefixListEntries",
         "ImportKeyPair",
-        "LaunchTemplateData",
-        "LaunchTemplateId",
-        "LaunchTemplateName",
         "ModifyInstanceMaintenanceOptions",
         "ModifyLaunchTemplate",
         "ModifyManagedPrefixList",
@@ -1040,9 +1218,9 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 158,
+      "operation_count": 154,
       "extraction_sources": [
-        "dict-keys (165)"
+        "pinned"
       ]
     },
     "ecr": {
@@ -1077,7 +1255,7 @@
       ],
       "operation_count": 26,
       "extraction_sources": [
-        "dict-keys (26)"
+        "pinned"
       ]
     },
     "ecs": {
@@ -1135,7 +1313,7 @@
       ],
       "operation_count": 49,
       "extraction_sources": [
-        "dict-keys (49)"
+        "pinned"
       ]
     },
     "ecs_metadata": {
@@ -1150,11 +1328,9 @@
         "CreateAccessPoint",
         "CreateFileSystem",
         "CreateMountTarget",
-        "CreateTags",
         "DeleteAccessPoint",
         "DeleteFileSystem",
         "DeleteMountTarget",
-        "DeleteTags",
         "DescribeAccessPoints",
         "DescribeAccountPreferences",
         "DescribeBackupPolicy",
@@ -1162,7 +1338,6 @@
         "DescribeLifecycleConfiguration",
         "DescribeMountTargetSecurityGroups",
         "DescribeMountTargets",
-        "DescribeTags",
         "ListTagsForResource",
         "ModifyMountTargetSecurityGroups",
         "PutAccountPreferences",
@@ -1172,29 +1347,47 @@
         "UntagResource",
         "UpdateFileSystem"
       ],
-      "operation_count": 24,
+      "operation_count": 21,
       "extraction_sources": [
-        "docstring (+24)"
+        "pinned"
       ]
     },
     "eks": {
       "name": "eks",
       "operations": [
+        "AssociateAccessPolicy",
+        "AssociateEncryptionConfig",
+        "AssociateIdentityProviderConfig",
+        "CreateAccessEntry",
+        "CreateAddon",
         "CreateCluster",
         "CreateNodegroup",
+        "DeleteAccessEntry",
+        "DeleteAddon",
         "DeleteCluster",
         "DeleteNodegroup",
+        "DescribeAccessEntry",
+        "DescribeAddon",
         "DescribeCluster",
+        "DescribeIdentityProviderConfig",
         "DescribeNodegroup",
+        "DisassociateAccessPolicy",
+        "DisassociateIdentityProviderConfig",
+        "ListAccessEntries",
+        "ListAddons",
+        "ListAssociatedAccessPolicies",
         "ListClusters",
+        "ListIdentityProviderConfigs",
         "ListNodegroups",
         "ListTagsForResource",
         "TagResource",
-        "UntagResource"
+        "UntagResource",
+        "UpdateAccessEntry",
+        "UpdateAddon"
       ],
-      "operation_count": 11,
+      "operation_count": 29,
       "extraction_sources": [
-        "docstring (+11)"
+        "pinned"
       ]
     },
     "elasticache": {
@@ -1240,7 +1433,7 @@
       ],
       "operation_count": 37,
       "extraction_sources": [
-        "dict-keys (37)"
+        "pinned"
       ]
     },
     "emr": {
@@ -1271,7 +1464,7 @@
       ],
       "operation_count": 22,
       "extraction_sources": [
-        "dict-keys (22)"
+        "pinned"
       ]
     },
     "eventbridge": {
@@ -1337,7 +1530,7 @@
       ],
       "operation_count": 57,
       "extraction_sources": [
-        "dict-keys (57)"
+        "pinned"
       ]
     },
     "firehose": {
@@ -1358,7 +1551,7 @@
       ],
       "operation_count": 12,
       "extraction_sources": [
-        "dict-keys (12)"
+        "pinned"
       ]
     },
     "glue": {
@@ -1444,7 +1637,7 @@
       ],
       "operation_count": 77,
       "extraction_sources": [
-        "dict-keys (77)"
+        "pinned"
       ]
     },
     "iam": {
@@ -1543,6 +1736,9 @@
         "PutUserPolicy",
         "RemoveRoleFromInstanceProfile",
         "RemoveUserFromGroup",
+        "ResyncMFADevice",
+        "SimulateCustomPolicy",
+        "SimulatePrincipalPolicy",
         "TagInstanceProfile",
         "TagPolicy",
         "TagRole",
@@ -1559,9 +1755,9 @@
         "UpdateRoleDescription",
         "UpdateSAMLProvider"
       ],
-      "operation_count": 108,
+      "operation_count": 111,
       "extraction_sources": [
-        "dict-keys (108)"
+        "pinned"
       ]
     },
     "imds": {
@@ -1572,13 +1768,31 @@
     },
     "inspector2": {
       "name": "inspector2",
-      "operations": [],
-      "operation_count": 0,
-      "extraction_sources": []
+      "operations": [
+        "BatchGetFindingDetails",
+        "CreateFilter",
+        "DeleteFilter",
+        "Disable",
+        "Enable",
+        "ListCoverage",
+        "ListCoverageStatistics",
+        "ListFilters",
+        "ListFindingAggregations",
+        "ListFindings",
+        "ListTagsForResource",
+        "SearchVulnerabilities",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 14,
+      "extraction_sources": [
+        "pinned"
+      ]
     },
     "iot": {
       "name": "iot",
       "operations": [
+        "AddThingToThingGroup",
         "AttachPolicy",
         "AttachThingPrincipal",
         "CreateKeysAndCertificate",
@@ -1587,31 +1801,60 @@
         "CreateThing",
         "CreateThingGroup",
         "CreateThingType",
+        "CreateTopicRule",
         "DeleteCertificate",
+        "DeletePolicy",
+        "DeletePolicyVersion",
         "DeleteThing",
+        "DeleteThingGroup",
+        "DeleteThingType",
+        "DeleteTopicRule",
+        "DeprecateThingType",
+        "DescribeCertificate",
         "DescribeEndpoint",
         "DescribeThing",
+        "DescribeThingGroup",
+        "DescribeThingType",
         "DetachPolicy",
         "DetachThingPrincipal",
+        "GetPolicy",
+        "GetPolicyVersion",
+        "GetTopicRule",
+        "ListAttachedPolicies",
+        "ListCertificates",
+        "ListPolicies",
+        "ListPolicyVersions",
+        "ListPrincipalThings",
+        "ListTargetsForPolicy",
+        "ListThingGroups",
+        "ListThingPrincipals",
+        "ListThingTypes",
         "ListThings",
+        "ListThingsInThingGroup",
+        "ListTopicRules",
         "RegisterCertificate",
+        "RemoveThingFromThingGroup",
+        "ReplaceTopicRule",
         "UpdateCertificate",
-        "UpdateThing"
+        "UpdateThing",
+        "UpdateThingGroup"
       ],
-      "operation_count": 18,
+      "operation_count": 46,
       "extraction_sources": [
-        "docstring (+18)"
+        "pinned"
       ]
     },
     "iot_data": {
       "name": "iot_data",
       "operations": [
-        "GetRetainedMessage",
-        "ListRetainedMessages"
+        "DeleteThingShadow",
+        "GetThingShadow",
+        "Publish",
+        "UpdateThingShadow"
       ],
-      "operation_count": 2,
+      "operation_count": 4,
       "extraction_sources": [
-        "docstring (+2)"
+        "pinned"
       ]
     },
     "kinesis": {
@@ -1646,7 +1889,7 @@
       ],
       "operation_count": 26,
       "extraction_sources": [
-        "dict-keys (26)"
+        "pinned"
       ]
     },
     "kms": {
@@ -1684,24 +1927,25 @@
       ],
       "operation_count": 29,
       "extraction_sources": [
-        "dict-keys (29)"
+        "pinned"
       ]
     },
     "lambda_durable": {
       "name": "lambda_durable",
       "operations": [
         "CheckpointDurableExecution",
-        "CreateFunction",
         "GetDurableExecution",
         "GetDurableExecutionHistory",
         "GetDurableExecutionState",
-        "GetFunction",
         "ListDurableExecutionsByFunction",
+        "SendDurableExecutionCallbackFailure",
+        "SendDurableExecutionCallbackHeartbeat",
+        "SendDurableExecutionCallbackSuccess",
         "StopDurableExecution"
       ],
-      "operation_count": 8,
+      "operation_count": 9,
       "extraction_sources": [
-        "docstring (+8)"
+        "pinned"
       ]
     },
     "lambda_microvms": {
@@ -1720,7 +1964,7 @@
       ],
       "operation_count": 10,
       "extraction_sources": [
-        "docstring (+10)"
+        "pinned"
       ]
     },
     "lambda_svc": {
@@ -1735,9 +1979,13 @@
         "DeleteAlias",
         "DeleteEventSourceMapping",
         "DeleteFunction",
+        "DeleteFunctionCodeSigningConfig",
         "DeleteFunctionConcurrency",
+        "DeleteFunctionEventInvokeConfig",
         "DeleteFunctionUrlConfig",
         "DeleteLayerVersion",
+        "DeleteProvisionedConcurrencyConfig",
+        "GetAccountSettings",
         "GetAlias",
         "GetEventSourceMapping",
         "GetFunction",
@@ -1750,8 +1998,12 @@
         "GetLayerVersionByArn",
         "GetLayerVersionPolicy",
         "GetPolicy",
+        "GetProvisionedConcurrencyConfig",
+        "Invoke",
+        "InvokeWithResponseStream",
         "ListAliases",
         "ListEventSourceMappings",
+        "ListFunctionEventInvokeConfigs",
         "ListFunctionUrlConfigs",
         "ListFunctions",
         "ListLayerVersions",
@@ -1760,11 +2012,12 @@
         "ListVersionsByFunction",
         "PublishLayerVersion",
         "PublishVersion",
+        "PutFunctionCodeSigningConfig",
         "PutFunctionConcurrency",
         "PutFunctionEventInvokeConfig",
+        "PutProvisionedConcurrencyConfig",
         "RemoveLayerVersionPermission",
         "RemovePermission",
-        "RequestResponse",
         "TagResource",
         "UntagResource",
         "UpdateAlias",
@@ -1773,9 +2026,9 @@
         "UpdateFunctionConfiguration",
         "UpdateFunctionUrlConfig"
       ],
-      "operation_count": 46,
+      "operation_count": 55,
       "extraction_sources": [
-        "docstring (+46)"
+        "pinned"
       ]
     },
     "mediaconnect": {
@@ -1789,14 +2042,33 @@
       ],
       "operation_count": 5,
       "extraction_sources": [
-        "docstring (+5)"
+        "pinned"
       ]
     },
     "mq": {
       "name": "mq",
-      "operations": [],
-      "operation_count": 0,
-      "extraction_sources": []
+      "operations": [
+        "CreateBroker",
+        "CreateTags",
+        "CreateUser",
+        "DeleteBroker",
+        "DeleteTags",
+        "DeleteUser",
+        "DescribeBroker",
+        "DescribeBrokerEngineTypes",
+        "DescribeBrokerInstanceOptions",
+        "DescribeUser",
+        "ListBrokers",
+        "ListTags",
+        "ListUsers",
+        "RebootBroker",
+        "UpdateBroker",
+        "UpdateUser"
+      ],
+      "operation_count": 16,
+      "extraction_sources": [
+        "pinned"
+      ]
     },
     "msk": {
       "name": "msk",
@@ -1821,7 +2093,7 @@
       ],
       "operation_count": 17,
       "extraction_sources": [
-        "docstring (+17)"
+        "pinned"
       ]
     },
     "mwaa": {
@@ -1832,35 +2104,42 @@
         "CreateWebLoginToken",
         "DeleteEnvironment",
         "GetEnvironment",
+        "InvokeRestApi",
         "ListEnvironments",
         "UpdateEnvironment"
       ],
-      "operation_count": 7,
+      "operation_count": 8,
       "extraction_sources": [
-        "docstring (+7)"
+        "pinned"
       ]
     },
     "opensearch": {
       "name": "opensearch",
       "operations": [
         "AddTags",
+        "AssociatePackage",
         "CreateDomain",
+        "CreatePackage",
         "DeleteDomain",
+        "DeletePackage",
         "DescribeDomain",
         "DescribeDomainChangeProgress",
         "DescribeDomainConfig",
         "DescribeDomains",
+        "DescribePackages",
+        "DissociatePackage",
         "GetCompatibleVersions",
         "ListDomainNames",
+        "ListPackagesForDomain",
         "ListTags",
         "ListVersions",
-        "OpenSearch",
         "RemoveTags",
-        "UpdateDomainConfig"
+        "UpdateDomainConfig",
+        "UpdatePackage"
       ],
-      "operation_count": 14,
+      "operation_count": 20,
       "extraction_sources": [
-        "docstring (+14)"
+        "pinned"
       ]
     },
     "organizations": {
@@ -1882,14 +2161,16 @@
       ],
       "operation_count": 13,
       "extraction_sources": [
-        "dict-keys (13)"
+        "pinned"
       ]
     },
     "pipes": {
       "name": "pipes",
       "operations": [],
       "operation_count": 0,
-      "extraction_sources": []
+      "extraction_sources": [
+        "pinned"
+      ]
     },
     "rds": {
       "name": "rds",
@@ -1931,6 +2212,7 @@
         "DescribePendingMaintenanceActions",
         "DisableHttpEndpoint",
         "EnableHttpEndpoint",
+        "FailoverGlobalCluster",
         "ListTagsForResource",
         "ModifyDBCluster",
         "ModifyDBClusterParameterGroup",
@@ -1947,49 +2229,54 @@
         "StartDBCluster",
         "StartDBInstance",
         "StopDBCluster",
-        "StopDBInstance"
+        "StopDBInstance",
+        "SwitchoverGlobalCluster"
       ],
-      "operation_count": 54,
+      "operation_count": 56,
       "extraction_sources": [
-        "dict-keys (54)"
+        "pinned"
       ]
     },
     "rds_data": {
       "name": "rds_data",
       "operations": [
-        "BeginTransaction"
+        "BatchExecuteStatement",
+        "BeginTransaction",
+        "CommitTransaction",
+        "ExecuteStatement",
+        "RollbackTransaction"
       ],
-      "operation_count": 1,
+      "operation_count": 5,
       "extraction_sources": [
-        "docstring (+1)"
+        "pinned"
       ]
     },
     "resource_groups": {
       "name": "resource_groups",
       "operations": [
-        "CancelTagSyncTask",
         "CreateGroup",
         "DeleteGroup",
         "GetAccountSettings",
         "GetGroup",
         "GetGroupConfiguration",
         "GetGroupQuery",
-        "GetTagSyncTask",
         "GetTags",
+        "GroupResources",
         "ListGroupResources",
         "ListGroupingStatuses",
         "ListGroups",
-        "ListTagSyncTasks",
         "PutGroupConfiguration",
         "SearchResources",
-        "StartTagSyncTask",
+        "Tag",
+        "UngroupResources",
+        "Untag",
         "UpdateAccountSettings",
         "UpdateGroup",
         "UpdateGroupQuery"
       ],
       "operation_count": 19,
       "extraction_sources": [
-        "docstring (+19)"
+        "pinned"
       ]
     },
     "route53": {
@@ -2014,42 +2301,89 @@
       ],
       "operation_count": 16,
       "extraction_sources": [
-        "docstring (+16)"
+        "pinned"
       ]
     },
     "s3": {
       "name": "s3",
       "operations": [
+        "AbortMultipartUpload",
+        "CompleteMultipartUpload",
         "CopyObject",
         "CreateBucket",
+        "CreateMultipartUpload",
         "DeleteBucket",
+        "DeleteBucketCors",
+        "DeleteBucketEncryption",
+        "DeleteBucketLifecycle",
+        "DeleteBucketOwnershipControls",
+        "DeleteBucketPolicy",
         "DeleteBucketReplication",
+        "DeleteBucketTagging",
+        "DeleteBucketWebsite",
         "DeleteObject",
+        "DeleteObjectTagging",
         "DeleteObjects",
+        "DeletePublicAccessBlock",
+        "GetBucketAccelerateConfiguration",
+        "GetBucketAcl",
+        "GetBucketCors",
+        "GetBucketEncryption",
+        "GetBucketLifecycleConfiguration",
+        "GetBucketLocation",
+        "GetBucketLogging",
+        "GetBucketNotificationConfiguration",
+        "GetBucketOwnershipControls",
+        "GetBucketPolicy",
         "GetBucketReplication",
+        "GetBucketRequestPayment",
+        "GetBucketTagging",
+        "GetBucketVersioning",
+        "GetBucketWebsite",
         "GetObject",
+        "GetObjectAcl",
         "GetObjectAttributes",
         "GetObjectLegalHold",
         "GetObjectLockConfiguration",
         "GetObjectRetention",
+        "GetObjectTagging",
+        "GetPublicAccessBlock",
         "HeadBucket",
         "HeadObject",
         "ListBuckets",
+        "ListMultipartUploads",
         "ListObjectVersions",
-        "ListObjectsV1",
+        "ListObjects",
         "ListObjectsV2",
         "ListParts",
+        "PostObject",
+        "PutBucketAccelerateConfiguration",
+        "PutBucketAcl",
+        "PutBucketCors",
+        "PutBucketEncryption",
+        "PutBucketLifecycleConfiguration",
+        "PutBucketLogging",
+        "PutBucketNotificationConfiguration",
+        "PutBucketOwnershipControls",
+        "PutBucketPolicy",
         "PutBucketReplication",
+        "PutBucketRequestPayment",
+        "PutBucketTagging",
+        "PutBucketVersioning",
+        "PutBucketWebsite",
         "PutObject",
+        "PutObjectAcl",
         "PutObjectLegalHold",
         "PutObjectLockConfiguration",
         "PutObjectRetention",
-        "RequestPayment",
-        "UploadPart"
+        "PutObjectTagging",
+        "PutPublicAccessBlock",
+        "UploadPart",
+        "UploadPartCopy"
       ],
-      "operation_count": 26,
+      "operation_count": 73,
       "extraction_sources": [
-        "docstring (+26)"
+        "pinned"
       ]
     },
     "s3files": {
@@ -2079,7 +2413,7 @@
       ],
       "operation_count": 21,
       "extraction_sources": [
-        "docstring (+21)"
+        "pinned"
       ]
     },
     "s3tables": {
@@ -2102,7 +2436,7 @@
       ],
       "operation_count": 14,
       "extraction_sources": [
-        "docstring (+14)"
+        "pinned"
       ]
     },
     "scheduler": {
@@ -2123,7 +2457,7 @@
       ],
       "operation_count": 12,
       "extraction_sources": [
-        "docstring (+12)"
+        "pinned"
       ]
     },
     "secretsmanager": {
@@ -2152,7 +2486,7 @@
       ],
       "operation_count": 20,
       "extraction_sources": [
-        "dict-keys (20)"
+        "pinned"
       ]
     },
     "servicediscovery": {
@@ -2191,8 +2525,7 @@
       ],
       "operation_count": 30,
       "extraction_sources": [
-        "dict-keys (30)",
-        "compare (3)"
+        "pinned"
       ]
     },
     "ses": {
@@ -2227,7 +2560,7 @@
       ],
       "operation_count": 26,
       "extraction_sources": [
-        "dict-keys (26)"
+        "pinned"
       ]
     },
     "ses_v2": {
@@ -2251,7 +2584,7 @@
       ],
       "operation_count": 15,
       "extraction_sources": [
-        "docstring (+15)"
+        "pinned"
       ]
     },
     "sns": {
@@ -2284,7 +2617,7 @@
       ],
       "operation_count": 24,
       "extraction_sources": [
-        "dict-keys (24)"
+        "pinned"
       ]
     },
     "sqs": {
@@ -2308,14 +2641,11 @@
         "SendMessageBatch",
         "SetQueueAttributes",
         "TagQueue",
-        "UntagQueue",
-        "WaitTimeSeconds"
+        "UntagQueue"
       ],
-      "operation_count": 20,
+      "operation_count": 19,
       "extraction_sources": [
-        "dict-keys (19)",
-        "compare (20)",
-        "docstring (+1)"
+        "pinned"
       ]
     },
     "ssm": {
@@ -2336,52 +2666,33 @@
       ],
       "operation_count": 12,
       "extraction_sources": [
-        "dict-keys (12)"
+        "pinned"
       ]
     },
     "stepfunctions": {
       "name": "stepfunctions",
       "operations": [
-        "BatchExecuteStatement",
-        "BeginTransaction",
-        "CommitTransaction",
-        "CopyObject",
         "CreateActivity",
-        "CreateBucket",
         "CreateStateMachine",
         "CreateStateMachineAlias",
         "DeleteActivity",
-        "DeleteBucket",
-        "DeleteObject",
         "DeleteStateMachine",
         "DeleteStateMachineAlias",
         "DeleteStateMachineVersion",
         "DescribeActivity",
         "DescribeExecution",
-        "DescribeSecurityGroups",
         "DescribeStateMachine",
         "DescribeStateMachineAlias",
         "DescribeStateMachineForExecution",
-        "ExecuteStatement",
         "GetActivityTask",
-        "GetBucketVersioning",
         "GetExecutionHistory",
-        "GetObjectTagging",
-        "GetQueueAttributes",
-        "HeadBucket",
-        "HeadObject",
         "ListActivities",
-        "ListBuckets",
         "ListExecutions",
-        "ListObjects",
-        "ListObjectsV2",
         "ListStateMachineAliases",
         "ListStateMachineVersions",
         "ListStateMachines",
         "ListTagsForResource",
         "PublishStateMachineVersion",
-        "PutObjectTagging",
-        "RollbackTransaction",
         "SendTaskFailure",
         "SendTaskHeartbeat",
         "SendTaskSuccess",
@@ -2395,10 +2706,9 @@
         "UpdateStateMachineAlias",
         "ValidateStateMachineDefinition"
       ],
-      "operation_count": 52,
+      "operation_count": 33,
       "extraction_sources": [
-        "dict-keys (50)",
-        "compare (3)"
+        "pinned"
       ]
     },
     "sts": {
@@ -2413,7 +2723,7 @@
       ],
       "operation_count": 6,
       "extraction_sources": [
-        "compare (6)"
+        "pinned"
       ]
     },
     "tagging": {
@@ -2422,15 +2732,12 @@
         "GetResources",
         "GetTagKeys",
         "GetTagValues",
-        "TagKey",
         "TagResources",
-        "TagValue",
         "UntagResources"
       ],
-      "operation_count": 7,
+      "operation_count": 5,
       "extraction_sources": [
-        "dict-keys (5)",
-        "docstring (+2)"
+        "pinned"
       ]
     },
     "transfer": {
@@ -2447,13 +2754,11 @@
         "ListServers",
         "ListUsers",
         "StartServer",
-        "StopServer",
-        "TransferService"
+        "StopServer"
       ],
-      "operation_count": 13,
+      "operation_count": 12,
       "extraction_sources": [
-        "dict-keys (12)",
-        "docstring (+1)"
+        "pinned"
       ]
     },
     "waf": {
@@ -2486,7 +2791,7 @@
       ],
       "operation_count": 24,
       "extraction_sources": [
-        "dict-keys (24)"
+        "pinned"
       ]
     },
     "waf_v1": {
@@ -2515,8 +2820,7 @@
       ],
       "operation_count": 20,
       "extraction_sources": [
-        "dict-keys (17)",
-        "compare (4)"
+        "pinned"
       ]
     },
     "cloudformation": {
@@ -2524,7 +2828,6 @@
       "operations": [
         "CreateChangeSet",
         "CreateStack",
-        "CreateTime",
         "DeleteChangeSet",
         "DeleteStack",
         "DescribeChangeSet",
@@ -2535,9 +2838,6 @@
         "ExecuteChangeSet",
         "GetTemplate",
         "GetTemplateSummary",
-        "LaunchTemplateData",
-        "LaunchTemplateId",
-        "LaunchTemplateName",
         "ListChangeSets",
         "ListExports",
         "ListStackResources",
@@ -2545,11 +2845,9 @@
         "UpdateStack",
         "ValidateTemplate"
       ],
-      "operation_count": 22,
+      "operation_count": 18,
       "extraction_sources": [
-        "docstring (+18)",
-        "dict-keys (18)",
-        "dict-keys (7)"
+        "pinned"
       ]
     }
   },
@@ -2762,7 +3060,6 @@
         "ministack/services/ses.py",
         "ministack/services/emr.py",
         "ministack/services/dynamodb.py",
-        "ministack/services/cognito.py",
         "ministack/services/waf.py",
         "ministack/services/iam.py",
         "ministack/services/sqs.py",

@@ -342,6 +342,25 @@ def build() -> dict:
             "extraction_sources": merged_sources,
         }
 
+    # Apply authoritative op pins (ops_pins.json). The AST heuristics above are
+    # generous by design and mis-scrape struct field names, enum values,
+    # service-integration `action ==` tokens, and docstring prose as operations.
+    # For every module with a code-verified dispatched-op list, the pin REPLACES
+    # the scraped set so the catalog matches the real runtime dispatch. Modules
+    # absent from the pins keep their scraped ops.
+    pins_path = os.path.join(_HERE, "ops_pins.json")
+    if os.path.exists(pins_path):
+        with open(pins_path, "r", encoding="utf-8") as f:
+            pins = json.load(f)
+        for name, ops in pins.items():
+            if name == "_comment":
+                continue
+            entry = services.get(name) or {"name": name}
+            entry["operations"] = sorted(ops)
+            entry["operation_count"] = len(ops)
+            entry["extraction_sources"] = ["pinned"]
+            services[name] = entry
+
     env_vars = _extract_env_vars()
     # Drop noisy non-MiniStack vars (PATH, HOME, etc.) — keep only those with
     # MINISTACK_/AWS_ prefix or that look intentional.
