@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.14",
-  "generated_at": "2026-08-07T18:26:30Z",
+  "ministack_version": "1.4.16",
+  "generated_at": "2026-08-11T23:37:31Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 80,
+  "service_count": 81,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -1031,6 +1031,26 @@
         "pinned"
       ]
     },
+    "dsql": {
+      "name": "dsql",
+      "operations": [
+        "CreateCluster",
+        "DeleteCluster",
+        "DeleteClusterPolicy",
+        "GetCluster",
+        "GetClusterPolicy",
+        "ListClusters",
+        "ListTagsForResource",
+        "PutClusterPolicy",
+        "TagResource",
+        "UntagResource",
+        "UpdateCluster"
+      ],
+      "operation_count": 11,
+      "extraction_sources": [
+        "pinned"
+      ]
+    },
     "dynamodb": {
       "name": "dynamodb",
       "operations": [
@@ -1952,6 +1972,7 @@
         "GenerateDataKeyPair",
         "GenerateDataKeyPairWithoutPlaintext",
         "GenerateDataKeyWithoutPlaintext",
+        "GenerateMac",
         "GetKeyPolicy",
         "GetKeyRotationStatus",
         "GetPublicKey",
@@ -1966,9 +1987,10 @@
         "UntagResource",
         "UpdateAlias",
         "UpdateKeyDescription",
-        "Verify"
+        "Verify",
+        "VerifyMac"
       ],
-      "operation_count": 30,
+      "operation_count": 32,
       "extraction_sources": [
         "pinned"
       ]
@@ -2961,9 +2983,38 @@
     "DOCKER_HOST": {
       "name": "DOCKER_HOST",
       "files": [
-        "ministack/app.py"
+        "ministack/app.py",
+        "ministack/services/dsql.py"
       ],
       "default": null
+    },
+    "DSQL_BASE_PORT": {
+      "name": "DSQL_BASE_PORT",
+      "files": [
+        "ministack/services/dsql.py"
+      ],
+      "default": "25432"
+    },
+    "DSQL_PERSIST": {
+      "name": "DSQL_PERSIST",
+      "files": [
+        "ministack/services/dsql.py"
+      ],
+      "default": "0"
+    },
+    "DSQL_PG_IMAGE": {
+      "name": "DSQL_PG_IMAGE",
+      "files": [
+        "ministack/services/dsql.py"
+      ],
+      "default": "postgres:16-alpine"
+    },
+    "DSQL_STRICT": {
+      "name": "DSQL_STRICT",
+      "files": [
+        "ministack/services/dsql.py"
+      ],
+      "default": "0"
     },
     "MINISTACK_ACCOUNT_ID": {
       "name": "MINISTACK_ACCOUNT_ID",

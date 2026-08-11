@@ -818,6 +818,19 @@
     "TagResource",
     "UntagResource"
   ],
+  "dsql": [
+    "CreateCluster",
+    "GetCluster",
+    "ListClusters",
+    "UpdateCluster",
+    "DeleteCluster",
+    "GetClusterPolicy",
+    "PutClusterPolicy",
+    "DeleteClusterPolicy",
+    "TagResource",
+    "UntagResource",
+    "ListTagsForResource"
+  ],
   "dynamodb": [
     "BatchExecuteStatement",
     "BatchGetItem",
@@ -1606,6 +1619,7 @@
     "GenerateDataKeyPair",
     "GenerateDataKeyPairWithoutPlaintext",
     "GenerateDataKeyWithoutPlaintext",
+    "GenerateMac",
     "GetKeyPolicy",
     "GetKeyRotationStatus",
     "GetPublicKey",
@@ -1620,7 +1634,8 @@
     "UntagResource",
     "UpdateAlias",
     "UpdateKeyDescription",
-    "Verify"
+    "Verify",
+    "VerifyMac"
   ],
   "lambda_durable": [
     "CheckpointDurableExecution",

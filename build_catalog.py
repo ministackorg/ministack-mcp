@@ -370,6 +370,7 @@ def build() -> dict:
             k.startswith("MINISTACK_")
             or k.startswith("AWS_")
             or k.startswith("OPENSEARCH_")
+            or k.startswith("DSQL_")
             or k in {
                 "S3_PERSIST", "DOCKER_HOST", "TZ", "PORT", "PYTHONUNBUFFERED",
             }
