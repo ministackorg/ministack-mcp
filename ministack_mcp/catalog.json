@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.19",
-  "generated_at": "2026-08-17T06:47:30Z",
+  "ministack_version": "1.4.20",
+  "generated_at": "2026-08-19T00:05:13Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 83,
+  "service_count": 84,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -1857,6 +1857,9 @@
         "AddThingToThingGroup",
         "AttachPolicy",
         "AttachThingPrincipal",
+        "CancelJob",
+        "CancelJobExecution",
+        "CreateJob",
         "CreateKeysAndCertificate",
         "CreatePolicy",
         "CreatePolicyVersion",
@@ -1865,6 +1868,7 @@
         "CreateThingType",
         "CreateTopicRule",
         "DeleteCertificate",
+        "DeleteJob",
         "DeletePolicy",
         "DeletePolicyVersion",
         "DeleteThing",
@@ -1874,16 +1878,21 @@
         "DeprecateThingType",
         "DescribeCertificate",
         "DescribeEndpoint",
+        "DescribeJob",
+        "DescribeJobExecution",
         "DescribeThing",
         "DescribeThingGroup",
         "DescribeThingType",
         "DetachPolicy",
         "DetachThingPrincipal",
+        "GetJobDocument",
         "GetPolicy",
         "GetPolicyVersion",
         "GetTopicRule",
         "ListAttachedPolicies",
         "ListCertificates",
+        "ListJobExecutionsForThing",
+        "ListJobs",
         "ListPolicies",
         "ListPolicyVersions",
         "ListPrincipalThings",
@@ -1901,7 +1910,7 @@
         "UpdateThing",
         "UpdateThingGroup"
       ],
-      "operation_count": 46,
+      "operation_count": 55,
       "extraction_sources": [
         "pinned"
       ]
@@ -1917,6 +1926,20 @@
       "operation_count": 4,
       "extraction_sources": [
         "pinned"
+      ]
+    },
+    "iot_jobs_data": {
+      "name": "iot_jobs_data",
+      "operations": [
+        "DescribeEndpoint",
+        "DescribeJobExecution",
+        "GetPendingJobExecutions",
+        "StartNextPendingJobExecution",
+        "UpdateJobExecution"
+      ],
+      "operation_count": 5,
+      "extraction_sources": [
+        "docstring (+5)"
       ]
     },
     "kinesis": {
@@ -2290,6 +2313,7 @@
         "DescribePendingMaintenanceActions",
         "DisableHttpEndpoint",
         "EnableHttpEndpoint",
+        "FailoverDBCluster",
         "FailoverGlobalCluster",
         "ListTagsForResource",
         "ModifyDBCluster",
@@ -2310,7 +2334,7 @@
         "StopDBInstance",
         "SwitchoverGlobalCluster"
       ],
-      "operation_count": 56,
+      "operation_count": 57,
       "extraction_sources": [
         "pinned"
       ]
@@ -3165,6 +3189,13 @@
         "ministack/services/opensearch.py"
       ],
       "default": ""
+    },
+    "MINISTACK_RDS_PG_CLUSTER_REPLICATION": {
+      "name": "MINISTACK_RDS_PG_CLUSTER_REPLICATION",
+      "files": [
+        "ministack/services/rds.py"
+      ],
+      "default": "0"
     },
     "MINISTACK_RDS_PUBLIC_ENDPOINT": {
       "name": "MINISTACK_RDS_PUBLIC_ENDPOINT",
