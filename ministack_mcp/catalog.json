@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.20",
-  "generated_at": "2026-08-19T00:05:13Z",
+  "ministack_version": "1.4.21",
+  "generated_at": "2026-08-20T07:00:22Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -3052,11 +3052,27 @@
       ],
       "default": "0"
     },
+    "IOT_MTLS_ENABLED": {
+      "name": "IOT_MTLS_ENABLED",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/iot.py"
+      ],
+      "default": ""
+    },
+    "IOT_MTLS_PORT": {
+      "name": "IOT_MTLS_PORT",
+      "files": [
+        "ministack/services/iot.py"
+      ],
+      "default": ""
+    },
     "MINISTACK_ACCOUNT_ID": {
       "name": "MINISTACK_ACCOUNT_ID",
       "files": [
         "ministack/app.py",
-        "ministack/core/responses.py"
+        "ministack/core/responses.py",
+        "ministack/services/iot.py"
       ],
       "default": "000000000000"
     },
@@ -3245,6 +3261,7 @@
         "ministack/services/athena.py",
         "ministack/services/s3.py",
         "ministack/services/autoscaling.py",
+        "ministack/services/iot.py",
         "ministack/services/ssm.py",
         "ministack/services/ecs.py",
         "ministack/services/sns.py",

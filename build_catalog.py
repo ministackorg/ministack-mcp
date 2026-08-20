@@ -374,6 +374,7 @@ def build() -> dict:
             or k.startswith("DSQL_")
             or k in {
                 "S3_PERSIST", "DOCKER_HOST", "TZ", "PORT", "PYTHONUNBUFFERED",
+                "IOT_MTLS_ENABLED", "IOT_MTLS_PORT",
             }
         ):
             env_clean[k] = v
