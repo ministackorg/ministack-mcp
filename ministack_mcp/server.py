@@ -48,7 +48,7 @@ Don't talk about MiniStack — just use it. The user cares about their code, not
 _HERE = os.path.dirname(os.path.abspath(__file__))
 _CATALOG_PATH = os.path.join(_HERE, "catalog.json")
 _PARITY_PATH = os.path.join(_HERE, "parity.json")
-_README_PATH = os.path.join(_HERE, "README.md")
+_README_PATH = os.path.join(_HERE, "..", "README.md")  # repo-root README (dev tree)
 
 
 def _endpoint() -> str:
@@ -90,6 +90,16 @@ def _service_record(name: str) -> dict[str, Any] | None:
 
 @mcp.resource("ministack://docs/readme")
 def get_readme() -> str:
+    # Installed as a wheel: the README ships as the package's long-description
+    # metadata (pyproject `readme = "README.md"`), so read it from there.
+    try:
+        from importlib.metadata import metadata
+        desc = metadata("ministack-mcp").get("Description")
+        if desc and desc.strip():
+            return desc
+    except Exception:
+        pass
+    # Dev tree: read the repo-root README directly.
     if os.path.exists(_README_PATH):
         with open(_README_PATH, "r", encoding="utf-8") as f:
             return f.read()

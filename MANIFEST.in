@@ -1,5 +1,4 @@
-include README.md
 include LICENSE
-include catalog.json
-include parity.json
 include requirements.txt
+recursive-include ministack_mcp *.json *.md
+recursive-include ministack_mcp/docs *.md

@@ -164,7 +164,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution.",
+      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution. Also SaaS Manager multi-tenant distributions (connection groups + distribution tenants).",
       "gotchas": [
         "Distributions deploy instantly — no real CDN edge propagation",
         "CloudFront Functions code is stored but not executed",
@@ -282,7 +282,7 @@
       "real_backend": null,
       "notes": "80+ actions covering instances, images (stub), security groups, key pairs, VPCs, subnets, availability zones, internet gateways, elastic IPs, tags, route tables, ENIs, VPC endpoints, EBS volumes, EBS snapshots, NAT gateways, network ACLs, flow logs, VPC peering, DHCP options, egress-only IGWs, managed prefix lists, VPN gateways/connections, launch templates, AMIs (register/deregister/describe), EC2 Fleet (CreateFleet, DescribeFleets). Instances exist in memory only — no real VMs launched. EC2 Fleet: instant-type synchronously launches instances and emits the Instances/Errors blocks; maintain/request return FleetId alone (FulfilledCapacity=0, ActivityStatus=pending_fulfillment) matching AWS async-fulfilment semantics; DefaultTargetCapacityType drives spot vs on-demand (not the FleetType enum); TotalTargetCapacity is round-robin distributed across every LaunchTemplateConfigs[*]×Overrides[*] slot; DescribeFleets on an unknown FleetId returns InvalidFleetId.NotFound. ENIs: AttachNetworkInterface records Attachment.AttachTime; DescribeNetworkInterfaces surfaces it as <attachTime> matching the AWS NetworkInterfaceAttachment shape (required by Cloud Custodian / Config rules that audit attachment age).",
       "gotchas": [
-        "No real instances are launched — RunInstances creates in-memory records only",
+        "By default RunInstances creates in-memory records only; since 1.5.0 RegisterImage can back an instance with a real container (opt-in), reachable and driven by ssm:SendCommand",
         "DescribeImages returns a stub set of common AMI IDs",
         "No actual networking — VPCs, subnets, security groups are metadata-only",
         "EBS volumes are metadata-only — no real block storage"
@@ -421,7 +421,7 @@
       "real_backend": null,
       "notes": "70+ actions: users, groups, roles, policies (managed + inline), access keys (Create/List/Delete/Update/GetLastUsed), instance profiles, service-linked roles, OIDC providers (Create/Get/List/Delete), SAML providers (Create/Get/List/Update/Delete), login profiles (Create/Get/Update/Delete), virtual MFA devices (Create/Enable/Deactivate/Delete/List/Resync), GetAccountAuthorizationDetails, Access Advisor (GenerateServiceLastAccessedDetails/GetServiceLastAccessedDetails), attached/inline policies for users and roles, assume role policy updates, SimulatePrincipalPolicy, SimulateCustomPolicy, TagRole/UntagRole/ListRoleTags, TagUser/UntagUser/ListUserTags, TagPolicy/UntagPolicy/ListPolicyTags. AWS-managed policy seeds carry the verbatim AWS documents (not the wildcard Allow * fallback) for AdministratorAccess, PowerUserAccess, ReadOnlyAccess, SecurityAudit, IAMFullAccess, IAMReadOnlyAccess, AmazonS3FullAccess, AmazonS3ReadOnlyAccess, AmazonEC2FullAccess, AmazonEC2ReadOnlyAccess, AmazonSSMManagedInstanceCore, AmazonDynamoDBFullAccess, AWSLambdaBasicExecutionRole, AWSLambdaVPCAccessExecutionRole, AmazonSQSFullAccess, AmazonSNSFullAccess, AmazonECSTaskExecutionRolePolicy, CloudWatchAgentServerPolicy, CloudWatchLogsFullAccess, AWSCloudFormationFullAccess, AmazonEKSClusterPolicy, AmazonEKSWorkerNodePolicy, AmazonEKS_CNI_Policy, AmazonEKSServicePolicy — so GetPolicyVersion returns the real action lists and Terraform diffs / policy simulators behave the same as real AWS.",
       "gotchas": [
-        "No policy evaluation — policies are stored but never enforced on API calls",
+        "Policies are not evaluated by default; set AUTH=true to evaluate the caller's policies and return 403 AccessDenied on a disallowed action (SigV4 signatures are never validated either way)",
         "SimulatePrincipalPolicy/SimulateCustomPolicy return stub results",
         "Access key rotation is tracked but credentials are not validated on requests"
       ]
@@ -659,7 +659,8 @@
         "ACLs are stored but not enforced on access",
         "Bucket policies are stored but not evaluated",
         "Lifecycle rules are stored but not automatically executed",
-        "Replication configuration is stored but objects are not actually replicated"
+        "Replication configuration is stored but objects are not actually replicated",
+        "Glacier / Deep Archive restore is emulated: an object in GLACIER/DEEP_ARCHIVE is unreadable (InvalidObjectState) until RestoreObject completes, in seconds rather than AWS's hours; GLACIER_IR stays readable"
       ]
     },
     "s3files": {
@@ -770,10 +771,11 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "12 operations: PutParameter, GetParameter, GetParameters, GetParametersByPath, DeleteParameter, DeleteParameters, DescribeParameters, GetParameterHistory, LabelParameterVersion, AddTagsToResource, RemoveTagsFromResource, ListTagsForResource. Parameter Store supports String, SecureString, StringList types.",
+      "notes": "16 operations: Parameter Store (PutParameter, GetParameter, GetParameters, GetParametersByPath, DeleteParameter, DeleteParameters, DescribeParameters, GetParameterHistory, LabelParameterVersion, tags) plus Run Command (SendCommand, GetCommandInvocation, ListCommands, DescribeInstanceInformation).",
       "gotchas": [
         "SecureString values are stored in plaintext — no actual KMS encryption",
-        "Parameter policies (expiration, notification) are not enforced"
+        "Parameter policies (expiration, notification) are not enforced",
+        "Run Command: SendCommand runs AWS-RunShellScript in an instance's container; Session Manager and Patch Manager are not implemented"
       ]
     },
     "stepfunctions": {
@@ -850,6 +852,120 @@
         "No persistence — state is not saved",
         "All list operations return empty results",
         "ChangeToken is always valid but no rules can be created"
+      ]
+    },
+    "bedrock": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Foundation-model control plane: list/get models, guardrails, inference profiles, custom/imported models, provisioned throughput.",
+      "gotchas": [
+        "Control plane only — no real model inference (use bedrock-runtime for the data plane)"
+      ]
+    },
+    "bedrock_runtime": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": "optional proxy",
+      "notes": "InvokeModel / Converse / ConverseStream data plane; deterministic family-aware mocks or proxied to a real backend.",
+      "gotchas": [
+        "Responses are deterministic mocks unless a real backend is configured via MINISTACK_BEDROCK_PROXY_URL"
+      ]
+    },
+    "bedrock_agent": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Agents, aliases, knowledge bases, action groups, flows, prompts — control plane.",
+      "gotchas": [
+        "Control plane only — no real agent orchestration or ingestion"
+      ]
+    },
+    "bedrock_agent_runtime": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "InvokeAgent / Retrieve / RetrieveAndGenerate data-plane wiring for local agent testing.",
+      "gotchas": [
+        "Deterministic — no real retrieval or generation is performed"
+      ]
+    },
+    "bedrock_agentcore": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AgentCore agent-runtime control plane (runtimes + endpoints, versions) plus a deterministic InvokeAgentRuntime data plane.",
+      "gotchas": [
+        "InvokeAgentRuntime echoes the request payload — no container or model is executed",
+        "Only the agent-runtime and runtime-endpoint surface is emulated (Memory, Gateway, Browser, Code Interpreter, Identity are not)"
+      ]
+    },
+    "cloudcontrol": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Cloud Control API — generic resource CRUD behind Terraform's awscc provider and CDK L1 constructs (ProgressEvent / ResourceDescription shapes).",
+      "gotchas": [
+        "Keeps its own resource store and does NOT provision the underlying service resource (a bucket created here is invisible to the S3 API)",
+        "No schema validation; all operations complete synchronously with SUCCESS"
+      ]
+    },
+    "config": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AWS Config control plane — config rules, configuration recorders, delivery channels, with recorder start/stop.",
+      "gotchas": [
+        "Rules are never evaluated against live resource configuration; compliance reads return INSUFFICIENT_DATA"
+      ]
+    },
+    "dsql": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": "optional postgres",
+      "notes": "Aurora DSQL cluster control plane; optional real Postgres backend behind a SQL-validating wire-protocol proxy (DSQL_STRICT=1).",
+      "gotchas": [
+        "Control plane by default — a cluster reaches ACTIVE with nothing listening on its endpoint",
+        "Not region-isolated — cluster state is shared across regions within an account (use unique names)"
+      ]
+    },
+    "iot_jobs_data": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "AWS IoT Jobs device data plane (jobs-data): pending job executions, start/update job execution for a thing.",
+      "gotchas": [
+        "Device-side Jobs API; pairs with the iot control plane which owns job definitions"
+      ]
+    },
+    "lambda_microvms": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "Lambda MicroVM control-plane emulation (2025-09-09): run/get/list/suspend/resume/terminate MicroVMs, create images, mint auth/shell tokens.",
+      "gotchas": [
+        "No real microVM — RunMicrovm returns RUNNING immediately and CreateMicrovmImage a CREATED image",
+        "Auth tokens are opaque stubs, not usable against a real runtime"
+      ]
+    },
+    "msk": {
+      "status": "partial",
+      "persistence": true,
+      "multi_tenant": true,
+      "real_backend": null,
+      "notes": "MSK (Kafka) control plane — clusters, configurations, SCRAM secrets, GetBootstrapBrokers.",
+      "gotchas": [
+        "No Kafka broker runs in-process; GetBootstrapBrokers can return an external broker via MINISTACK_MSK_BOOTSTRAP / _TLS / _SASL_SCRAM / _SASL_IAM"
       ]
     }
   }

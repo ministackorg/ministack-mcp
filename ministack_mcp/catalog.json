@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.4.21",
-  "generated_at": "2026-08-20T07:00:22Z",
+  "ministack_version": "1.5.0",
+  "generated_at": "2026-08-23T21:16:54Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -704,16 +704,22 @@
     "cloudfront": {
       "name": "cloudfront",
       "operations": [
+        "AssociateDistributionTenantWebACL",
         "CreateCachePolicy",
+        "CreateConnectionGroup",
         "CreateDistribution",
+        "CreateDistributionTenant",
         "CreateFunction",
         "CreateInvalidation",
+        "CreateInvalidationForDistributionTenant",
         "CreateKeyValueStore",
         "CreateOriginAccessControl",
         "CreateOriginRequestPolicy",
         "CreateResponseHeadersPolicy",
         "DeleteCachePolicy",
+        "DeleteConnectionGroup",
         "DeleteDistribution",
+        "DeleteDistributionTenant",
         "DeleteFunction",
         "DeleteKeyValueStore",
         "DeleteOriginAccessControl",
@@ -721,24 +727,37 @@
         "DeleteResponseHeadersPolicy",
         "DescribeFunction",
         "DescribeKeyValueStore",
+        "DisassociateDistributionTenantWebACL",
         "GetCachePolicy",
         "GetCachePolicyConfig",
+        "GetConnectionGroup",
+        "GetConnectionGroupByRoutingEndpoint",
         "GetDistribution",
         "GetDistributionConfig",
+        "GetDistributionTenant",
+        "GetDistributionTenantByDomain",
         "GetFunction",
         "GetInvalidation",
+        "GetInvalidationForDistributionTenant",
+        "GetManagedCertificateDetails",
         "GetOriginAccessControl",
         "GetOriginAccessControlConfig",
         "GetOriginRequestPolicy",
         "GetOriginRequestPolicyConfig",
         "GetResponseHeadersPolicy",
         "GetResponseHeadersPolicyConfig",
+        "ListConnectionGroups",
+        "ListDistributionTenants",
+        "ListDistributionTenantsByCustomization",
         "ListDistributions",
         "ListDistributionsByCachePolicyId",
+        "ListDistributionsByConnectionMode",
         "ListDistributionsByOriginRequestPolicyId",
         "ListDistributionsByResponseHeadersPolicyId",
+        "ListDomainConflicts",
         "ListFunctions",
         "ListInvalidations",
+        "ListInvalidationsForDistributionTenant",
         "ListKeyValueStores",
         "ListOriginAccessControls",
         "ListTagsForResource",
@@ -746,14 +765,18 @@
         "TagResource",
         "UntagResource",
         "UpdateCachePolicy",
+        "UpdateConnectionGroup",
         "UpdateDistribution",
+        "UpdateDistributionTenant",
+        "UpdateDomainAssociation",
         "UpdateFunction",
         "UpdateKeyValueStore",
         "UpdateOriginAccessControl",
         "UpdateOriginRequestPolicy",
-        "UpdateResponseHeadersPolicy"
+        "UpdateResponseHeadersPolicy",
+        "VerifyDnsConfiguration"
       ],
-      "operation_count": 48,
+      "operation_count": 71,
       "extraction_sources": [
         "pinned"
       ]
@@ -1267,6 +1290,7 @@
         "ModifyVpcAttribute",
         "ModifyVpcEndpoint",
         "RebootInstances",
+        "RegisterImage",
         "ReleaseAddress",
         "ReplaceIamInstanceProfileAssociation",
         "ReplaceNetworkAclAssociation",
@@ -1280,7 +1304,7 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 154,
+      "operation_count": 155,
       "extraction_sources": [
         "pinned"
       ]
@@ -2492,10 +2516,11 @@
         "PutObjectRetention",
         "PutObjectTagging",
         "PutPublicAccessBlock",
+        "RestoreObject",
         "UploadPart",
         "UploadPartCopy"
       ],
-      "operation_count": 73,
+      "operation_count": 74,
       "extraction_sources": [
         "pinned"
       ]
@@ -2768,17 +2793,21 @@
         "AddTagsToResource",
         "DeleteParameter",
         "DeleteParameters",
+        "DescribeInstanceInformation",
         "DescribeParameters",
+        "GetCommandInvocation",
         "GetParameter",
         "GetParameterHistory",
         "GetParameters",
         "GetParametersByPath",
         "LabelParameterVersion",
+        "ListCommands",
         "ListTagsForResource",
         "PutParameter",
-        "RemoveTagsFromResource"
+        "RemoveTagsFromResource",
+        "SendCommand"
       ],
-      "operation_count": 12,
+      "operation_count": 16,
       "extraction_sources": [
         "pinned"
       ]
@@ -2966,6 +2995,13 @@
     }
   },
   "env_vars": {
+    "AUTH": {
+      "name": "AUTH",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": "false"
+    },
     "AWS_ACCESS_KEY_ID": {
       "name": "AWS_ACCESS_KEY_ID",
       "files": [
@@ -3125,6 +3161,23 @@
       ],
       "default": "1"
     },
+    "MINISTACK_DOCKER_TIMEOUT": {
+      "name": "MINISTACK_DOCKER_TIMEOUT",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/rds.py",
+        "ministack/services/elasticache.py",
+        "ministack/services/opensearch.py",
+        "ministack/services/eks.py",
+        "ministack/services/codebuild.py",
+        "ministack/services/mwaa.py",
+        "ministack/services/glue.py",
+        "ministack/services/ec2.py",
+        "ministack/services/lambda_svc.py",
+        "ministack/services/ecs.py"
+      ],
+      "default": "10"
+    },
     "MINISTACK_EDITION": {
       "name": "MINISTACK_EDITION",
       "files": [
@@ -3156,6 +3209,13 @@
         "ministack/services/cloudformation/custom_resource.py"
       ],
       "default": "localhost"
+    },
+    "MINISTACK_HOSTNAME": {
+      "name": "MINISTACK_HOSTNAME",
+      "files": [
+        "ministack/core/container_reaper.py"
+      ],
+      "default": null
     },
     "MINISTACK_IMAGE_PREFIX": {
       "name": "MINISTACK_IMAGE_PREFIX",

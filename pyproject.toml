@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ministack-mcp"
-version = "0.1.29"
-description = "MCP knowledge layer for MiniStack — plug into any IDE AI (Claude Desktop, Cursor, Continue, Windsurf, Cline)."
+version = "0.1.30"
+description = "MCP knowledge layer for MiniStack — plug into any IDE AI (Claude Desktop, Cursor, Continue, Devin, Cline)."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
@@ -40,4 +40,4 @@ packages = ["ministack_mcp"]
 include-package-data = true
 
 [tool.setuptools.package-data]
-ministack_mcp = ["catalog.json", "parity.json", "README.md"]
+ministack_mcp = ["catalog.json", "parity.json", "docs/*.md"]
