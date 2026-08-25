@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.0",
-  "generated_at": "2026-08-23T21:16:54Z",
+  "ministack_version": "1.5.1",
+  "generated_at": "2026-08-25T20:31:39Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -877,6 +877,7 @@
         "GetDeliveryDestination",
         "GetDeliverySource",
         "GetLogEvents",
+        "GetLogGroupFields",
         "GetLogRecord",
         "GetQueryResults",
         "ListTagsForResource",
@@ -897,7 +898,7 @@
         "UntagLogGroup",
         "UntagResource"
       ],
-      "operation_count": 44,
+      "operation_count": 45,
       "extraction_sources": [
         "pinned"
       ]
@@ -1216,6 +1217,7 @@
         "DeleteVpnConnection",
         "DeleteVpnConnectionRoute",
         "DeleteVpnGateway",
+        "DeregisterImage",
         "DescribeAddresses",
         "DescribeAddressesAttribute",
         "DescribeAvailabilityZones",
@@ -1304,7 +1306,7 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 155,
+      "operation_count": 156,
       "extraction_sources": [
         "pinned"
       ]
@@ -2307,6 +2309,8 @@
         "CreateDBInstance",
         "CreateDBInstanceReadReplica",
         "CreateDBParameterGroup",
+        "CreateDBProxy",
+        "CreateDBProxyEndpoint",
         "CreateDBSnapshot",
         "CreateDBSubnetGroup",
         "CreateGlobalCluster",
@@ -2316,10 +2320,13 @@
         "DeleteDBClusterSnapshot",
         "DeleteDBInstance",
         "DeleteDBParameterGroup",
+        "DeleteDBProxy",
+        "DeleteDBProxyEndpoint",
         "DeleteDBSnapshot",
         "DeleteDBSubnetGroup",
         "DeleteGlobalCluster",
         "DeleteOptionGroup",
+        "DeregisterDBProxyTargets",
         "DescribeDBClusterParameterGroups",
         "DescribeDBClusterParameters",
         "DescribeDBClusterSnapshots",
@@ -2328,6 +2335,10 @@
         "DescribeDBInstances",
         "DescribeDBParameterGroups",
         "DescribeDBParameters",
+        "DescribeDBProxies",
+        "DescribeDBProxyEndpoints",
+        "DescribeDBProxyTargetGroups",
+        "DescribeDBProxyTargets",
         "DescribeDBSnapshots",
         "DescribeDBSubnetGroups",
         "DescribeGlobalClusters",
@@ -2344,9 +2355,13 @@
         "ModifyDBClusterParameterGroup",
         "ModifyDBInstance",
         "ModifyDBParameterGroup",
+        "ModifyDBProxy",
+        "ModifyDBProxyEndpoint",
+        "ModifyDBProxyTargetGroup",
         "ModifyDBSubnetGroup",
         "ModifyGlobalCluster",
         "RebootDBInstance",
+        "RegisterDBProxyTargets",
         "RemoveFromGlobalCluster",
         "RemoveTagsFromResource",
         "ResetDBClusterParameterGroup",
@@ -2358,7 +2373,7 @@
         "StopDBInstance",
         "SwitchoverGlobalCluster"
       ],
-      "operation_count": 57,
+      "operation_count": 70,
       "extraction_sources": [
         "pinned"
       ]
@@ -2737,6 +2752,7 @@
         "DeletePlatformApplication",
         "DeleteTopic",
         "GetEndpointAttributes",
+        "GetPlatformApplicationAttributes",
         "GetSubscriptionAttributes",
         "GetTopicAttributes",
         "ListPlatformApplications",
@@ -2747,6 +2763,7 @@
         "Publish",
         "PublishBatch",
         "SetEndpointAttributes",
+        "SetPlatformApplicationAttributes",
         "SetSubscriptionAttributes",
         "SetTopicAttributes",
         "Subscribe",
@@ -2754,7 +2771,7 @@
         "Unsubscribe",
         "UntagResource"
       ],
-      "operation_count": 24,
+      "operation_count": 26,
       "extraction_sources": [
         "pinned"
       ]
