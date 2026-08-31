@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.3",
-  "generated_at": "2026-08-28T21:47:57Z",
+  "ministack_version": "1.5.4",
+  "generated_at": "2026-08-31T17:55:48Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -279,30 +279,50 @@
     "appsync": {
       "name": "appsync",
       "operations": [
+        "CreateApiCache",
         "CreateApiKey",
         "CreateDataSource",
+        "CreateFunction",
         "CreateGraphqlApi",
         "CreateResolver",
         "CreateType",
+        "DeleteApiCache",
         "DeleteApiKey",
         "DeleteDataSource",
+        "DeleteFunction",
         "DeleteGraphqlApi",
         "DeleteResolver",
+        "EvaluateCode",
+        "FlushApiCache",
+        "GetApiCache",
         "GetDataSource",
+        "GetFunction",
         "GetGraphqlApi",
+        "GetGraphqlApiEnvironmentVariables",
+        "GetIntrospectionSchema",
         "GetResolver",
+        "GetSchemaCreationStatus",
         "GetType",
         "ListApiKeys",
         "ListDataSources",
+        "ListFunctions",
         "ListGraphqlApis",
         "ListResolvers",
         "ListTagsForResource",
         "ListTypes",
+        "PutGraphqlApiEnvironmentVariables",
+        "StartSchemaCreation",
         "TagResource",
         "UntagResource",
-        "UpdateGraphqlApi"
+        "UpdateApiCache",
+        "UpdateApiKey",
+        "UpdateDataSource",
+        "UpdateFunction",
+        "UpdateGraphqlApi",
+        "UpdateResolver",
+        "UpdateType"
       ],
-      "operation_count": 22,
+      "operation_count": 42,
       "extraction_sources": [
         "pinned"
       ]
@@ -1062,18 +1082,23 @@
       "name": "dsql",
       "operations": [
         "CreateCluster",
+        "CreateStream",
         "DeleteCluster",
         "DeleteClusterPolicy",
+        "DeleteStream",
         "GetCluster",
         "GetClusterPolicy",
+        "GetStream",
+        "GetVpcEndpointServiceName",
         "ListClusters",
+        "ListStreams",
         "ListTagsForResource",
         "PutClusterPolicy",
         "TagResource",
         "UntagResource",
         "UpdateCluster"
       ],
-      "operation_count": 11,
+      "operation_count": 16,
       "extraction_sources": [
         "pinned"
       ]
@@ -1929,6 +1954,7 @@
         "ListProvisioningTemplates",
         "ListTargetsForPolicy",
         "ListThingGroups",
+        "ListThingGroupsForThing",
         "ListThingPrincipals",
         "ListThingTypes",
         "ListThings",
@@ -1942,7 +1968,7 @@
         "UpdateThing",
         "UpdateThingGroup"
       ],
-      "operation_count": 60,
+      "operation_count": 61,
       "extraction_sources": [
         "pinned"
       ]
@@ -2028,6 +2054,7 @@
         "GenerateDataKeyPairWithoutPlaintext",
         "GenerateDataKeyWithoutPlaintext",
         "GenerateMac",
+        "GenerateRandom",
         "GetKeyPolicy",
         "GetKeyRotationStatus",
         "GetPublicKey",
@@ -2045,7 +2072,7 @@
         "Verify",
         "VerifyMac"
       ],
-      "operation_count": 32,
+      "operation_count": 33,
       "extraction_sources": [
         "pinned"
       ]
