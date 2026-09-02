@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.4",
-  "generated_at": "2026-08-31T17:55:48Z",
+  "ministack_version": "1.5.6",
+  "generated_at": "2026-09-02T22:07:57Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 84,
+  "service_count": 85,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -2933,6 +2933,25 @@
         "pinned"
       ]
     },
+    "transcribe": {
+      "name": "transcribe",
+      "operations": [
+        "DeleteTranscriptionJob",
+        "GetTranscriptionJob",
+        "IdentifyLanguage",
+        "IdentifyMultipleLanguages",
+        "ListTagsForResource",
+        "ListTranscriptionJobs",
+        "StartTranscriptionJob",
+        "TagResource",
+        "UntagResource"
+      ],
+      "operation_count": 9,
+      "extraction_sources": [
+        "dict-keys (4)",
+        "docstring (+5)"
+      ]
+    },
     "transfer": {
       "name": "transfer",
       "operations": [
@@ -3056,7 +3075,6 @@
       "name": "AWS_ACCESS_KEY_ID",
       "files": [
         "ministack/core/lambda_runtime.py",
-        "ministack/services/glue.py",
         "ministack/services/lambda_svc.py"
       ],
       "default": "test"
@@ -3081,7 +3099,6 @@
       "name": "AWS_SECRET_ACCESS_KEY",
       "files": [
         "ministack/core/lambda_runtime.py",
-        "ministack/services/glue.py",
         "ministack/services/lambda_svc.py",
         "ministack/services/s3.py"
       ],
@@ -3239,6 +3256,7 @@
       "name": "MINISTACK_HOST",
       "files": [
         "ministack/app.py",
+        "ministack/core/router.py",
         "ministack/services/rds.py",
         "ministack/services/elasticache.py",
         "ministack/services/dynamodb.py",
@@ -3249,6 +3267,7 @@
         "ministack/services/appsync_events.py",
         "ministack/services/apigateway.py",
         "ministack/services/glue.py",
+        "ministack/services/transcribe.py",
         "ministack/services/lambda_svc.py",
         "ministack/services/s3tables.py",
         "ministack/services/s3.py",
