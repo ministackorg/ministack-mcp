@@ -372,6 +372,8 @@ def build() -> dict:
             or k.startswith("AWS_")
             or k.startswith("OPENSEARCH_")
             or k.startswith("DSQL_")
+            or k.startswith("LAMBDA_")
+            or k.startswith("CODEBUILD_")
             or k in {
                 "S3_PERSIST", "DOCKER_HOST", "TZ", "PORT", "PYTHONUNBUFFERED",
                 "IOT_MTLS_ENABLED", "IOT_MTLS_PORT", "AUTH",

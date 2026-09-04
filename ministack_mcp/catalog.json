@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.6",
-  "generated_at": "2026-09-02T22:07:57Z",
+  "ministack_version": "1.5.7",
+  "generated_at": "2026-09-04T00:45:03Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -999,6 +999,7 @@
         "GetIdentityPoolRoles",
         "GetIdentityProviderByIdentifier",
         "GetOpenIdToken",
+        "GetPrincipalTagAttributeMap",
         "GetTokensFromRefreshToken",
         "GetUser",
         "GetUserPoolMfaConfig",
@@ -1019,6 +1020,7 @@
         "RespondToAuthChallenge",
         "RevokeToken",
         "SetIdentityPoolRoles",
+        "SetPrincipalTagAttributeMap",
         "SetUserMFAPreference",
         "SetUserPoolMfaConfig",
         "SignUp",
@@ -1034,7 +1036,7 @@
         "UpdateUserPoolClient",
         "VerifySoftwareToken"
       ],
-      "operation_count": 87,
+      "operation_count": 89,
       "extraction_sources": [
         "pinned"
       ]
@@ -1256,6 +1258,7 @@
         "DescribeFleets",
         "DescribeFlowLogs",
         "DescribeIamInstanceProfileAssociations",
+        "DescribeImageAttribute",
         "DescribeImages",
         "DescribeInstanceAttribute",
         "DescribeInstanceCreditSpecifications",
@@ -1307,6 +1310,7 @@
         "EnableVolumeIO",
         "GetManagedPrefixListEntries",
         "ImportKeyPair",
+        "ModifyImageAttribute",
         "ModifyInstanceMaintenanceOptions",
         "ModifyLaunchTemplate",
         "ModifyManagedPrefixList",
@@ -1325,6 +1329,7 @@
         "ReplaceNetworkAclEntry",
         "ReplaceRoute",
         "ReplaceRouteTableAssociation",
+        "ResetImageAttribute",
         "RevokeSecurityGroupEgress",
         "RevokeSecurityGroupIngress",
         "RunInstances",
@@ -1332,7 +1337,7 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 154,
+      "operation_count": 157,
       "extraction_sources": [
         "pinned"
       ]
@@ -3119,6 +3124,13 @@
       ],
       "default": null
     },
+    "CODEBUILD_DOCKER_FLAGS": {
+      "name": "CODEBUILD_DOCKER_FLAGS",
+      "files": [
+        "ministack/services/codebuild.py"
+      ],
+      "default": ""
+    },
     "DOCKER_HOST": {
       "name": "DOCKER_HOST",
       "files": [
@@ -3169,6 +3181,84 @@
         "ministack/services/iot.py"
       ],
       "default": ""
+    },
+    "LAMBDA_ACCOUNT_CONCURRENCY": {
+      "name": "LAMBDA_ACCOUNT_CONCURRENCY",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": null
+    },
+    "LAMBDA_ASYNC_RETRY_BASE_SECONDS": {
+      "name": "LAMBDA_ASYNC_RETRY_BASE_SECONDS",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "1"
+    },
+    "LAMBDA_ASYNC_RETRY_MAX_SECONDS": {
+      "name": "LAMBDA_ASYNC_RETRY_MAX_SECONDS",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "30"
+    },
+    "LAMBDA_DOCKER_FLAGS": {
+      "name": "LAMBDA_DOCKER_FLAGS",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "LAMBDA_DOCKER_NETWORK": {
+      "name": "LAMBDA_DOCKER_NETWORK",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "LAMBDA_EXECUTOR": {
+      "name": "LAMBDA_EXECUTOR",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "local"
+    },
+    "LAMBDA_KEEPALIVE_MS": {
+      "name": "LAMBDA_KEEPALIVE_MS",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "LAMBDA_REMOTE_DOCKER_VOLUME_MOUNT": {
+      "name": "LAMBDA_REMOTE_DOCKER_VOLUME_MOUNT",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "LAMBDA_STATE_TRANSITION_SECONDS": {
+      "name": "LAMBDA_STATE_TRANSITION_SECONDS",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "0.5"
+    },
+    "LAMBDA_STRICT": {
+      "name": "LAMBDA_STRICT",
+      "files": [
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "0"
+    },
+    "LAMBDA_WARM_TTL_SECONDS": {
+      "name": "LAMBDA_WARM_TTL_SECONDS",
+      "files": [
+        "ministack/core/lambda_runtime.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": "300"
     },
     "MINISTACK_ACCOUNT_ID": {
       "name": "MINISTACK_ACCOUNT_ID",
