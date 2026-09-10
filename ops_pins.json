@@ -568,6 +568,8 @@
     "StartAsyncInvoke"
   ],
   "cloudformation": [
+    "CancelUpdateStack",
+    "ContinueUpdateRollback",
     "CreateChangeSet",
     "CreateStack",
     "DeleteChangeSet",
@@ -578,13 +580,18 @@
     "DescribeStackResources",
     "DescribeStacks",
     "ExecuteChangeSet",
+    "GetStackPolicy",
     "GetTemplate",
     "GetTemplateSummary",
     "ListChangeSets",
     "ListExports",
+    "ListImports",
     "ListStackResources",
     "ListStacks",
+    "SetStackPolicy",
+    "SignalResource",
     "UpdateStack",
+    "UpdateTerminationProtection",
     "ValidateTemplate"
   ],
   "cloudfront": [

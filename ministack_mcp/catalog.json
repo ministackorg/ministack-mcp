@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.7",
-  "generated_at": "2026-09-04T00:45:03Z",
+  "ministack_version": "1.5.10",
+  "generated_at": "2026-09-10T20:38:27Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 85,
+  "service_count": 90,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -2005,6 +2005,16 @@
         "docstring (+5)"
       ]
     },
+    "iotwireless": {
+      "name": "iotwireless",
+      "operations": [
+        "GetPositionEstimate"
+      ],
+      "operation_count": 1,
+      "extraction_sources": [
+        "docstring (+1)"
+      ]
+    },
     "kinesis": {
       "name": "kinesis",
       "operations": [
@@ -2080,6 +2090,20 @@
       "operation_count": 33,
       "extraction_sources": [
         "pinned"
+      ]
+    },
+    "lambda_core": {
+      "name": "lambda_core",
+      "operations": [
+        "CreateNetworkConnector",
+        "DeleteNetworkConnector",
+        "GetNetworkConnector",
+        "ListNetworkConnectors",
+        "UpdateNetworkConnector"
+      ],
+      "operation_count": 5,
+      "extraction_sources": [
+        "docstring (+5)"
       ]
     },
     "lambda_durable": {
@@ -2183,6 +2207,28 @@
       "operation_count": 57,
       "extraction_sources": [
         "pinned"
+      ]
+    },
+    "location": {
+      "name": "location",
+      "operations": [
+        "AssociateTrackerConsumer",
+        "BatchGetDevicePosition",
+        "BatchUpdateDevicePosition",
+        "CreateTime",
+        "CreateTracker",
+        "DeleteTracker",
+        "DescribeTracker",
+        "GetDevicePosition",
+        "GetDevicePositionHistory",
+        "ListTrackers",
+        "RequestBasedUsage",
+        "UpdateTime",
+        "UpdateTracker"
+      ],
+      "operation_count": 13,
+      "extraction_sources": [
+        "docstring (+13)"
       ]
     },
     "mediaconnect": {
@@ -2779,6 +2825,20 @@
         "pinned"
       ]
     },
+    "signer": {
+      "name": "signer",
+      "operations": [
+        "DescribeSigningJob",
+        "GetSigningProfile",
+        "ListSigningJobs",
+        "PutSigningProfile",
+        "StartSigningJob"
+      ],
+      "operation_count": 5,
+      "extraction_sources": [
+        "docstring (+5)"
+      ]
+    },
     "sns": {
       "name": "sns",
       "operations": [
@@ -2978,6 +3038,26 @@
         "pinned"
       ]
     },
+    "translate": {
+      "name": "translate",
+      "operations": [
+        "DescribeTextTranslationJob",
+        "ListLanguages",
+        "ListTagsForResource",
+        "ListTextTranslationJobs",
+        "StartTextTranslationJob",
+        "StopTextTranslationJob",
+        "TagResource",
+        "TranslateDocument",
+        "TranslateText",
+        "UntagResource"
+      ],
+      "operation_count": 10,
+      "extraction_sources": [
+        "dict-keys (4)",
+        "docstring (+6)"
+      ]
+    },
     "waf": {
       "name": "waf",
       "operations": [
@@ -3043,6 +3123,8 @@
     "cloudformation": {
       "name": "cloudformation",
       "operations": [
+        "CancelUpdateStack",
+        "ContinueUpdateRollback",
         "CreateChangeSet",
         "CreateStack",
         "DeleteChangeSet",
@@ -3053,16 +3135,21 @@
         "DescribeStackResources",
         "DescribeStacks",
         "ExecuteChangeSet",
+        "GetStackPolicy",
         "GetTemplate",
         "GetTemplateSummary",
         "ListChangeSets",
         "ListExports",
+        "ListImports",
         "ListStackResources",
         "ListStacks",
+        "SetStackPolicy",
+        "SignalResource",
         "UpdateStack",
+        "UpdateTerminationProtection",
         "ValidateTemplate"
       ],
-      "operation_count": 18,
+      "operation_count": 25,
       "extraction_sources": [
         "pinned"
       ]
