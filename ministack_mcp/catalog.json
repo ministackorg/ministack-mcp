@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.10",
-  "generated_at": "2026-09-10T20:38:27Z",
+  "ministack_version": "1.5.11",
+  "generated_at": "2026-09-13T15:33:30Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1481,15 +1481,18 @@
         "CreateAddon",
         "CreateCluster",
         "CreateNodegroup",
+        "CreatePodIdentityAssociation",
         "DeleteAccessEntry",
         "DeleteAddon",
         "DeleteCluster",
         "DeleteNodegroup",
+        "DeletePodIdentityAssociation",
         "DescribeAccessEntry",
         "DescribeAddon",
         "DescribeCluster",
         "DescribeIdentityProviderConfig",
         "DescribeNodegroup",
+        "DescribePodIdentityAssociation",
         "DisassociateAccessPolicy",
         "DisassociateIdentityProviderConfig",
         "ListAccessEntries",
@@ -1498,13 +1501,15 @@
         "ListClusters",
         "ListIdentityProviderConfigs",
         "ListNodegroups",
+        "ListPodIdentityAssociations",
         "ListTagsForResource",
         "TagResource",
         "UntagResource",
         "UpdateAccessEntry",
-        "UpdateAddon"
+        "UpdateAddon",
+        "UpdatePodIdentityAssociation"
       ],
-      "operation_count": 29,
+      "operation_count": 34,
       "extraction_sources": [
         "pinned"
       ]
@@ -3007,14 +3012,15 @@
         "IdentifyMultipleLanguages",
         "ListTagsForResource",
         "ListTranscriptionJobs",
+        "StartTime",
         "StartTranscriptionJob",
         "TagResource",
         "UntagResource"
       ],
-      "operation_count": 9,
+      "operation_count": 10,
       "extraction_sources": [
         "dict-keys (4)",
-        "docstring (+5)"
+        "docstring (+6)"
       ]
     },
     "transfer": {
@@ -3166,6 +3172,7 @@
     "AWS_ACCESS_KEY_ID": {
       "name": "AWS_ACCESS_KEY_ID",
       "files": [
+        "ministack/core/iam_evaluator.py",
         "ministack/core/lambda_runtime.py",
         "ministack/services/lambda_svc.py"
       ],
@@ -3190,17 +3197,16 @@
     "AWS_SECRET_ACCESS_KEY": {
       "name": "AWS_SECRET_ACCESS_KEY",
       "files": [
-        "ministack/core/lambda_runtime.py",
-        "ministack/services/lambda_svc.py",
-        "ministack/services/s3.py"
+        "ministack/core/iam_evaluator.py",
+        "ministack/core/lambda_runtime.py"
       ],
       "default": "test"
     },
     "AWS_SESSION_TOKEN": {
       "name": "AWS_SESSION_TOKEN",
       "files": [
-        "ministack/core/lambda_runtime.py",
-        "ministack/services/lambda_svc.py"
+        "ministack/core/iam_evaluator.py",
+        "ministack/core/lambda_runtime.py"
       ],
       "default": ""
     },
