@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.11",
-  "generated_at": "2026-09-13T15:33:30Z",
+  "ministack_version": "1.5.12",
+  "generated_at": "2026-09-15T00:10:03Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -3358,6 +3358,7 @@
       "files": [
         "ministack/app.py",
         "ministack/core/responses.py",
+        "ministack/services/eks.py",
         "ministack/services/iot.py"
       ],
       "default": "000000000000"
