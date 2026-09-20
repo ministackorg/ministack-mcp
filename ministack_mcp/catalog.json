@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.12",
-  "generated_at": "2026-09-15T00:10:03Z",
+  "ministack_version": "1.5.14",
+  "generated_at": "2026-09-20T11:06:33Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1999,15 +1999,14 @@
     "iot_jobs_data": {
       "name": "iot_jobs_data",
       "operations": [
-        "DescribeEndpoint",
         "DescribeJobExecution",
         "GetPendingJobExecutions",
         "StartNextPendingJobExecution",
         "UpdateJobExecution"
       ],
-      "operation_count": 5,
+      "operation_count": 4,
       "extraction_sources": [
-        "docstring (+5)"
+        "docstring (+4)"
       ]
     },
     "iotwireless": {
@@ -3331,13 +3330,6 @@
       ],
       "default": ""
     },
-    "LAMBDA_STATE_TRANSITION_SECONDS": {
-      "name": "LAMBDA_STATE_TRANSITION_SECONDS",
-      "files": [
-        "ministack/services/lambda_svc.py"
-      ],
-      "default": "0.5"
-    },
     "LAMBDA_STRICT": {
       "name": "LAMBDA_STRICT",
       "files": [
@@ -3400,13 +3392,6 @@
     },
     "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC": {
       "name": "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC",
-      "files": [
-        "ministack/services/dynamodb.py"
-      ],
-      "default": "1"
-    },
-    "MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC": {
-      "name": "MINISTACK_DDB_IMPORT_COMPLETE_AFTER_SEC",
       "files": [
         "ministack/services/dynamodb.py"
       ],
