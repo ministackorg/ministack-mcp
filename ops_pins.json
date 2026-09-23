@@ -1739,11 +1739,14 @@
     "CreateMicrovmShellAuthToken",
     "GetMicrovm",
     "GetMicrovmImage",
+    "GetMicrovmImageVersion",
+    "ListMicrovmImages",
     "ListMicrovms",
     "ResumeMicrovm",
     "RunMicrovm",
     "SuspendMicrovm",
-    "TerminateMicrovm"
+    "TerminateMicrovm",
+    "UpdateMicrovmImage"
   ],
   "lambda_svc": [
     "AddLayerVersionPermission",
@@ -1881,19 +1884,34 @@
     "UpdatePackage"
   ],
   "organizations": [
+    "AttachPolicy",
+    "CloseAccount",
+    "CreateAccount",
     "CreateOrganizationalUnit",
+    "CreatePolicy",
     "DeleteOrganizationalUnit",
+    "DeletePolicy",
     "DescribeAccount",
+    "DescribeCreateAccountStatus",
     "DescribeOrganization",
     "DescribeOrganizationalUnit",
+    "DescribePolicy",
+    "DetachPolicy",
+    "DisablePolicyType",
+    "EnablePolicyType",
     "ListAccounts",
     "ListAccountsForParent",
     "ListOrganizationalUnitsForParent",
     "ListParents",
+    "ListPolicies",
+    "ListPoliciesForTarget",
     "ListRoots",
     "ListTagsForResource",
+    "ListTargetsForPolicy",
+    "MoveAccount",
     "TagResource",
-    "UntagResource"
+    "UntagResource",
+    "UpdatePolicy"
   ],
   "pipes": [
     "CreatePipe",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.15",
-  "generated_at": "2026-09-21T23:51:48Z",
+  "ministack_version": "1.5.16",
+  "generated_at": "2026-09-23T20:08:31Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -2136,13 +2136,16 @@
         "CreateMicrovmShellAuthToken",
         "GetMicrovm",
         "GetMicrovmImage",
+        "GetMicrovmImageVersion",
+        "ListMicrovmImages",
         "ListMicrovms",
         "ResumeMicrovm",
         "RunMicrovm",
         "SuspendMicrovm",
-        "TerminateMicrovm"
+        "TerminateMicrovm",
+        "UpdateMicrovmImage"
       ],
-      "operation_count": 10,
+      "operation_count": 13,
       "extraction_sources": [
         "pinned"
       ]
@@ -2349,21 +2352,36 @@
     "organizations": {
       "name": "organizations",
       "operations": [
+        "AttachPolicy",
+        "CloseAccount",
+        "CreateAccount",
         "CreateOrganizationalUnit",
+        "CreatePolicy",
         "DeleteOrganizationalUnit",
+        "DeletePolicy",
         "DescribeAccount",
+        "DescribeCreateAccountStatus",
         "DescribeOrganization",
         "DescribeOrganizationalUnit",
+        "DescribePolicy",
+        "DetachPolicy",
+        "DisablePolicyType",
+        "EnablePolicyType",
         "ListAccounts",
         "ListAccountsForParent",
         "ListOrganizationalUnitsForParent",
         "ListParents",
+        "ListPolicies",
+        "ListPoliciesForTarget",
         "ListRoots",
         "ListTagsForResource",
+        "ListTargetsForPolicy",
+        "MoveAccount",
         "TagResource",
-        "UntagResource"
+        "UntagResource",
+        "UpdatePolicy"
       ],
-      "operation_count": 13,
+      "operation_count": 28,
       "extraction_sources": [
         "pinned"
       ]
