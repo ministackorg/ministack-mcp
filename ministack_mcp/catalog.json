@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.17",
-  "generated_at": "2026-09-25T17:22:43Z",
+  "ministack_version": "1.5.18",
+  "generated_at": "2026-09-28T22:32:23Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -889,6 +889,7 @@
         "CreateLogStream",
         "DeleteDelivery",
         "DeleteDeliveryDestination",
+        "DeleteDeliveryDestinationPolicy",
         "DeleteDeliverySource",
         "DeleteDestination",
         "DeleteLogGroup",
@@ -907,6 +908,7 @@
         "FilterLogEvents",
         "GetDelivery",
         "GetDeliveryDestination",
+        "GetDeliveryDestinationPolicy",
         "GetDeliverySource",
         "GetLogEvents",
         "GetLogGroupFields",
@@ -915,6 +917,7 @@
         "ListTagsForResource",
         "ListTagsLogGroup",
         "PutDeliveryDestination",
+        "PutDeliveryDestinationPolicy",
         "PutDeliverySource",
         "PutDestination",
         "PutDestinationPolicy",
@@ -930,7 +933,7 @@
         "UntagLogGroup",
         "UntagResource"
       ],
-      "operation_count": 45,
+      "operation_count": 48,
       "extraction_sources": [
         "pinned"
       ]
@@ -2074,6 +2077,7 @@
         "CreateKey",
         "Decrypt",
         "DeleteAlias",
+        "DeleteImportedKeyMaterial",
         "DescribeKey",
         "DisableKey",
         "DisableKeyRotation",
@@ -2088,12 +2092,16 @@
         "GenerateRandom",
         "GetKeyPolicy",
         "GetKeyRotationStatus",
+        "GetParametersForImport",
         "GetPublicKey",
+        "ImportKeyMaterial",
         "ListAliases",
+        "ListGrants",
         "ListKeyPolicies",
         "ListKeys",
         "ListResourceTags",
         "PutKeyPolicy",
+        "ReplicateKey",
         "ScheduleKeyDeletion",
         "Sign",
         "TagResource",
@@ -2103,7 +2111,7 @@
         "Verify",
         "VerifyMac"
       ],
-      "operation_count": 33,
+      "operation_count": 38,
       "extraction_sources": [
         "pinned"
       ]
@@ -2593,6 +2601,7 @@
         "DeleteBucketTagging",
         "DeleteBucketWebsite",
         "DeleteObject",
+        "DeleteObjectAnnotation",
         "DeleteObjectTagging",
         "DeleteObjects",
         "DeletePublicAccessBlock",
@@ -2613,6 +2622,7 @@
         "GetBucketWebsite",
         "GetObject",
         "GetObjectAcl",
+        "GetObjectAnnotation",
         "GetObjectAttributes",
         "GetObjectLegalHold",
         "GetObjectLockConfiguration",
@@ -2623,6 +2633,7 @@
         "HeadObject",
         "ListBuckets",
         "ListMultipartUploads",
+        "ListObjectAnnotations",
         "ListObjectVersions",
         "ListObjects",
         "ListObjectsV2",
@@ -2644,6 +2655,7 @@
         "PutBucketWebsite",
         "PutObject",
         "PutObjectAcl",
+        "PutObjectAnnotation",
         "PutObjectLegalHold",
         "PutObjectLockConfiguration",
         "PutObjectRetention",
@@ -2653,7 +2665,7 @@
         "UploadPart",
         "UploadPartCopy"
       ],
-      "operation_count": 74,
+      "operation_count": 78,
       "extraction_sources": [
         "pinned"
       ]
@@ -2876,6 +2888,7 @@
     "sns": {
       "name": "sns",
       "operations": [
+        "AddPermission",
         "ConfirmSubscription",
         "CreatePlatformApplication",
         "CreatePlatformEndpoint",
@@ -2894,6 +2907,7 @@
         "ListTopics",
         "Publish",
         "PublishBatch",
+        "RemovePermission",
         "SetEndpointAttributes",
         "SetPlatformApplicationAttributes",
         "SetSubscriptionAttributes",
@@ -2903,7 +2917,7 @@
         "Unsubscribe",
         "UntagResource"
       ],
-      "operation_count": 26,
+      "operation_count": 28,
       "extraction_sources": [
         "pinned"
       ]
@@ -3554,6 +3568,7 @@
       "files": [
         "ministack/app.py",
         "ministack/core/responses.py",
+        "ministack/core/tls.py",
         "ministack/core/router.py",
         "ministack/services/rds.py",
         "ministack/services/secretsmanager.py",
