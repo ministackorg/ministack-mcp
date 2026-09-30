@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.18",
-  "generated_at": "2026-09-28T22:32:23Z",
+  "ministack_version": "1.5.19",
+  "generated_at": "2026-09-30T22:27:48Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -673,16 +673,19 @@
         "CreateAgentRuntimeEndpoint",
         "DeleteAgentRuntime",
         "DeleteAgentRuntimeEndpoint",
+        "DeleteResourcePolicy",
         "GetAgentRuntime",
         "GetAgentRuntimeEndpoint",
+        "GetResourcePolicy",
         "InvokeAgentRuntime",
         "ListAgentRuntimeEndpoints",
         "ListAgentRuntimeVersions",
         "ListAgentRuntimes",
+        "PutResourcePolicy",
         "UpdateAgentRuntime",
         "UpdateAgentRuntimeEndpoint"
       ],
-      "operation_count": 12,
+      "operation_count": 15,
       "extraction_sources": [
         "pinned"
       ]
@@ -895,6 +898,7 @@
         "DeleteLogGroup",
         "DeleteLogStream",
         "DeleteMetricFilter",
+        "DeleteResourcePolicy",
         "DeleteRetentionPolicy",
         "DeleteSubscriptionFilter",
         "DescribeDeliveries",
@@ -904,6 +908,7 @@
         "DescribeLogGroups",
         "DescribeLogStreams",
         "DescribeMetricFilters",
+        "DescribeResourcePolicies",
         "DescribeSubscriptionFilters",
         "FilterLogEvents",
         "GetDelivery",
@@ -923,6 +928,7 @@
         "PutDestinationPolicy",
         "PutLogEvents",
         "PutMetricFilter",
+        "PutResourcePolicy",
         "PutRetentionPolicy",
         "PutSubscriptionFilter",
         "StartLiveTail",
@@ -933,7 +939,7 @@
         "UntagLogGroup",
         "UntagResource"
       ],
-      "operation_count": 48,
+      "operation_count": 51,
       "extraction_sources": [
         "pinned"
       ]
@@ -2062,9 +2068,10 @@
         "SplitShard",
         "StartStreamEncryption",
         "StopStreamEncryption",
+        "SubscribeToShard",
         "UpdateShardCount"
       ],
-      "operation_count": 26,
+      "operation_count": 27,
       "extraction_sources": [
         "pinned"
       ]
@@ -2074,6 +2081,7 @@
       "operations": [
         "CancelKeyDeletion",
         "CreateAlias",
+        "CreateGrant",
         "CreateKey",
         "Decrypt",
         "DeleteAlias",
@@ -2102,6 +2110,8 @@
         "ListResourceTags",
         "PutKeyPolicy",
         "ReplicateKey",
+        "RetireGrant",
+        "RevokeGrant",
         "ScheduleKeyDeletion",
         "Sign",
         "TagResource",
@@ -2111,7 +2121,7 @@
         "Verify",
         "VerifyMac"
       ],
-      "operation_count": 38,
+      "operation_count": 41,
       "extraction_sources": [
         "pinned"
       ]
@@ -3179,10 +3189,14 @@
         "DeleteChangeSet",
         "DeleteStack",
         "DescribeChangeSet",
+        "DescribeStackDriftDetectionStatus",
         "DescribeStackEvents",
         "DescribeStackResource",
+        "DescribeStackResourceDrifts",
         "DescribeStackResources",
         "DescribeStacks",
+        "DetectStackDrift",
+        "DetectStackResourceDrift",
         "ExecuteChangeSet",
         "GetStackPolicy",
         "GetTemplate",
@@ -3192,13 +3206,14 @@
         "ListImports",
         "ListStackResources",
         "ListStacks",
+        "RollbackStack",
         "SetStackPolicy",
         "SignalResource",
         "UpdateStack",
         "UpdateTerminationProtection",
         "ValidateTemplate"
       ],
-      "operation_count": 25,
+      "operation_count": 30,
       "extraction_sources": [
         "pinned"
       ]
