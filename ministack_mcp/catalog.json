@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.20",
-  "generated_at": "2026-10-01T20:52:52Z",
+  "ministack_version": "1.5.21",
+  "generated_at": "2026-10-03T10:56:07Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 90,
+  "service_count": 91,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -97,27 +97,35 @@
       "name": "apigateway",
       "operations": [
         "CreateApi",
+        "CreateApiMapping",
         "CreateAuthorizer",
         "CreateDeployment",
+        "CreateDomainName",
         "CreateIntegration",
         "CreateIntegrationResponse",
         "CreateRoute",
         "CreateRouteResponse",
         "CreateStage",
         "DeleteApi",
+        "DeleteApiMapping",
         "DeleteAuthorizer",
         "DeleteDeployment",
+        "DeleteDomainName",
         "DeleteIntegration",
         "DeleteIntegrationResponse",
         "DeleteRoute",
         "DeleteRouteResponse",
         "DeleteStage",
         "GetApi",
+        "GetApiMapping",
+        "GetApiMappings",
         "GetApis",
         "GetAuthorizer",
         "GetAuthorizers",
         "GetDeployment",
         "GetDeployments",
+        "GetDomainName",
+        "GetDomainNames",
         "GetIntegration",
         "GetIntegrationResponse",
         "GetIntegrationResponses",
@@ -132,14 +140,16 @@
         "TagResource",
         "UntagResource",
         "UpdateApi",
+        "UpdateApiMapping",
         "UpdateAuthorizer",
+        "UpdateDomainName",
         "UpdateIntegration",
         "UpdateIntegrationResponse",
         "UpdateRoute",
         "UpdateRouteResponse",
         "UpdateStage"
       ],
-      "operation_count": 42,
+      "operation_count": 52,
       "extraction_sources": [
         "pinned"
       ]
@@ -360,6 +370,7 @@
         "DeletePreparedStatement",
         "DeleteWorkGroup",
         "GetDataCatalog",
+        "GetDatabase",
         "GetNamedQuery",
         "GetPreparedStatement",
         "GetQueryExecution",
@@ -367,6 +378,7 @@
         "GetTableMetadata",
         "GetWorkGroup",
         "ListDataCatalogs",
+        "ListDatabases",
         "ListNamedQueries",
         "ListPreparedStatements",
         "ListQueryExecutions",
@@ -380,7 +392,7 @@
         "UpdateDataCatalog",
         "UpdateWorkGroup"
       ],
-      "operation_count": 30,
+      "operation_count": 32,
       "extraction_sources": [
         "pinned"
       ]
@@ -671,21 +683,26 @@
       "operations": [
         "CreateAgentRuntime",
         "CreateAgentRuntimeEndpoint",
+        "CreateMemory",
         "DeleteAgentRuntime",
         "DeleteAgentRuntimeEndpoint",
+        "DeleteMemory",
         "DeleteResourcePolicy",
         "GetAgentRuntime",
         "GetAgentRuntimeEndpoint",
+        "GetMemory",
         "GetResourcePolicy",
         "InvokeAgentRuntime",
         "ListAgentRuntimeEndpoints",
         "ListAgentRuntimeVersions",
         "ListAgentRuntimes",
+        "ListMemories",
         "PutResourcePolicy",
         "UpdateAgentRuntime",
-        "UpdateAgentRuntimeEndpoint"
+        "UpdateAgentRuntimeEndpoint",
+        "UpdateMemory"
       ],
-      "operation_count": 15,
+      "operation_count": 20,
       "extraction_sources": [
         "pinned"
       ]
@@ -737,6 +754,7 @@
         "CreateInvalidationForDistributionTenant",
         "CreateKeyGroup",
         "CreateKeyValueStore",
+        "CreateMonitoringSubscription",
         "CreateOriginAccessControl",
         "CreateOriginRequestPolicy",
         "CreatePublicKey",
@@ -748,6 +766,7 @@
         "DeleteFunction",
         "DeleteKeyGroup",
         "DeleteKeyValueStore",
+        "DeleteMonitoringSubscription",
         "DeleteOriginAccessControl",
         "DeleteOriginRequestPolicy",
         "DeletePublicKey",
@@ -769,6 +788,7 @@
         "GetKeyGroup",
         "GetKeyGroupConfig",
         "GetManagedCertificateDetails",
+        "GetMonitoringSubscription",
         "GetOriginAccessControl",
         "GetOriginAccessControlConfig",
         "GetOriginRequestPolicy",
@@ -777,6 +797,7 @@
         "GetPublicKeyConfig",
         "GetResponseHeadersPolicy",
         "GetResponseHeadersPolicyConfig",
+        "ListCachePolicies",
         "ListConnectionGroups",
         "ListDistributionTenants",
         "ListDistributionTenantsByCustomization",
@@ -792,7 +813,9 @@
         "ListKeyGroups",
         "ListKeyValueStores",
         "ListOriginAccessControls",
+        "ListOriginRequestPolicies",
         "ListPublicKeys",
+        "ListResponseHeadersPolicies",
         "ListTagsForResource",
         "PublishFunction",
         "TagResource",
@@ -811,10 +834,16 @@
         "UpdateResponseHeadersPolicy",
         "VerifyDnsConfiguration"
       ],
-      "operation_count": 83,
+      "operation_count": 89,
       "extraction_sources": [
         "pinned"
       ]
+    },
+    "cloudfront_dataplane": {
+      "name": "cloudfront_dataplane",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
     },
     "cloudfront_keyvaluestore": {
       "name": "cloudfront_keyvaluestore",
@@ -1468,26 +1497,33 @@
         "CreateAccessPoint",
         "CreateFileSystem",
         "CreateMountTarget",
+        "CreateReplicationConfiguration",
         "DeleteAccessPoint",
         "DeleteFileSystem",
+        "DeleteFileSystemPolicy",
         "DeleteMountTarget",
+        "DeleteReplicationConfiguration",
         "DescribeAccessPoints",
         "DescribeAccountPreferences",
         "DescribeBackupPolicy",
+        "DescribeFileSystemPolicy",
         "DescribeFileSystems",
         "DescribeLifecycleConfiguration",
         "DescribeMountTargetSecurityGroups",
         "DescribeMountTargets",
+        "DescribeReplicationConfigurations",
         "ListTagsForResource",
         "ModifyMountTargetSecurityGroups",
         "PutAccountPreferences",
         "PutBackupPolicy",
+        "PutFileSystemPolicy",
         "PutLifecycleConfiguration",
         "TagResource",
         "UntagResource",
-        "UpdateFileSystem"
+        "UpdateFileSystem",
+        "UpdateFileSystemProtection"
       ],
-      "operation_count": 21,
+      "operation_count": 28,
       "extraction_sources": [
         "pinned"
       ]
@@ -2471,6 +2507,7 @@
         "DeregisterDBProxyTargets",
         "DescribeDBClusterParameterGroups",
         "DescribeDBClusterParameters",
+        "DescribeDBClusterSnapshotAttributes",
         "DescribeDBClusterSnapshots",
         "DescribeDBClusters",
         "DescribeDBEngineVersions",
@@ -2515,7 +2552,7 @@
         "StopDBInstance",
         "SwitchoverGlobalCluster"
       ],
-      "operation_count": 70,
+      "operation_count": 71,
       "extraction_sources": [
         "pinned"
       ]
@@ -2877,12 +2914,13 @@
         "ListEmailIdentities",
         "ListSuppressedDestinations",
         "ListTagsForResource",
+        "PutAccountDetails",
         "PutAccountSuppressionAttributes",
         "SendEmail",
         "TagResource",
         "UntagResource"
       ],
-      "operation_count": 15,
+      "operation_count": 16,
       "extraction_sources": [
         "pinned"
       ]
