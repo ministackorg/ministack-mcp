@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.21",
-  "generated_at": "2026-10-03T10:56:07Z",
+  "ministack_version": "1.5.22",
+  "generated_at": "2026-10-06T01:42:39Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 91,
+  "service_count": 93,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -681,28 +681,43 @@
     "bedrock_agentcore": {
       "name": "bedrock_agentcore",
       "operations": [
+        "BatchCreateMemoryRecords",
+        "BatchDeleteMemoryRecords",
+        "BatchUpdateMemoryRecords",
         "CreateAgentRuntime",
         "CreateAgentRuntimeEndpoint",
+        "CreateEvent",
         "CreateMemory",
         "DeleteAgentRuntime",
         "DeleteAgentRuntimeEndpoint",
+        "DeleteEvent",
         "DeleteMemory",
+        "DeleteMemoryRecord",
         "DeleteResourcePolicy",
         "GetAgentRuntime",
         "GetAgentRuntimeEndpoint",
+        "GetEvent",
         "GetMemory",
+        "GetMemoryRecord",
         "GetResourcePolicy",
         "InvokeAgentRuntime",
+        "ListActors",
         "ListAgentRuntimeEndpoints",
         "ListAgentRuntimeVersions",
         "ListAgentRuntimes",
+        "ListEvents",
         "ListMemories",
+        "ListMemoryExtractionJobs",
+        "ListMemoryRecords",
+        "ListSessions",
         "PutResourcePolicy",
+        "RetrieveMemoryRecords",
+        "StartMemoryExtractionJob",
         "UpdateAgentRuntime",
         "UpdateAgentRuntimeEndpoint",
         "UpdateMemory"
       ],
-      "operation_count": 20,
+      "operation_count": 35,
       "extraction_sources": [
         "pinned"
       ]
@@ -720,6 +735,31 @@
         "StartAsyncInvoke"
       ],
       "operation_count": 8,
+      "extraction_sources": [
+        "pinned"
+      ]
+    },
+    "budgets": {
+      "name": "budgets",
+      "operations": [
+        "CreateBudget",
+        "CreateNotification",
+        "CreateSubscriber",
+        "DeleteBudget",
+        "DeleteNotification",
+        "DeleteSubscriber",
+        "DescribeBudget",
+        "DescribeBudgets",
+        "DescribeNotificationsForBudget",
+        "DescribeSubscribersForNotification",
+        "ListTagsForResource",
+        "TagResource",
+        "UntagResource",
+        "UpdateBudget",
+        "UpdateNotification",
+        "UpdateSubscriber"
+      ],
+      "operation_count": 16,
       "extraction_sources": [
         "pinned"
       ]
@@ -1051,6 +1091,7 @@
         "GetOpenIdToken",
         "GetPrincipalTagAttributeMap",
         "GetTokensFromRefreshToken",
+        "GetUICustomization",
         "GetUser",
         "GetUserPoolMfaConfig",
         "GlobalSignOut",
@@ -1071,6 +1112,7 @@
         "RevokeToken",
         "SetIdentityPoolRoles",
         "SetPrincipalTagAttributeMap",
+        "SetUICustomization",
         "SetUserMFAPreference",
         "SetUserPoolMfaConfig",
         "SignUp",
@@ -1086,7 +1128,7 @@
         "UpdateUserPoolClient",
         "VerifySoftwareToken"
       ],
-      "operation_count": 89,
+      "operation_count": 91,
       "extraction_sources": [
         "pinned"
       ]
@@ -2018,6 +2060,7 @@
         "GetTopicRule",
         "ListAttachedPolicies",
         "ListCertificates",
+        "ListCertificatesByCA",
         "ListJobExecutionsForThing",
         "ListJobs",
         "ListPolicies",
@@ -2041,7 +2084,7 @@
         "UpdateThing",
         "UpdateThingGroup"
       ],
-      "operation_count": 63,
+      "operation_count": 64,
       "extraction_sources": [
         "pinned"
       ]
@@ -2417,6 +2460,34 @@
         "UpdatePackage"
       ],
       "operation_count": 20,
+      "extraction_sources": [
+        "pinned"
+      ]
+    },
+    "opensearchserverless": {
+      "name": "opensearchserverless",
+      "operations": [
+        "BatchGetCollection",
+        "CreateAccessPolicy",
+        "CreateCollection",
+        "CreateSecurityPolicy",
+        "DeleteAccessPolicy",
+        "DeleteCollection",
+        "DeleteSecurityPolicy",
+        "GetAccessPolicy",
+        "GetPoliciesStats",
+        "GetSecurityPolicy",
+        "ListAccessPolicies",
+        "ListCollections",
+        "ListSecurityPolicies",
+        "ListTagsForResource",
+        "TagResource",
+        "UntagResource",
+        "UpdateAccessPolicy",
+        "UpdateCollection",
+        "UpdateSecurityPolicy"
+      ],
+      "operation_count": 19,
       "extraction_sources": [
         "pinned"
       ]
@@ -3453,6 +3524,7 @@
       "files": [
         "ministack/app.py",
         "ministack/core/responses.py",
+        "ministack/services/sts.py",
         "ministack/services/eks.py",
         "ministack/services/iot.py"
       ],
@@ -3537,6 +3609,7 @@
         "ministack/services/cognito.py",
         "ministack/services/sqs.py",
         "ministack/services/eks.py",
+        "ministack/services/opensearchserverless.py",
         "ministack/services/appsync_events.py",
         "ministack/services/apigateway.py",
         "ministack/services/glue.py",
