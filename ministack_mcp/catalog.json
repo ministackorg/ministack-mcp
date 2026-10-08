@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.23",
-  "generated_at": "2026-10-07T22:34:25Z",
+  "ministack_version": "1.5.24",
+  "generated_at": "2026-10-08T20:29:14Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -164,6 +164,7 @@
         "CreateDocumentationPart",
         "CreateDomainName",
         "CreateModel",
+        "CreateRequestValidator",
         "CreateResource",
         "CreateRestApi",
         "CreateStage",
@@ -181,6 +182,7 @@
         "DeleteMethod",
         "DeleteMethodResponse",
         "DeleteModel",
+        "DeleteRequestValidator",
         "DeleteResource",
         "DeleteRestApi",
         "DeleteStage",
@@ -208,6 +210,8 @@
         "GetMethodResponse",
         "GetModel",
         "GetModels",
+        "GetRequestValidator",
+        "GetRequestValidators",
         "GetResource",
         "GetResources",
         "GetRestApi",
@@ -234,12 +238,13 @@
         "UpdateIntegration",
         "UpdateMethod",
         "UpdateModel",
+        "UpdateRequestValidator",
         "UpdateResource",
         "UpdateRestApi",
         "UpdateStage",
         "UpdateUsagePlan"
       ],
-      "operation_count": 81,
+      "operation_count": 86,
       "extraction_sources": [
         "pinned"
       ]
@@ -2361,23 +2366,19 @@
     "location": {
       "name": "location",
       "operations": [
-        "AssociateTrackerConsumer",
         "BatchGetDevicePosition",
         "BatchUpdateDevicePosition",
-        "CreateTime",
         "CreateTracker",
         "DeleteTracker",
         "DescribeTracker",
         "GetDevicePosition",
         "GetDevicePositionHistory",
         "ListTrackers",
-        "RequestBasedUsage",
-        "UpdateTime",
         "UpdateTracker"
       ],
-      "operation_count": 13,
+      "operation_count": 9,
       "extraction_sources": [
-        "docstring (+13)"
+        "pinned"
       ]
     },
     "mediaconnect": {
@@ -3234,19 +3235,12 @@
       "operations": [
         "DeleteTranscriptionJob",
         "GetTranscriptionJob",
-        "IdentifyLanguage",
-        "IdentifyMultipleLanguages",
-        "ListTagsForResource",
         "ListTranscriptionJobs",
-        "StartTime",
-        "StartTranscriptionJob",
-        "TagResource",
-        "UntagResource"
+        "StartTranscriptionJob"
       ],
-      "operation_count": 10,
+      "operation_count": 4,
       "extraction_sources": [
-        "dict-keys (4)",
-        "docstring (+6)"
+        "pinned"
       ]
     },
     "transfer": {
@@ -3274,20 +3268,13 @@
       "name": "translate",
       "operations": [
         "DescribeTextTranslationJob",
-        "ListLanguages",
-        "ListTagsForResource",
         "ListTextTranslationJobs",
         "StartTextTranslationJob",
-        "StopTextTranslationJob",
-        "TagResource",
-        "TranslateDocument",
-        "TranslateText",
-        "UntagResource"
+        "StopTextTranslationJob"
       ],
-      "operation_count": 10,
+      "operation_count": 4,
       "extraction_sources": [
-        "dict-keys (4)",
-        "docstring (+6)"
+        "pinned"
       ]
     },
     "waf": {

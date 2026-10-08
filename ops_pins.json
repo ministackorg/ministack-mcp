@@ -116,6 +116,7 @@
     "CreateDocumentationPart",
     "CreateDomainName",
     "CreateModel",
+    "CreateRequestValidator",
     "CreateResource",
     "CreateRestApi",
     "CreateStage",
@@ -133,6 +134,7 @@
     "DeleteMethod",
     "DeleteMethodResponse",
     "DeleteModel",
+    "DeleteRequestValidator",
     "DeleteResource",
     "DeleteRestApi",
     "DeleteStage",
@@ -160,6 +162,8 @@
     "GetMethodResponse",
     "GetModel",
     "GetModels",
+    "GetRequestValidator",
+    "GetRequestValidators",
     "GetResource",
     "GetResources",
     "GetRestApi",
@@ -186,6 +190,7 @@
     "UpdateIntegration",
     "UpdateMethod",
     "UpdateModel",
+    "UpdateRequestValidator",
     "UpdateResource",
     "UpdateRestApi",
     "UpdateStage",
@@ -1941,6 +1946,17 @@
     "UpdateFunctionConfiguration",
     "UpdateFunctionUrlConfig"
   ],
+  "location": [
+    "BatchGetDevicePosition",
+    "BatchUpdateDevicePosition",
+    "CreateTracker",
+    "DeleteTracker",
+    "DescribeTracker",
+    "GetDevicePosition",
+    "GetDevicePositionHistory",
+    "ListTrackers",
+    "UpdateTracker"
+  ],
   "mediaconnect": [
     "CreateFlow",
     "DescribeFlow",
@@ -2578,6 +2594,12 @@
     "TagResources",
     "UntagResources"
   ],
+  "transcribe": [
+    "DeleteTranscriptionJob",
+    "GetTranscriptionJob",
+    "ListTranscriptionJobs",
+    "StartTranscriptionJob"
+  ],
   "transfer": [
     "CreateServer",
     "CreateUser",
@@ -2591,6 +2613,12 @@
     "ListUsers",
     "StartServer",
     "StopServer"
+  ],
+  "translate": [
+    "DescribeTextTranslationJob",
+    "ListTextTranslationJobs",
+    "StartTextTranslationJob",
+    "StopTextTranslationJob"
   ],
   "waf": [
     "AssociateWebACL",
