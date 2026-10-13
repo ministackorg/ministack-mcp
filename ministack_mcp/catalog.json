@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.24",
-  "generated_at": "2026-10-08T20:29:14Z",
+  "ministack_version": "1.5.27",
+  "generated_at": "2026-10-13T17:35:14Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 93,
+  "service_count": 94,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -1177,6 +1177,30 @@
         "pinned"
       ]
     },
+    "documentdb": {
+      "name": "documentdb",
+      "operations": [
+        "AddTagsToResource",
+        "CreateDBCluster",
+        "CreateDBInstance",
+        "DeleteDBCluster",
+        "DeleteDBInstance",
+        "DescribeDBClusters",
+        "DescribeDBInstances",
+        "FailoverDBCluster",
+        "ListTagsForResource",
+        "ModifyDBCluster",
+        "ModifyDBInstance",
+        "RebootDBInstance",
+        "RemoveTagsFromResource",
+        "StartDBCluster",
+        "StopDBCluster"
+      ],
+      "operation_count": 15,
+      "extraction_sources": [
+        "pinned"
+      ]
+    },
     "dsql": {
       "name": "dsql",
       "operations": [
@@ -1244,6 +1268,7 @@
         "RestoreTableFromBackup",
         "RestoreTableToPointInTime",
         "Scan",
+        "SearchVectors",
         "TagResource",
         "TransactGetItems",
         "TransactWriteItems",
@@ -1255,7 +1280,7 @@
         "UpdateTable",
         "UpdateTimeToLive"
       ],
-      "operation_count": 49,
+      "operation_count": 50,
       "extraction_sources": [
         "pinned"
       ]
@@ -1910,6 +1935,7 @@
         "DeleteSAMLProvider",
         "DeleteServiceLinkedRole",
         "DeleteUser",
+        "DeleteUserPermissionsBoundary",
         "DeleteUserPolicy",
         "DeleteVirtualMFADevice",
         "DetachGroupPolicy",
@@ -1965,6 +1991,7 @@
         "PutGroupPolicy",
         "PutRolePermissionsBoundary",
         "PutRolePolicy",
+        "PutUserPermissionsBoundary",
         "PutUserPolicy",
         "RemoveRoleFromInstanceProfile",
         "RemoveUserFromGroup",
@@ -1987,7 +2014,7 @@
         "UpdateRoleDescription",
         "UpdateSAMLProvider"
       ],
-      "operation_count": 111,
+      "operation_count": 113,
       "extraction_sources": [
         "pinned"
       ]
@@ -2046,6 +2073,7 @@
         "DeleteCertificate",
         "DeleteDomainConfiguration",
         "DeleteJob",
+        "DeleteJobExecution",
         "DeleteJobTemplate",
         "DeletePolicy",
         "DeletePolicyVersion",
@@ -2084,6 +2112,7 @@
         "ListCertificatesByCA",
         "ListDomainConfigurations",
         "ListIndices",
+        "ListJobExecutionsForJob",
         "ListJobExecutionsForThing",
         "ListJobTemplates",
         "ListJobs",
@@ -2093,6 +2122,7 @@
         "ListPrincipalPolicies",
         "ListPrincipalThings",
         "ListProvisioningTemplates",
+        "ListTagsForResource",
         "ListTargetsForPolicy",
         "ListThingGroups",
         "ListThingGroupsForThing",
@@ -2107,16 +2137,19 @@
         "RemoveThingFromThingGroup",
         "ReplaceTopicRule",
         "SearchIndex",
+        "TagResource",
+        "UntagResource",
         "UpdateCACertificate",
         "UpdateCertificate",
         "UpdateDomainConfiguration",
         "UpdateEventConfigurations",
         "UpdateIndexingConfiguration",
+        "UpdateJob",
         "UpdateProvisioningTemplate",
         "UpdateThing",
         "UpdateThingGroup"
       ],
-      "operation_count": 91,
+      "operation_count": 97,
       "extraction_sources": [
         "pinned"
       ]
@@ -2125,11 +2158,13 @@
       "name": "iot_data",
       "operations": [
         "DeleteThingShadow",
+        "GetRetainedMessage",
         "GetThingShadow",
+        "ListRetainedMessages",
         "Publish",
         "UpdateThingShadow"
       ],
-      "operation_count": 4,
+      "operation_count": 6,
       "extraction_sources": [
         "pinned"
       ]
@@ -2861,16 +2896,41 @@
         "DeleteNamespace",
         "DeleteTable",
         "DeleteTableBucket",
+        "DeleteTableBucketEncryption",
+        "DeleteTableBucketMetricsConfiguration",
+        "DeleteTableBucketPolicy",
+        "DeleteTablePolicy",
         "GetNamespace",
         "GetTable",
         "GetTableBucket",
+        "GetTableBucketEncryption",
+        "GetTableBucketMaintenanceConfiguration",
+        "GetTableBucketMetricsConfiguration",
+        "GetTableBucketPolicy",
+        "GetTableBucketStorageClass",
+        "GetTableEncryption",
+        "GetTableMaintenanceConfiguration",
+        "GetTableMaintenanceJobStatus",
         "GetTableMetadataLocation",
+        "GetTablePolicy",
+        "GetTableStorageClass",
         "ListNamespaces",
         "ListTableBuckets",
         "ListTables",
+        "ListTagsForResource",
+        "PutTableBucketEncryption",
+        "PutTableBucketMaintenanceConfiguration",
+        "PutTableBucketMetricsConfiguration",
+        "PutTableBucketPolicy",
+        "PutTableBucketStorageClass",
+        "PutTableMaintenanceConfiguration",
+        "PutTablePolicy",
+        "RenameTable",
+        "TagResource",
+        "UntagResource",
         "UpdateTableMetadataLocation"
       ],
-      "operation_count": 14,
+      "operation_count": 39,
       "extraction_sources": [
         "pinned"
       ]
@@ -3571,6 +3631,7 @@
         "ministack/core/responses.py",
         "ministack/services/sts.py",
         "ministack/services/eks.py",
+        "ministack/services/s3tables.py",
         "ministack/services/iot.py"
       ],
       "default": "000000000000"
@@ -3766,6 +3827,7 @@
         "ministack/services/appconfig.py",
         "ministack/services/kinesis.py",
         "ministack/services/codebuild.py",
+        "ministack/services/documentdb.py",
         "ministack/services/eventbridge.py",
         "ministack/services/glue.py",
         "ministack/services/transfer.py",
