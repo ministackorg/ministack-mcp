@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.27",
-  "generated_at": "2026-10-13T17:35:14Z",
+  "ministack_version": "1.5.28",
+  "generated_at": "2026-10-16T15:52:47Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1131,9 +1131,10 @@
         "UpdateUserAttributes",
         "UpdateUserPool",
         "UpdateUserPoolClient",
+        "UpdateUserPoolDomain",
         "VerifySoftwareToken"
       ],
-      "operation_count": 91,
+      "operation_count": 92,
       "extraction_sources": [
         "pinned"
       ]
@@ -2064,7 +2065,9 @@
         "CreateKeysAndCertificate",
         "CreatePolicy",
         "CreatePolicyVersion",
+        "CreateProvisioningClaim",
         "CreateProvisioningTemplate",
+        "CreateProvisioningTemplateVersion",
         "CreateThing",
         "CreateThingGroup",
         "CreateThingType",
@@ -2078,6 +2081,7 @@
         "DeletePolicy",
         "DeletePolicyVersion",
         "DeleteProvisioningTemplate",
+        "DeleteProvisioningTemplateVersion",
         "DeleteRegistrationCode",
         "DeleteThing",
         "DeleteThingGroup",
@@ -2094,12 +2098,15 @@
         "DescribeJobExecution",
         "DescribeJobTemplate",
         "DescribeProvisioningTemplate",
+        "DescribeProvisioningTemplateVersion",
         "DescribeThing",
         "DescribeThingGroup",
         "DescribeThingType",
         "DetachPolicy",
         "DetachPrincipalPolicy",
         "DetachThingPrincipal",
+        "DisableTopicRule",
+        "EnableTopicRule",
         "GetIndexingConfiguration",
         "GetJobDocument",
         "GetPolicy",
@@ -2121,6 +2128,7 @@
         "ListPolicyVersions",
         "ListPrincipalPolicies",
         "ListPrincipalThings",
+        "ListProvisioningTemplateVersions",
         "ListProvisioningTemplates",
         "ListTagsForResource",
         "ListTargetsForPolicy",
@@ -2137,6 +2145,7 @@
         "RemoveThingFromThingGroup",
         "ReplaceTopicRule",
         "SearchIndex",
+        "SetDefaultPolicyVersion",
         "TagResource",
         "UntagResource",
         "UpdateCACertificate",
@@ -2149,7 +2158,7 @@
         "UpdateThing",
         "UpdateThingGroup"
       ],
-      "operation_count": 97,
+      "operation_count": 105,
       "extraction_sources": [
         "pinned"
       ]
@@ -2654,6 +2663,7 @@
         "DescribeDBProxyTargets",
         "DescribeDBSnapshots",
         "DescribeDBSubnetGroups",
+        "DescribeEvents",
         "DescribeGlobalClusters",
         "DescribeOptionGroupOptions",
         "DescribeOptionGroups",
@@ -2686,7 +2696,7 @@
         "StopDBInstance",
         "SwitchoverGlobalCluster"
       ],
-      "operation_count": 71,
+      "operation_count": 72,
       "extraction_sources": [
         "pinned"
       ]
@@ -2777,6 +2787,7 @@
         "CompleteMultipartUpload",
         "CopyObject",
         "CreateBucket",
+        "CreateMultiRegionAccessPoint",
         "CreateMultipartUpload",
         "DeleteBucket",
         "DeleteBucketCors",
@@ -2787,11 +2798,13 @@
         "DeleteBucketReplication",
         "DeleteBucketTagging",
         "DeleteBucketWebsite",
+        "DeleteMultiRegionAccessPoint",
         "DeleteObject",
         "DeleteObjectAnnotation",
         "DeleteObjectTagging",
         "DeleteObjects",
         "DeletePublicAccessBlock",
+        "DescribeMultiRegionAccessPointOperation",
         "GetBucketAccelerateConfiguration",
         "GetBucketAcl",
         "GetBucketCors",
@@ -2807,6 +2820,9 @@
         "GetBucketTagging",
         "GetBucketVersioning",
         "GetBucketWebsite",
+        "GetMultiRegionAccessPoint",
+        "GetMultiRegionAccessPointPolicy",
+        "GetMultiRegionAccessPointRoutes",
         "GetObject",
         "GetObjectAcl",
         "GetObjectAnnotation",
@@ -2819,6 +2835,7 @@
         "HeadBucket",
         "HeadObject",
         "ListBuckets",
+        "ListMultiRegionAccessPoints",
         "ListMultipartUploads",
         "ListObjectAnnotations",
         "ListObjectVersions",
@@ -2840,6 +2857,7 @@
         "PutBucketTagging",
         "PutBucketVersioning",
         "PutBucketWebsite",
+        "PutMultiRegionAccessPointPolicy",
         "PutObject",
         "PutObjectAcl",
         "PutObjectAnnotation",
@@ -2849,10 +2867,11 @@
         "PutObjectTagging",
         "PutPublicAccessBlock",
         "RestoreObject",
+        "SubmitMultiRegionAccessPointRoutes",
         "UploadPart",
         "UploadPartCopy"
       ],
-      "operation_count": 78,
+      "operation_count": 87,
       "extraction_sources": [
         "pinned"
       ]
@@ -3072,12 +3091,14 @@
       "name": "ses_v2",
       "operations": [
         "CreateConfigurationSet",
+        "CreateConfigurationSetEventDestination",
         "CreateDedicatedIpPool",
         "CreateEmailIdentity",
         "CreateEmailTemplate",
         "CreateTenant",
         "CreateTenantResourceAssociation",
         "DeleteConfigurationSet",
+        "DeleteConfigurationSetEventDestination",
         "DeleteDedicatedIpPool",
         "DeleteEmailIdentity",
         "DeleteEmailTemplate",
@@ -3085,6 +3106,7 @@
         "DeleteTenantResourceAssociation",
         "GetAccount",
         "GetConfigurationSet",
+        "GetConfigurationSetEventDestinations",
         "GetDedicatedIpPool",
         "GetEmailIdentity",
         "GetEmailTemplate",
@@ -3100,13 +3122,21 @@
         "ListTenants",
         "PutAccountDetails",
         "PutAccountSuppressionAttributes",
+        "PutConfigurationSetArchivingOptions",
+        "PutConfigurationSetDeliveryOptions",
+        "PutConfigurationSetReputationOptions",
+        "PutConfigurationSetSendingOptions",
+        "PutConfigurationSetSuppressionOptions",
+        "PutConfigurationSetTrackingOptions",
+        "PutConfigurationSetVdmOptions",
         "PutTenantSuppressionAttributes",
         "SendEmail",
         "TagResource",
         "UntagResource",
+        "UpdateConfigurationSetEventDestination",
         "UpdateEmailTemplate"
       ],
-      "operation_count": 34,
+      "operation_count": 45,
       "extraction_sources": [
         "pinned"
       ]
@@ -3268,10 +3298,11 @@
         "AssumeRoleWithWebIdentity",
         "GetAccessKeyInfo",
         "GetCallerIdentity",
+        "GetFederationToken",
         "GetSessionToken",
         "GetWebIdentityToken"
       ],
-      "operation_count": 6,
+      "operation_count": 7,
       "extraction_sources": [
         "pinned"
       ]
@@ -3343,18 +3374,22 @@
         "AssociateWebACL",
         "CheckCapacity",
         "CreateIPSet",
+        "CreateRegexPatternSet",
         "CreateRuleGroup",
         "CreateWebACL",
         "DeleteIPSet",
+        "DeleteRegexPatternSet",
         "DeleteRuleGroup",
         "DeleteWebACL",
         "DescribeManagedRuleGroup",
         "DisassociateWebACL",
         "GetIPSet",
+        "GetRegexPatternSet",
         "GetRuleGroup",
         "GetWebACL",
         "GetWebACLForResource",
         "ListIPSets",
+        "ListRegexPatternSets",
         "ListResourcesForWebACL",
         "ListRuleGroups",
         "ListTagsForResource",
@@ -3362,10 +3397,11 @@
         "TagResource",
         "UntagResource",
         "UpdateIPSet",
+        "UpdateRegexPatternSet",
         "UpdateRuleGroup",
         "UpdateWebACL"
       ],
-      "operation_count": 24,
+      "operation_count": 29,
       "extraction_sources": [
         "pinned"
       ]
@@ -3409,6 +3445,7 @@
         "DeleteChangeSet",
         "DeleteStack",
         "DescribeChangeSet",
+        "DescribeEvents",
         "DescribeStackDriftDetectionStatus",
         "DescribeStackEvents",
         "DescribeStackResource",
@@ -3433,7 +3470,7 @@
         "UpdateTerminationProtection",
         "ValidateTemplate"
       ],
-      "operation_count": 30,
+      "operation_count": 31,
       "extraction_sources": [
         "pinned"
       ]
