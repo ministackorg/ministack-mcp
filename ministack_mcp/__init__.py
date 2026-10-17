@@ -1,5 +1,10 @@
 """MiniStack MCP — knowledge layer for AI agents."""
 
-from ministack_mcp.server import main
+
+def main() -> None:
+    from ministack_mcp.server import main as _main
+
+    _main()
+
 
 __all__ = ["main"]

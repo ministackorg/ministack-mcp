@@ -434,27 +434,29 @@ def validate_endpoint() -> str:
 
 # ─── Section 3: Live AWS Interaction ────────────────────────────────────────
 
-_DANGEROUS_PATTERNS = re.compile(
-    r"\b(rm\s+-rf|sudo|chmod|chown|mkfs|dd\s+if=|shutdown|reboot|halt|"
-    r"curl|wget|nc\s|ncat|python|perl|ruby|bash|sh\s+-c|eval|exec)\b",
-    re.IGNORECASE,
-)
+_BLOCKED_FLAGS = ("--endpoint-url", "--profile")
 
 
 @mcp.tool()
 def aws_execute(command: str) -> str:
-    """Run an AWS CLI command against MiniStack. The command should start with
-    'aws'. Dangerous shell patterns are rejected. 30s timeout."""
-    if _DANGEROUS_PATTERNS.search(command):
-        return json.dumps({"error": "command contains dangerous patterns", "command": command})
-    cmd = command.strip()
-    if not cmd.startswith("aws "):
-        cmd = "aws " + cmd
-    if "--endpoint-url" not in cmd:
-        cmd = cmd.replace("aws ", f"aws --endpoint-url {_endpoint()} ", 1)
+    """Run an AWS CLI command against MiniStack. The command must start with
+    'aws'; it runs without a shell and always targets MiniStack's endpoint
+    (--endpoint-url and --profile are rejected). 30s timeout."""
+    try:
+        args = shlex.split(command)
+    except ValueError as e:
+        return json.dumps({"error": f"cannot parse command: {e}", "command": command})
+    if not args or args[0] != "aws":
+        return json.dumps({"error": "command must start with 'aws'", "command": command})
+    blocked = [a for a in args if a.split("=", 1)[0] in _BLOCKED_FLAGS]
+    if blocked:
+        return json.dumps({"error": f"{blocked[0].split('=', 1)[0]} is not allowed; commands always target MiniStack",
+                           "command": command})
+    args = ["aws", "--endpoint-url", _endpoint(), *args[1:]]
+    cmd = shlex.join(args)
     try:
         result = subprocess.run(
-            shlex.split(cmd),
+            args,
             capture_output=True,
             text=True,
             timeout=30,
@@ -472,7 +474,7 @@ def aws_execute(command: str) -> str:
 
 
 _CREATE_COMMANDS: dict[str, str] = {
-    "s3": "aws s3 mb s3://{name}",
+    "s3": "aws s3api create-bucket --bucket {name}",
     "dynamodb": "aws dynamodb create-table --table-name {name} --attribute-definitions AttributeName=pk,AttributeType=S --key-schema AttributeName=pk,KeyType=HASH --billing-mode PAY_PER_REQUEST",
     "sqs": "aws sqs create-queue --queue-name {name}",
     "sns": "aws sns create-topic --name {name}",
