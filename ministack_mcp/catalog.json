@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.28",
-  "generated_at": "2026-10-16T15:52:47Z",
+  "ministack_version": "1.5.29",
+  "generated_at": "2026-10-17T18:54:42Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 94,
+  "service_count": 97,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -2237,6 +2237,36 @@
         "pinned"
       ]
     },
+    "kinesisanalyticsv2": {
+      "name": "kinesisanalyticsv2",
+      "operations": [
+        "AddApplicationCloudWatchLoggingOption",
+        "CreateApplication",
+        "CreateApplicationSnapshot",
+        "DeleteApplication",
+        "DeleteApplicationCloudWatchLoggingOption",
+        "DeleteApplicationSnapshot",
+        "DescribeApplication",
+        "DescribeApplicationSnapshot",
+        "ListApplicationSnapshots",
+        "ListTagsForResource",
+        "StartApplication",
+        "StopApplication",
+        "TagResource",
+        "UntagResource",
+        "UpdateApplication"
+      ],
+      "operation_count": 15,
+      "extraction_sources": [
+        "pinned"
+      ]
+    },
+    "kinesisanalyticsv2_flink": {
+      "name": "kinesisanalyticsv2_flink",
+      "operations": [],
+      "operation_count": 0,
+      "extraction_sources": []
+    },
     "kms": {
       "name": "kms",
       "operations": [
@@ -2786,9 +2816,15 @@
         "AbortMultipartUpload",
         "CompleteMultipartUpload",
         "CopyObject",
+        "CreateAccessPoint",
+        "CreateAccessPointForObjectLambda",
         "CreateBucket",
         "CreateMultiRegionAccessPoint",
         "CreateMultipartUpload",
+        "DeleteAccessPoint",
+        "DeleteAccessPointForObjectLambda",
+        "DeleteAccessPointPolicy",
+        "DeleteAccessPointPolicyForObjectLambda",
         "DeleteBucket",
         "DeleteBucketCors",
         "DeleteBucketEncryption",
@@ -2805,6 +2841,11 @@
         "DeleteObjects",
         "DeletePublicAccessBlock",
         "DescribeMultiRegionAccessPointOperation",
+        "GetAccessPoint",
+        "GetAccessPointConfigurationForObjectLambda",
+        "GetAccessPointForObjectLambda",
+        "GetAccessPointPolicy",
+        "GetAccessPointPolicyForObjectLambda",
         "GetBucketAccelerateConfiguration",
         "GetBucketAcl",
         "GetBucketCors",
@@ -2834,6 +2875,8 @@
         "GetPublicAccessBlock",
         "HeadBucket",
         "HeadObject",
+        "ListAccessPoints",
+        "ListAccessPointsForObjectLambda",
         "ListBuckets",
         "ListMultiRegionAccessPoints",
         "ListMultipartUploads",
@@ -2843,6 +2886,9 @@
         "ListObjectsV2",
         "ListParts",
         "PostObject",
+        "PutAccessPointConfigurationForObjectLambda",
+        "PutAccessPointPolicy",
+        "PutAccessPointPolicyForObjectLambda",
         "PutBucketAccelerateConfiguration",
         "PutBucketAcl",
         "PutBucketCors",
@@ -2869,11 +2915,26 @@
         "RestoreObject",
         "SubmitMultiRegionAccessPointRoutes",
         "UploadPart",
-        "UploadPartCopy"
+        "UploadPartCopy",
+        "WriteGetObjectResponse"
       ],
-      "operation_count": 87,
+      "operation_count": 104,
       "extraction_sources": [
         "pinned"
+      ]
+    },
+    "s3_object_lambda": {
+      "name": "s3_object_lambda",
+      "operations": [
+        "GetObject",
+        "HeadObject",
+        "ListObjects",
+        "ListObjectsV2"
+      ],
+      "operation_count": 4,
+      "extraction_sources": [
+        "dict-keys (3)",
+        "compare (2)"
       ]
     },
     "s3files": {
@@ -3489,6 +3550,7 @@
       "files": [
         "ministack/core/iam_evaluator.py",
         "ministack/core/lambda_runtime.py",
+        "ministack/services/s3_object_lambda.py",
         "ministack/services/lambda_svc.py"
       ],
       "default": "test"
@@ -3504,6 +3566,7 @@
     "AWS_ENDPOINT_URL": {
       "name": "AWS_ENDPOINT_URL",
       "files": [
+        "ministack/services/s3_object_lambda.py",
         "ministack/services/lambda_svc.py",
         "ministack/services/s3.py"
       ],
@@ -3724,6 +3787,7 @@
         "ministack/services/elasticache.py",
         "ministack/services/opensearch.py",
         "ministack/services/eks.py",
+        "ministack/services/kinesisanalyticsv2_flink.py",
         "ministack/services/codebuild.py",
         "ministack/services/mwaa.py",
         "ministack/services/glue.py",
