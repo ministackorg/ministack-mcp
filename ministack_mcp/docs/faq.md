@@ -25,13 +25,19 @@ A: Lambda, RDS, ECS, EKS, ElastiCache, OpenSearch, Glue, and MWAA spawn real
 Docker containers. Other services are in-memory emulations.
 
 **Q: Does IAM actually enforce policies?**
-A: No. IAM resources (users, roles, policies) are stored but policies are not
-evaluated on API calls. All calls are implicitly allowed.
+A: Only with `AUTH=true`. By default (`AUTH` unset) IAM resources are stored
+but every call is allowed. With `AUTH=true`, MiniStack verifies the SigV4/SigV2
+signature of IAM user and STS session keys and evaluates the caller's IAM
+policies, answering the service's 403 access-denied error when they do not
+allow the action.
 
 **Q: Does Lambda support all runtimes?**
-A: Python and Node.js run natively with warm worker pools. Go, Rust, and C++
-use `provided.al2023`/`provided.al2` via Docker RIE. Java and .NET are not
-currently supported.
+A: Python and Node.js run natively with warm worker pools, and Go, Rust and C++
+(`provided.al2023`/`provided.al2`) run their `bootstrap` on the host. Java, .NET
+and Ruby run in the AWS runtime image and need Docker: without it, the default
+`LAMBDA_STRICT=0` answers the invoke with a placeholder 200 (`Mock response -
+<runtime> not supported for local execution`), and `LAMBDA_STRICT=1` with a
+`Runtime.DockerUnavailable` function error.
 
 **Q: Is there billing/cost tracking?**
 A: No. MiniStack does not meter or bill. Cost-related APIs (CUR) are stubs.
@@ -52,8 +58,10 @@ Set `s3_use_path_style = true` in Terraform or `forcePathStyle: true` in SDKs.
 A: MiniStack is not running. Start it with `ministack start` or via Docker.
 
 **Q: Lambda invocation returns 500**
-A: Check that the Docker socket is mounted. Lambda needs Docker to run function
-code. Also verify the handler path matches your code layout.
+A: Verify the handler path matches your code layout. Python, Node.js and
+`provided.*` run on the host; Java, .NET, Ruby and image functions (or every
+function with `LAMBDA_EXECUTOR=docker` / `LAMBDA_STRICT=1`) need the Docker
+socket mounted.
 
 **Q: RDS instance stuck in "creating"**
 A: The Docker container is still starting. Poll `DescribeDBInstances` until

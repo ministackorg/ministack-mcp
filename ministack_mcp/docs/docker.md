@@ -13,7 +13,7 @@ docker run -d \
 ## Docker socket
 
 MiniStack needs the Docker socket for services that run real backends:
-- **Lambda** — worker containers for function execution
+- **Lambda** — runtime containers for Java, .NET, Ruby and image functions (every function with `LAMBDA_EXECUTOR=docker` or `LAMBDA_STRICT=1`)
 - **RDS** — Postgres/MySQL containers
 - **ECS** — task containers
 - **EKS** — k3s containers

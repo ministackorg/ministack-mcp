@@ -61,7 +61,6 @@ These LocalStack-specific env vars are NOT used by MiniStack:
 - `LOCALSTACK_API_KEY` — MiniStack has no Pro tier
 - `EDGE_PORT` — use standard port 4566
 - `DEFAULT_REGION` — use `AWS_DEFAULT_REGION`
-- `LAMBDA_EXECUTOR` — MiniStack always uses Docker for Lambda
 
 ## Step 7: Verify
 
@@ -84,7 +83,7 @@ pytest
 |---------|--------------|-----------|
 | Port | 4566 | 4566 |
 | Pro tier | Yes | No |
-| Lambda | Docker/local | Docker (warm pool) |
+| Lambda | Docker/local | Local warm pool (Python, Node.js, `provided.*`); Docker for Java, .NET, Ruby and images |
 | RDS | Stub only (Pro) | Real Postgres/MySQL containers |
 | ECS | Stub only | Real Docker containers |
 | EKS | Stub only (Pro) | Real k3s containers |
