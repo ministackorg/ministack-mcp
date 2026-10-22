@@ -164,7 +164,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution. Also SaaS Manager multi-tenant distributions (connection groups + distribution tenants).",
+      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List), web ACL association (AssociateDistributionWebACL/DisassociateDistributionWebACL), VPC origins (Create/Get/Update/Delete/List; the endpoint must be an ALB, NLB or EC2 instance in MiniStack, and viewer requests are not routed to it). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution. Also SaaS Manager multi-tenant distributions (connection groups + distribution tenants).",
       "gotchas": [
         "Distributions deploy instantly — no real CDN edge propagation",
         "CloudFront Functions code is stored but not executed",
@@ -641,7 +641,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Hosted zones (Create/Get/Delete/List/ListByName/UpdateComment), record sets (ChangeResourceRecordSets/List), changes (GetChange), health checks (Create/Get/Delete/List/Update), tags (ChangeTagsForResource/ListTagsForResource). REST/XML API under /2013-04-01/.",
+      "notes": "Hosted zones (Create/Get/Delete/List/ListByName/UpdateComment), private zones and VPC associations (AssociateVPCWithHostedZone/DisassociateVPCFromHostedZone/ListHostedZonesByVPC), record sets (ChangeResourceRecordSets/List), changes (GetChange), health checks (Create/Get/Delete/List/Update), tags (ChangeTagsForResource/ListTagsForResource). REST/XML API under /2013-04-01/.",
       "gotchas": [
         "DNS records are metadata-only — no actual DNS resolution",
         "Health checks are stored but never actually evaluated",
@@ -659,7 +659,7 @@
         "ACLs are stored but not enforced on access",
         "Bucket policies are stored but not evaluated",
         "Lifecycle rules are stored but not automatically executed",
-        "Replication configuration is stored but objects are not actually replicated",
+        "Replication copies objects to the destination by each rule's filter and status; ReplicationTime, Metrics and replica KMS settings are stored but don't change timing or encryption",
         "Glacier / Deep Archive restore is emulated: an object in GLACIER/DEEP_ARCHIVE is unreadable (InvalidObjectState) until RestoreObject completes, in seconds rather than AWS's hours; GLACIER_IR stays readable"
       ]
     },
