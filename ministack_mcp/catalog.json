@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.31",
-  "generated_at": "2026-10-21T17:27:14Z",
+  "ministack_version": "1.5.32",
+  "generated_at": "2026-10-23T16:44:47Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -9,7 +9,7 @@
     "default_account": "000000000000",
     "default_region": "us-east-1"
   },
-  "service_count": 97,
+  "service_count": 96,
   "services": {
     "_dynamodb_keywords": {
       "name": "_dynamodb_keywords",
@@ -891,12 +891,6 @@
         "pinned"
       ]
     },
-    "cloudfront_dataplane": {
-      "name": "cloudfront_dataplane",
-      "operations": [],
-      "operation_count": 0,
-      "extraction_sources": []
-    },
     "cloudfront_keyvaluestore": {
       "name": "cloudfront_keyvaluestore",
       "operations": [
@@ -1319,6 +1313,7 @@
         "AssociateRouteTable",
         "AttachInternetGateway",
         "AttachNetworkInterface",
+        "AttachVerifiedAccessTrustProvider",
         "AttachVolume",
         "AttachVpnGateway",
         "AuthorizeSecurityGroupEgress",
@@ -1346,6 +1341,10 @@
         "CreateSnapshot",
         "CreateSubnet",
         "CreateTags",
+        "CreateVerifiedAccessEndpoint",
+        "CreateVerifiedAccessGroup",
+        "CreateVerifiedAccessInstance",
+        "CreateVerifiedAccessTrustProvider",
         "CreateVolume",
         "CreateVpc",
         "CreateVpcEndpoint",
@@ -1372,6 +1371,10 @@
         "DeleteSnapshot",
         "DeleteSubnet",
         "DeleteTags",
+        "DeleteVerifiedAccessEndpoint",
+        "DeleteVerifiedAccessGroup",
+        "DeleteVerifiedAccessInstance",
+        "DeleteVerifiedAccessTrustProvider",
         "DeleteVolume",
         "DeleteVpc",
         "DeleteVpcEndpoints",
@@ -1417,6 +1420,11 @@
         "DescribeSpotInstanceRequests",
         "DescribeSubnets",
         "DescribeTags",
+        "DescribeVerifiedAccessEndpoints",
+        "DescribeVerifiedAccessGroups",
+        "DescribeVerifiedAccessInstanceLoggingConfigurations",
+        "DescribeVerifiedAccessInstances",
+        "DescribeVerifiedAccessTrustProviders",
         "DescribeVolumeAttribute",
         "DescribeVolumeStatus",
         "DescribeVolumes",
@@ -1432,6 +1440,7 @@
         "DescribeVpnGateways",
         "DetachInternetGateway",
         "DetachNetworkInterface",
+        "DetachVerifiedAccessTrustProvider",
         "DetachVolume",
         "DetachVpnGateway",
         "DisableVgwRoutePropagation",
@@ -1441,6 +1450,8 @@
         "EnableVgwRoutePropagation",
         "EnableVolumeIO",
         "GetManagedPrefixListEntries",
+        "GetVerifiedAccessEndpointPolicy",
+        "GetVerifiedAccessGroupPolicy",
         "ImportKeyPair",
         "ModifyImageAttribute",
         "ModifyInstanceMaintenanceOptions",
@@ -1449,6 +1460,13 @@
         "ModifySecurityGroupRules",
         "ModifySnapshotAttribute",
         "ModifySubnetAttribute",
+        "ModifyVerifiedAccessEndpoint",
+        "ModifyVerifiedAccessEndpointPolicy",
+        "ModifyVerifiedAccessGroup",
+        "ModifyVerifiedAccessGroupPolicy",
+        "ModifyVerifiedAccessInstance",
+        "ModifyVerifiedAccessInstanceLoggingConfiguration",
+        "ModifyVerifiedAccessTrustProvider",
         "ModifyVolume",
         "ModifyVolumeAttribute",
         "ModifyVpcAttribute",
@@ -1469,7 +1487,7 @@
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 157,
+      "operation_count": 181,
       "extraction_sources": [
         "pinned"
       ]
@@ -3310,14 +3328,17 @@
         "GetParameterHistory",
         "GetParameters",
         "GetParametersByPath",
+        "GetServiceSetting",
         "LabelParameterVersion",
         "ListCommands",
         "ListTagsForResource",
         "PutParameter",
         "RemoveTagsFromResource",
-        "SendCommand"
+        "ResetServiceSetting",
+        "SendCommand",
+        "UpdateServiceSetting"
       ],
-      "operation_count": 16,
+      "operation_count": 19,
       "extraction_sources": [
         "pinned"
       ]
@@ -3334,6 +3355,7 @@
         "DeleteStateMachineVersion",
         "DescribeActivity",
         "DescribeExecution",
+        "DescribeMapRun",
         "DescribeStateMachine",
         "DescribeStateMachineAlias",
         "DescribeStateMachineForExecution",
@@ -3341,6 +3363,7 @@
         "GetExecutionHistory",
         "ListActivities",
         "ListExecutions",
+        "ListMapRuns",
         "ListStateMachineAliases",
         "ListStateMachineVersions",
         "ListStateMachines",
@@ -3355,11 +3378,12 @@
         "TagResource",
         "TestState",
         "UntagResource",
+        "UpdateMapRun",
         "UpdateStateMachine",
         "UpdateStateMachineAlias",
         "ValidateStateMachineDefinition"
       ],
-      "operation_count": 33,
+      "operation_count": 36,
       "extraction_sources": [
         "pinned"
       ]
