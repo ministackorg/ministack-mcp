@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.32",
-  "generated_at": "2026-10-23T16:44:47Z",
+  "ministack_version": "1.5.33",
+  "generated_at": "2026-10-26T18:37:43Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -2234,6 +2234,7 @@
         "AddTagsToStream",
         "CreateStream",
         "DecreaseStreamRetentionPeriod",
+        "DeleteResourcePolicy",
         "DeleteStream",
         "DeregisterStreamConsumer",
         "DescribeStream",
@@ -2242,6 +2243,7 @@
         "DisableEnhancedMonitoring",
         "EnableEnhancedMonitoring",
         "GetRecords",
+        "GetResourcePolicy",
         "GetShardIterator",
         "IncreaseStreamRetentionPeriod",
         "ListShards",
@@ -2251,6 +2253,7 @@
         "MergeShards",
         "PutRecord",
         "PutRecords",
+        "PutResourcePolicy",
         "RegisterStreamConsumer",
         "RemoveTagsFromStream",
         "SplitShard",
@@ -2259,7 +2262,7 @@
         "SubscribeToShard",
         "UpdateShardCount"
       ],
-      "operation_count": 27,
+      "operation_count": 30,
       "extraction_sources": [
         "pinned"
       ]
