@@ -47,7 +47,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Module aggregator — see apigateway_v1 / apigateway_v2. HTTP API and WebSocket API; Lambda proxy / HTTP proxy / MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; $default stage served from URL root; per-API CORS; request parameter mapping; JWT data-plane authorization with RS256 signature verification; qualified-alias integration URIs; WebSocket data plane with @connections management API (PostToConnection/GetConnection/DeleteConnection); route responses and integration responses; pin apiId via ms-custom-id tag. JWT authorizer resolves the issuer's `jwks_uri` via OIDC discovery (`{issuer}/.well-known/openid-configuration`) so non-Cognito issuers (Salesforce `/id/keys`, Okta `/oauth2/v1/keys`, etc.) work; Cognito short-circuits to the local pool JWKS; conventional `/.well-known/jwks.json` is the fallback when discovery is unavailable. Discovery results cached per-issuer for 2h.",
+      "notes": "Module aggregator — see apigateway_v1 / apigateway_v2. HTTP API and WebSocket API; Lambda proxy / HTTP proxy / MOCK; data plane via {apiId}.execute-api.localhost or path-based /_aws/execute-api/{apiId}/{stage}/{path}; $default stage served from URL root; per-API CORS; request parameter mapping; JWT data-plane authorization with RS256 signature verification; qualified-alias integration URIs; WebSocket data plane with @connections management API (PostToConnection/GetConnection/DeleteConnection); route responses and integration responses; pin apiId via ms-custom-id tag. JWT authorizer resolves the issuer's `jwks_uri` via OIDC discovery (`{issuer}/.well-known/openid-configuration`) so non-Cognito issuers (Salesforce `/id/keys`, Okta `/oauth2/v1/keys`, etc.) work; Cognito short-circuits to the local pool JWKS; conventional `/.well-known/jwks.json` is the fallback when discovery is unavailable. Discovery results cached per-issuer for 2h. REST API custom domain names report domainNameStatus; private ones also have domainNameId and their account-scoped domainNameArn.",
       "gotchas": [
         "JWT authorizer only supports RS256 algorithm — other algorithms are not verified",
         "JWKS cache is per-account — issuer URL collisions across accounts may serve different keys",
@@ -73,7 +73,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "33 operations covering control plane + data plane. Applications, environments, configuration profiles, hosted configuration versions, deployment strategies, deployments, tags. Data plane: StartConfigurationSession + GetLatestConfiguration with token rotation. Deployments complete immediately.",
+      "notes": "33 operations covering control plane + data plane. Applications, environments, configuration profiles, hosted configuration versions, deployment strategies, deployments, tags. Data plane: StartConfigurationSession + GetLatestConfiguration with token rotation. Deployments complete immediately. Configuration profiles whose LocationUri is a Secrets Manager secret serve the deployed secret version; KmsKeyIdentifier, KmsKeyArn, hosted version Description and deployment Tags are kept.",
       "gotchas": [
         "Deployments complete immediately — no gradual rollout, no bake time enforcement",
         "Configuration session tokens are single-use — each GetLatestConfiguration consumes and rotates the token",
@@ -123,10 +123,10 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "23 actions; in-memory state, no real instance scaling. Full ASG lifecycle: launch configs, scaling policies, lifecycle hooks (Put/Describe/Delete/Complete/RecordHeartbeat), scheduled actions, tags (CreateOrUpdate/Describe/Delete). CDK/Terraform compatible.",
+      "notes": "23 actions; in-memory state, no real instance scaling. Full ASG lifecycle: launch configs, scaling policies, lifecycle hooks (Put/Describe/Delete/Complete/RecordHeartbeat), scheduled actions, tags (CreateOrUpdate/Describe/Delete). CDK/Terraform compatible. A group's LaunchTemplate is resolved to the EC2 template it names, with its id and name, and an unknown template or version answers AWS's ValidationError.",
       "gotchas": [
         "No actual instances are launched or terminated — DesiredCapacity is stored but not acted on",
-        "DescribeAutoScalingInstances always returns empty — no synthetic instance records",
+        "DescribeAutoScalingInstances lists synthetic instance records for each group's desired capacity; no EC2 instances are launched",
         "DescribeScalingActivities always returns empty — no scaling activity tracking",
         "Lifecycle hook actions (Complete/RecordHeartbeat) are no-ops"
       ]
@@ -164,7 +164,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List), web ACL association (AssociateDistributionWebACL/DisassociateDistributionWebACL), VPC origins (Create/Get/Update/Delete/List; the endpoint must be an ALB, NLB or EC2 instance in MiniStack, and viewer requests are not routed to it). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution. Also SaaS Manager multi-tenant distributions (connection groups + distribution tenants).",
+      "notes": "Distributions (Create/CreateWithTags/Get/GetConfig/List/Update/Delete), invalidations (Create/List/Get), OAC (Create/Get/GetConfig/List/Update/Delete), CloudFront Functions (Create/Delete/Describe/Get/List/Publish/Update), KeyValueStore (Create/Describe/List/Update/Delete), tags (Tag/Untag/List), web ACL association (AssociateDistributionWebACL/DisassociateDistributionWebACL), VPC origins (Create/Get/Update/Delete/List; the endpoint must be an ALB, NLB or EC2 instance in MiniStack, and viewer requests are not routed to it). ETag-based optimistic concurrency on all mutating operations. CallerReference idempotency on CreateDistribution. Also SaaS Manager multi-tenant distributions (connection groups + distribution tenants). DescribeFunction and GetFunction without Stage answer the DEVELOPMENT stage.",
       "gotchas": [
         "Distributions deploy instantly — no real CDN edge propagation",
         "CloudFront Functions run in Node.js on the data plane; without node they cannot run",
@@ -653,11 +653,11 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "Full S3 implementation: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV1/V2, DeleteObjects (batch), multipart upload (Create/UploadPart/Complete/Abort/List/ListParts), object tagging, ListObjectVersions, bucket sub-resources (Policy/Versioning/Encryption/Lifecycle/CORS/ACL/Tagging/Notification/Logging/Accelerate/RequestPayment/Website/PublicAccessBlock), Object Lock (retention/legal hold enforcement on delete), replication (Put/Get/Delete), range requests (206), Content-MD5 validation, encoding-type=url. PutObject checksums end-to-end: SHA256 / SHA1 / CRC32 client-supplied values are accepted, x-amz-sdk-checksum-algorithm triggers server-side compute, mismatch rejected with BadDigest. Get / HeadObject surface checksum headers under x-amz-checksum-mode: ENABLED (never on 206 Partial Content — a whole-object checksum can't validate sliced bytes). CopyObject propagates the source checksum (or computes/validates against a different algorithm requested via x-amz-sdk-checksum-algorithm). Versioned reads honor per-version checksums. Checksums persist across restart via the on-disk meta sidecar. CRC32C / CRC64NVME are rejected with InvalidRequest rather than silently round-tripping unverifiable client-supplied values (the dep ministack would need to compute them isn't bundled per the no-new-deps rule). CreateBucket / DeleteBucket account-scope the on-disk bucket directory to match the canonical object writer (_object_disk_path), so the persisted layout is end-to-end account-scoped under DATA_DIR/<account>/<bucket>/<key>. With S3_PERSIST=1, keys a file path can't hold (a trailing slash, a key under another key's object, doubled or dot segments) are stored under the bucket's .ministack-keys directory by an encoded name, so they survive a restart.",
+      "notes": "Full S3 implementation: CreateBucket, DeleteBucket, ListBuckets, HeadBucket, PutObject, GetObject, DeleteObject, HeadObject, CopyObject, ListObjectsV1/V2, DeleteObjects (batch), multipart upload (Create/UploadPart/Complete/Abort/List/ListParts), object tagging, ListObjectVersions, bucket sub-resources (Policy/Versioning/Encryption/Lifecycle/CORS/ACL/Tagging/Notification/Logging/Accelerate/RequestPayment/Website/PublicAccessBlock), Object Lock (retention/legal hold enforcement on delete), replication (Put/Get/Delete), range requests (206), Content-MD5 validation, encoding-type=url. PutObject checksums end-to-end: SHA256 / SHA1 / CRC32 client-supplied values are accepted, x-amz-sdk-checksum-algorithm triggers server-side compute, mismatch rejected with BadDigest. Get / HeadObject surface checksum headers under x-amz-checksum-mode: ENABLED (never on 206 Partial Content — a whole-object checksum can't validate sliced bytes). CopyObject propagates the source checksum (or computes/validates against a different algorithm requested via x-amz-sdk-checksum-algorithm). Versioned reads honor per-version checksums. Checksums persist across restart via the on-disk meta sidecar. CRC32C / CRC64NVME are rejected with InvalidRequest rather than silently round-tripping unverifiable client-supplied values (the dep ministack would need to compute them isn't bundled per the no-new-deps rule). CreateBucket / DeleteBucket account-scope the on-disk bucket directory to match the canonical object writer (_object_disk_path), so the persisted layout is end-to-end account-scoped under DATA_DIR/<account>/<bucket>/<key>. With S3_PERSIST=1, keys a file path can't hold (a trailing slash, a key under another key's object, doubled or dot segments) are stored under the bucket's .ministack-keys directory by an encoded name, so they survive a restart. With AUTH=false a presigned URL is accepted like a header-signed request; AUTH=true verifies it.",
       "gotchas": [
         "Optional disk persistence via S3_PERSIST=1 or S3_DATA_DIR",
         "ACLs are stored but not enforced on access",
-        "Bucket policies are stored but not evaluated",
+        "Bucket policies are evaluated only with AUTH=true",
         "Lifecycle rules are stored but not automatically executed",
         "Replication copies objects to the destination by each rule's filter and status; ReplicationTime, Metrics and replica KMS settings are stored but don't change timing or encryption",
         "Glacier / Deep Archive restore is emulated: an object in GLACIER/DEEP_ARCHIVE is unreadable (InvalidObjectState) until RestoreObject completes, in seconds rather than AWS's hours; GLACIER_IR stays readable"
@@ -690,10 +690,9 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "12 actions: CreateSchedule, GetSchedule, ListSchedules, UpdateSchedule, DeleteSchedule, CreateScheduleGroup, GetScheduleGroup, ListScheduleGroups, DeleteScheduleGroup, TagResource, UntagResource, ListTagsForResource. Schedule groups with cascading deletes; rate(), cron(), at() expressions; group/prefix/state filters; CFN AWS::Scheduler::Schedule and ScheduleGroup supported.",
+      "notes": "12 actions: CreateSchedule, GetSchedule, ListSchedules, UpdateSchedule, DeleteSchedule, CreateScheduleGroup, GetScheduleGroup, ListScheduleGroups, DeleteScheduleGroup, TagResource, UntagResource, ListTagsForResource. Schedule groups with cascading deletes; rate(), cron(), at() expressions; group/prefix/state filters; CFN AWS::Scheduler::Schedule and ScheduleGroup supported. Schedules fire from a background sweep; an event bus target publishes with its EventBridgeParameters Source and DetailType.",
       "gotchas": [
-        "Schedules are stored but not actually triggered — no background scheduler execution",
-        "rate()/cron()/at() expressions are parsed for validation but not evaluated"
+        "Schedules fire from a 10-second sweep, so one can fire up to 10 seconds after its time"
       ]
     },
     "secretsmanager": {
@@ -701,10 +700,10 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "14 operations: CreateSecret, GetSecretValue, ListSecrets, DeleteSecret, RestoreSecret, UpdateSecret, DescribeSecret, PutSecretValue, UpdateSecretVersionStage, TagResource, UntagResource, ListSecretVersionIds, RotateSecret, GetRandomPassword, ReplicateSecretToRegions, PutResourcePolicy, GetResourcePolicy, DeleteResourcePolicy, ValidateResourcePolicy.",
+      "notes": "14 operations: CreateSecret, GetSecretValue, ListSecrets, DeleteSecret, RestoreSecret, UpdateSecret, DescribeSecret, PutSecretValue, UpdateSecretVersionStage, TagResource, UntagResource, ListSecretVersionIds, RotateSecret, GetRandomPassword, ReplicateSecretToRegions, PutResourcePolicy, GetResourcePolicy, DeleteResourcePolicy, ValidateResourcePolicy. A partial ARN (the ARN without its random suffix) resolves only its own secret.",
       "gotchas": [
         "RotateSecret stores the rotation config but does not invoke a Lambda rotation function",
-        "Resource policies are stored but not evaluated",
+        "Resource policies are evaluated only with AUTH=true",
         "ReplicateSecretToRegions is metadata-only — no cross-region replication"
       ]
     },
@@ -783,7 +782,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": null,
-      "notes": "28+ operations: CreateStateMachine, DeleteStateMachine, DescribeStateMachine, UpdateStateMachine, ListStateMachines, StartExecution, StartSyncExecution, StopExecution, DescribeExecution, DescribeStateMachineForExecution, ListExecutions, GetExecutionHistory, SendTaskSuccess, SendTaskFailure, SendTaskHeartbeat, CreateActivity, DeleteActivity, DescribeActivity, ListActivities, GetActivityTask, TagResource, UntagResource, ListTagsForResource, PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, DescribeStateMachineAlias, ListStateMachineAliases. Full ASL interpreter: Pass/Task/Choice/Wait/Succeed/Fail/Map/Parallel; Retry/Catch; waitForTaskToken; Activities (worker pattern); TestState API with mock and inspectionLevel; SFN_MOCK_CONFIG for AWS SFN Local compatible mocks; intrinsic functions; nested startExecution.sync; JSONata standard library (~30 built-in functions). Distributed Map: a Map in DISTRIBUTED mode creates a Map Run (ListMapRuns, DescribeMapRun, UpdateMapRun, ListExecutions by mapRunArn) whose items run as child executions, reads items from S3 with ItemReader (s3:getObject JSON/JSONL/CSV, s3:listObjectsV2) and honours tolerated failures; ResultWriter and ItemBatcher are not implemented.",
+      "notes": "28+ operations: CreateStateMachine, DeleteStateMachine, DescribeStateMachine, UpdateStateMachine, ListStateMachines, StartExecution, StartSyncExecution, StopExecution, DescribeExecution, DescribeStateMachineForExecution, ListExecutions, GetExecutionHistory, SendTaskSuccess, SendTaskFailure, SendTaskHeartbeat, CreateActivity, DeleteActivity, DescribeActivity, ListActivities, GetActivityTask, TagResource, UntagResource, ListTagsForResource, PublishStateMachineVersion, DeleteStateMachineVersion, ListStateMachineVersions, CreateStateMachineAlias, UpdateStateMachineAlias, DeleteStateMachineAlias, DescribeStateMachineAlias, ListStateMachineAliases. Full ASL interpreter: Pass/Task/Choice/Wait/Succeed/Fail/Map/Parallel; Retry/Catch; waitForTaskToken; Activities (worker pattern); TestState API with mock and inspectionLevel; SFN_MOCK_CONFIG for AWS SFN Local compatible mocks; intrinsic functions; nested startExecution.sync; JSONata standard library (~30 built-in functions). Distributed Map: a Map in DISTRIBUTED mode creates a Map Run (ListMapRuns, DescribeMapRun, UpdateMapRun, ListExecutions by mapRunArn) whose items run as child executions, reads items from S3 with ItemReader (s3:getObject JSON/JSONL/CSV, s3:listObjectsV2) and honours tolerated failures; ResultWriter and ItemBatcher are not implemented. Optimized glue:startJobRun (with .sync waiting for the run) and aws-sdk:scheduler tasks; JSONPath states support Assign and $variable references; states inside a Map item or Parallel branch write their StateEntered/StateExited events.",
       "gotchas": [
         "Executions run in background threads — not truly parallel for Map/Parallel states",
         "Wait states use real time.sleep — long waits block the execution thread",
@@ -931,7 +930,7 @@
       "persistence": true,
       "multi_tenant": true,
       "real_backend": "optional postgres",
-      "notes": "Aurora DSQL cluster control plane; optional real Postgres backend behind a SQL-validating wire-protocol proxy (DSQL_STRICT=1).",
+      "notes": "Aurora DSQL cluster control plane; optional real Postgres backend behind a SQL-validating wire-protocol proxy (DSQL_STRICT=1). With DSQL_STRICT=1, AWS IAM GRANT and AWS IAM REVOKE map Postgres roles to IAM ARNs (sys.iam_pg_role_mappings), over either wire protocol and in batches, and DROP ROLE of a mapped role answers 2BP01.",
       "gotchas": [
         "Control plane by default — a cluster reaches ACTIVE with nothing listening on its endpoint",
         "Not region-isolated — cluster state is shared across regions within an account (use unique names)"
