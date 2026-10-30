@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.34",
-  "generated_at": "2026-10-29T14:57:32Z",
+  "ministack_version": "1.5.35",
+  "generated_at": "2026-10-30T09:24:24Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -56,6 +56,7 @@
     "alb": {
       "name": "alb",
       "operations": [
+        "AddListenerCertificates",
         "AddTags",
         "CreateListener",
         "CreateLoadBalancer",
@@ -67,6 +68,7 @@
         "DeleteTargetGroup",
         "DeregisterTargets",
         "DescribeListenerAttributes",
+        "DescribeListenerCertificates",
         "DescribeListeners",
         "DescribeLoadBalancerAttributes",
         "DescribeLoadBalancers",
@@ -82,13 +84,14 @@
         "ModifyTargetGroup",
         "ModifyTargetGroupAttributes",
         "RegisterTargets",
+        "RemoveListenerCertificates",
         "RemoveTags",
         "SetIpAddressType",
         "SetRulePriorities",
         "SetSecurityGroups",
         "SetSubnets"
       ],
-      "operation_count": 31,
+      "operation_count": 34,
       "extraction_sources": [
         "pinned"
       ]
@@ -163,6 +166,7 @@
         "CreateDeployment",
         "CreateDocumentationPart",
         "CreateDomainName",
+        "CreateDomainNameAccessAssociation",
         "CreateModel",
         "CreateRequestValidator",
         "CreateResource",
@@ -173,9 +177,11 @@
         "DeleteApiKey",
         "DeleteAuthorizer",
         "DeleteBasePathMapping",
+        "DeleteClientCertificate",
         "DeleteDeployment",
         "DeleteDocumentationPart",
         "DeleteDomainName",
+        "DeleteDomainNameAccessAssociation",
         "DeleteGatewayResponse",
         "DeleteIntegration",
         "DeleteIntegrationResponse",
@@ -188,6 +194,7 @@
         "DeleteStage",
         "DeleteUsagePlan",
         "DeleteUsagePlanKey",
+        "GenerateClientCertificate",
         "GetAccount",
         "GetApiKey",
         "GetApiKeys",
@@ -195,11 +202,14 @@
         "GetAuthorizers",
         "GetBasePathMapping",
         "GetBasePathMappings",
+        "GetClientCertificate",
+        "GetClientCertificates",
         "GetDeployment",
         "GetDeployments",
         "GetDocumentationPart",
         "GetDocumentationParts",
         "GetDomainName",
+        "GetDomainNameAccessAssociations",
         "GetDomainNames",
         "GetExport",
         "GetGatewayResponse",
@@ -228,11 +238,14 @@
         "PutIntegrationResponse",
         "PutMethod",
         "PutMethodResponse",
+        "PutRestApi",
+        "RejectDomainNameAccessAssociation",
         "TagResource",
         "UntagResource",
         "UpdateAccount",
         "UpdateApiKey",
         "UpdateAuthorizer",
+        "UpdateClientCertificate",
         "UpdateDeployment",
         "UpdateDocumentationPart",
         "UpdateIntegration",
@@ -244,7 +257,7 @@
         "UpdateStage",
         "UpdateUsagePlan"
       ],
-      "operation_count": 86,
+      "operation_count": 96,
       "extraction_sources": [
         "pinned"
       ]
@@ -1944,6 +1957,7 @@
         "CreateRole",
         "CreateSAMLProvider",
         "CreateServiceLinkedRole",
+        "CreateServiceSpecificCredential",
         "CreateUser",
         "CreateVirtualMFADevice",
         "DeactivateMFADevice",
@@ -1961,7 +1975,9 @@
         "DeleteRolePermissionsBoundary",
         "DeleteRolePolicy",
         "DeleteSAMLProvider",
+        "DeleteServerCertificate",
         "DeleteServiceLinkedRole",
+        "DeleteServiceSpecificCredential",
         "DeleteUser",
         "DeleteUserPermissionsBoundary",
         "DeleteUserPolicy",
@@ -1987,6 +2003,7 @@
         "GetRole",
         "GetRolePolicy",
         "GetSAMLProvider",
+        "GetServerCertificate",
         "GetServiceLastAccessedDetails",
         "GetServiceLinkedRoleDeletionStatus",
         "GetUser",
@@ -2012,6 +2029,9 @@
         "ListRoleTags",
         "ListRoles",
         "ListSAMLProviders",
+        "ListServerCertificateTags",
+        "ListServerCertificates",
+        "ListServiceSpecificCredentials",
         "ListUserPolicies",
         "ListUserTags",
         "ListUsers",
@@ -2023,6 +2043,7 @@
         "PutUserPolicy",
         "RemoveRoleFromInstanceProfile",
         "RemoveUserFromGroup",
+        "ResetServiceSpecificCredential",
         "ResyncMFADevice",
         "SimulateCustomPolicy",
         "SimulatePrincipalPolicy",
@@ -2040,9 +2061,12 @@
         "UpdateLoginProfile",
         "UpdateRole",
         "UpdateRoleDescription",
-        "UpdateSAMLProvider"
+        "UpdateSAMLProvider",
+        "UpdateServerCertificate",
+        "UpdateServiceSpecificCredential",
+        "UploadServerCertificate"
       ],
-      "operation_count": 113,
+      "operation_count": 124,
       "extraction_sources": [
         "pinned"
       ]
