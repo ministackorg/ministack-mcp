@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.35",
-  "generated_at": "2026-10-30T09:24:24Z",
+  "ministack_version": "1.5.37",
+  "generated_at": "2026-11-04T10:15:16Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1858,6 +1858,7 @@
         "BatchCreatePartition",
         "BatchDeleteTable",
         "BatchGetPartition",
+        "BatchGetTableOptimizer",
         "BatchGetTriggers",
         "BatchStopJobRun",
         "BatchUpdatePartition",
@@ -1870,6 +1871,7 @@
         "CreatePartitionIndex",
         "CreateSecurityConfiguration",
         "CreateTable",
+        "CreateTableOptimizer",
         "CreateTrigger",
         "CreateUserDefinedFunction",
         "CreateWorkflow",
@@ -1883,6 +1885,7 @@
         "DeletePartition",
         "DeleteSecurityConfiguration",
         "DeleteTable",
+        "DeleteTableOptimizer",
         "DeleteTrigger",
         "DeleteUserDefinedFunction",
         "DeleteWorkflow",
@@ -1907,6 +1910,7 @@
         "GetSecurityConfiguration",
         "GetSecurityConfigurations",
         "GetTable",
+        "GetTableOptimizer",
         "GetTables",
         "GetTags",
         "GetTrigger",
@@ -1914,6 +1918,7 @@
         "GetUserDefinedFunction",
         "GetUserDefinedFunctions",
         "GetWorkflow",
+        "ListTableOptimizerRuns",
         "ListTriggers",
         "StartCrawler",
         "StartJobRun",
@@ -1929,11 +1934,12 @@
         "UpdateDatabase",
         "UpdateJob",
         "UpdateTable",
+        "UpdateTableOptimizer",
         "UpdateTrigger",
         "UpdateUserDefinedFunction",
         "UpdateWorkflow"
       ],
-      "operation_count": 77,
+      "operation_count": 83,
       "extraction_sources": [
         "pinned"
       ]
@@ -3346,11 +3352,17 @@
       "name": "ssm",
       "operations": [
         "AddTagsToResource",
+        "CreateDocument",
+        "DeleteDocument",
         "DeleteParameter",
         "DeleteParameters",
+        "DescribeAutomationExecutions",
+        "DescribeDocument",
         "DescribeInstanceInformation",
         "DescribeParameters",
+        "GetAutomationExecution",
         "GetCommandInvocation",
+        "GetDocument",
         "GetParameter",
         "GetParameterHistory",
         "GetParameters",
@@ -3358,14 +3370,17 @@
         "GetServiceSetting",
         "LabelParameterVersion",
         "ListCommands",
+        "ListDocuments",
         "ListTagsForResource",
         "PutParameter",
         "RemoveTagsFromResource",
         "ResetServiceSetting",
         "SendCommand",
+        "StartAutomationExecution",
+        "StopAutomationExecution",
         "UpdateServiceSetting"
       ],
-      "operation_count": 19,
+      "operation_count": 28,
       "extraction_sources": [
         "pinned"
       ]
@@ -3575,6 +3590,7 @@
         "DescribeStackResource",
         "DescribeStackResourceDrifts",
         "DescribeStackResources",
+        "DescribeStackSet",
         "DescribeStacks",
         "DetectStackDrift",
         "DetectStackResourceDrift",
@@ -3585,6 +3601,7 @@
         "ListChangeSets",
         "ListExports",
         "ListImports",
+        "ListStackInstances",
         "ListStackResources",
         "ListStacks",
         "RollbackStack",
@@ -3594,7 +3611,7 @@
         "UpdateTerminationProtection",
         "ValidateTemplate"
       ],
-      "operation_count": 31,
+      "operation_count": 33,
       "extraction_sources": [
         "pinned"
       ]
@@ -3826,13 +3843,6 @@
         "ministack/services/codebuild.py"
       ],
       "default": "0"
-    },
-    "MINISTACK_COGNITO_PRETOKEN_STRICT": {
-      "name": "MINISTACK_COGNITO_PRETOKEN_STRICT",
-      "files": [
-        "ministack/services/cognito.py"
-      ],
-      "default": ""
     },
     "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC": {
       "name": "MINISTACK_DDB_EXPORT_COMPLETE_AFTER_SEC",
