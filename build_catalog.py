@@ -238,6 +238,9 @@ def _extract_ops(filepath: str) -> tuple[set[str], list[str]]:
     return ops, sources
 
 
+_NOT_MINISTACK_ENV = frozenset({"HOSTNAME", "TMPDIR", "HOME", "PATH", "USER", "PWD", "SHELL", "LANG"})
+
+
 def _extract_env_vars() -> dict[str, dict]:
     """Walk ministack/ for os.environ.get / getenv / os.environ[...] usage."""
     found: dict[str, dict] = {}
@@ -267,7 +270,15 @@ def _extract_env_vars() -> dict[str, dict]:
                     is_getenv = (
                         isinstance(func, ast.Attribute) and func.attr == "getenv"
                     )
-                    if is_environ_get or is_getenv:
+                    # helpers such as _timeout_from_env("X", 5.0)
+                    fname = func.id if isinstance(func, ast.Name) else getattr(func, "attr", "")
+                    is_env_helper = (
+                        "env" in fname.lower() and fname not in ("getenv", "get")
+                        and node.args and isinstance(node.args[0], ast.Constant)
+                        and isinstance(node.args[0].value, str)
+                        and node.args[0].value.isupper()
+                    )
+                    if is_environ_get or is_getenv or is_env_helper:
                         if node.args and isinstance(node.args[0], ast.Constant):
                             if isinstance(node.args[0].value, str):
                                 key = node.args[0].value
@@ -363,23 +374,8 @@ def build() -> dict:
             services[name] = entry
 
     env_vars = _extract_env_vars()
-    # Drop noisy non-MiniStack vars (PATH, HOME, etc.) — keep only those with
-    # MINISTACK_/AWS_ prefix or that look intentional.
-    env_clean = {}
-    for k, v in env_vars.items():
-        if (
-            k.startswith("MINISTACK_")
-            or k.startswith("AWS_")
-            or k.startswith("OPENSEARCH_")
-            or k.startswith("DSQL_")
-            or k.startswith("LAMBDA_")
-            or k.startswith("CODEBUILD_")
-            or k in {
-                "S3_PERSIST", "DOCKER_HOST", "TZ", "PORT", "PYTHONUNBUFFERED",
-                "IOT_MTLS_ENABLED", "IOT_MTLS_PORT", "AUTH",
-            }
-        ):
-            env_clean[k] = v
+    # Every variable MiniStack reads, minus process/OS ones it doesn't own.
+    env_clean = {k: v for k, v in env_vars.items() if k not in _NOT_MINISTACK_ENV}
 
     return {
         "schema_version": 1,

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.37",
-  "generated_at": "2026-11-04T10:15:16Z",
+  "ministack_version": "1.5.38",
+  "generated_at": "2026-11-05T21:18:44Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1083,6 +1083,7 @@
         "CreateGroup",
         "CreateIdentityPool",
         "CreateIdentityProvider",
+        "CreateManagedLoginBranding",
         "CreateResourceServer",
         "CreateUserPool",
         "CreateUserPoolClient",
@@ -1090,6 +1091,7 @@
         "DeleteGroup",
         "DeleteIdentityPool",
         "DeleteIdentityProvider",
+        "DeleteManagedLoginBranding",
         "DeleteResourceServer",
         "DeleteUser",
         "DeleteUserPool",
@@ -1098,6 +1100,8 @@
         "DescribeIdentity",
         "DescribeIdentityPool",
         "DescribeIdentityProvider",
+        "DescribeManagedLoginBranding",
+        "DescribeManagedLoginBrandingByClient",
         "DescribeResourceServer",
         "DescribeUserPool",
         "DescribeUserPoolClient",
@@ -1143,6 +1147,7 @@
         "UpdateAuthEventFeedback",
         "UpdateIdentityPool",
         "UpdateIdentityProvider",
+        "UpdateManagedLoginBranding",
         "UpdateResourceServer",
         "UpdateUserAttributes",
         "UpdateUserPool",
@@ -1150,7 +1155,7 @@
         "UpdateUserPoolDomain",
         "VerifySoftwareToken"
       ],
-      "operation_count": 94,
+      "operation_count": 99,
       "extraction_sources": [
         "pinned"
       ]
@@ -3618,6 +3623,55 @@
     }
   },
   "env_vars": {
+    "ALB_TARGET_CONNECT_TIMEOUT_SECONDS": {
+      "name": "ALB_TARGET_CONNECT_TIMEOUT_SECONDS",
+      "files": [
+        "ministack/services/alb.py"
+      ],
+      "default": "10"
+    },
+    "ALB_TARGET_IDLE_TIMEOUT_SECONDS": {
+      "name": "ALB_TARGET_IDLE_TIMEOUT_SECONDS",
+      "files": [
+        "ministack/services/alb.py"
+      ],
+      "default": "60"
+    },
+    "APPSYNC_EVENTS_ENFORCE_AUTH": {
+      "name": "APPSYNC_EVENTS_ENFORCE_AUTH",
+      "files": [
+        "ministack/services/appsync_events.py"
+      ],
+      "default": ""
+    },
+    "APPSYNC_EVENTS_HTTP_HOST_TEMPLATE": {
+      "name": "APPSYNC_EVENTS_HTTP_HOST_TEMPLATE",
+      "files": [
+        "ministack/services/appsync_events.py"
+      ],
+      "default": ""
+    },
+    "APPSYNC_EVENTS_KA_INTERVAL_SECS": {
+      "name": "APPSYNC_EVENTS_KA_INTERVAL_SECS",
+      "files": [
+        "ministack/services/appsync_events.py"
+      ],
+      "default": null
+    },
+    "APPSYNC_EVENTS_REALTIME_HOST_TEMPLATE": {
+      "name": "APPSYNC_EVENTS_REALTIME_HOST_TEMPLATE",
+      "files": [
+        "ministack/services/appsync_events.py"
+      ],
+      "default": ""
+    },
+    "ATHENA_ENGINE": {
+      "name": "ATHENA_ENGINE",
+      "files": [
+        "ministack/services/athena.py"
+      ],
+      "default": "auto"
+    },
     "AUTH": {
       "name": "AUTH",
       "files": [
@@ -3675,12 +3729,71 @@
       ],
       "default": null
     },
+    "BIND_HOST": {
+      "name": "BIND_HOST",
+      "files": [
+        "ministack/app.py",
+        "ministack/core/container_reaper.py",
+        "ministack/core/rds_iam.py"
+      ],
+      "default": "0.0.0.0"
+    },
+    "CLOUDTRAIL_MAX_EVENTS": {
+      "name": "CLOUDTRAIL_MAX_EVENTS",
+      "files": [
+        "ministack/services/cloudtrail.py"
+      ],
+      "default": "10000"
+    },
+    "CLOUDTRAIL_RECORDING": {
+      "name": "CLOUDTRAIL_RECORDING",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/cloudtrail.py"
+      ],
+      "default": "0"
+    },
     "CODEBUILD_DOCKER_FLAGS": {
       "name": "CODEBUILD_DOCKER_FLAGS",
       "files": [
         "ministack/services/codebuild.py"
       ],
       "default": ""
+    },
+    "COGNITO_DEFAULT_FROM": {
+      "name": "COGNITO_DEFAULT_FROM",
+      "files": [
+        "ministack/services/cognito.py"
+      ],
+      "default": null
+    },
+    "COGNITO_EMAIL_ENABLED": {
+      "name": "COGNITO_EMAIL_ENABLED",
+      "files": [
+        "ministack/services/cognito.py"
+      ],
+      "default": "true"
+    },
+    "DOCDB_BASE_PORT": {
+      "name": "DOCDB_BASE_PORT",
+      "files": [
+        "ministack/services/documentdb.py"
+      ],
+      "default": "27117"
+    },
+    "DOCDB_PERSIST": {
+      "name": "DOCDB_PERSIST",
+      "files": [
+        "ministack/services/documentdb.py"
+      ],
+      "default": "0"
+    },
+    "DOCDB_TMPFS_SIZE": {
+      "name": "DOCDB_TMPFS_SIZE",
+      "files": [
+        "ministack/services/documentdb.py"
+      ],
+      "default": "256m"
     },
     "DOCKER_HOST": {
       "name": "DOCKER_HOST",
@@ -3689,6 +3802,23 @@
         "ministack/services/dsql.py"
       ],
       "default": null
+    },
+    "DOCKER_NETWORK": {
+      "name": "DOCKER_NETWORK",
+      "files": [
+        "ministack/services/lambda_microvms.py",
+        "ministack/services/rds.py",
+        "ministack/services/elasticache.py",
+        "ministack/services/opensearch.py",
+        "ministack/services/eks.py",
+        "ministack/services/kinesisanalyticsv2_flink.py",
+        "ministack/services/documentdb.py",
+        "ministack/services/mwaa.py",
+        "ministack/services/glue.py",
+        "ministack/services/ec2.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
     },
     "DSQL_BASE_PORT": {
       "name": "DSQL_BASE_PORT",
@@ -3718,6 +3848,116 @@
       ],
       "default": "0"
     },
+    "EC2_DOCKER_FLAGS": {
+      "name": "EC2_DOCKER_FLAGS",
+      "files": [
+        "ministack/services/ec2.py"
+      ],
+      "default": ""
+    },
+    "ECS_REAP_INTERVAL_SECONDS": {
+      "name": "ECS_REAP_INTERVAL_SECONDS",
+      "files": [
+        "ministack/services/ecs.py"
+      ],
+      "default": "60"
+    },
+    "ECS_RESTORE_RECONCILE_DELAY_SECONDS": {
+      "name": "ECS_RESTORE_RECONCILE_DELAY_SECONDS",
+      "files": [
+        "ministack/services/ecs.py"
+      ],
+      "default": "2"
+    },
+    "EDGE_PORT": {
+      "name": "EDGE_PORT",
+      "files": [
+        "ministack/app.py",
+        "ministack/core/lambda_runtime.py",
+        "ministack/core/container_reaper.py",
+        "ministack/services/rds.py",
+        "ministack/services/cognito.py",
+        "ministack/services/eks.py",
+        "ministack/services/opensearchserverless.py",
+        "ministack/services/s3_object_lambda.py",
+        "ministack/services/kinesisanalyticsv2_flink.py",
+        "ministack/services/appsync_events.py",
+        "ministack/services/codebuild.py",
+        "ministack/services/glue.py",
+        "ministack/services/transcribe.py",
+        "ministack/services/lambda_svc.py",
+        "ministack/services/iot.py",
+        "ministack/services/ecs.py",
+        "ministack/services/cloudformation/custom_resource.py"
+      ],
+      "default": "4566"
+    },
+    "EKS_BASE_PORT": {
+      "name": "EKS_BASE_PORT",
+      "files": [
+        "ministack/services/eks.py"
+      ],
+      "default": "16443"
+    },
+    "EKS_K3S_IMAGE": {
+      "name": "EKS_K3S_IMAGE",
+      "files": [
+        "ministack/services/eks.py"
+      ],
+      "default": "rancher/k3s:v1.31.4-k3s1"
+    },
+    "ELASTICACHE_BASE_PORT": {
+      "name": "ELASTICACHE_BASE_PORT",
+      "files": [
+        "ministack/services/elasticache.py"
+      ],
+      "default": "16379"
+    },
+    "ELASTICACHE_CLUSTER_MODE_REAL": {
+      "name": "ELASTICACHE_CLUSTER_MODE_REAL",
+      "files": [
+        "ministack/services/elasticache.py"
+      ],
+      "default": ""
+    },
+    "GATEWAY_PORT": {
+      "name": "GATEWAY_PORT",
+      "files": [
+        "ministack/app.py",
+        "ministack/core/lambda_runtime.py",
+        "ministack/core/container_reaper.py",
+        "ministack/services/rds.py",
+        "ministack/services/dynamodb.py",
+        "ministack/services/cognito.py",
+        "ministack/services/sqs.py",
+        "ministack/services/eks.py",
+        "ministack/services/opensearchserverless.py",
+        "ministack/services/s3_object_lambda.py",
+        "ministack/services/kinesisanalyticsv2_flink.py",
+        "ministack/services/appsync_events.py",
+        "ministack/services/apigateway.py",
+        "ministack/services/codebuild.py",
+        "ministack/services/glue.py",
+        "ministack/services/transcribe.py",
+        "ministack/services/lambda_svc.py",
+        "ministack/services/firehose.py",
+        "ministack/services/s3tables.py",
+        "ministack/services/athena.py",
+        "ministack/services/iot.py",
+        "ministack/services/ecs.py",
+        "ministack/services/sns.py",
+        "ministack/services/cloudformation/provisioners.py",
+        "ministack/services/cloudformation/custom_resource.py"
+      ],
+      "default": "4566"
+    },
+    "GLUE_DOCKER_IMAGE": {
+      "name": "GLUE_DOCKER_IMAGE",
+      "files": [
+        "ministack/services/glue.py"
+      ],
+      "default": ""
+    },
     "IOT_MTLS_ENABLED": {
       "name": "IOT_MTLS_ENABLED",
       "files": [
@@ -3732,6 +3972,27 @@
         "ministack/services/iot.py"
       ],
       "default": ""
+    },
+    "IOT_RETRANSMIT_SECONDS": {
+      "name": "IOT_RETRANSMIT_SECONDS",
+      "files": [
+        "ministack/services/iot.py"
+      ],
+      "default": "30"
+    },
+    "IOT_SESSION_EXPIRY_SECONDS": {
+      "name": "IOT_SESSION_EXPIRY_SECONDS",
+      "files": [
+        "ministack/services/iot.py"
+      ],
+      "default": "3600"
+    },
+    "IOT_WS_FRAME_MAX_BYTES": {
+      "name": "IOT_WS_FRAME_MAX_BYTES",
+      "files": [
+        "ministack/services/iot.py"
+      ],
+      "default": null
     },
     "LAMBDA_ACCOUNT_CONCURRENCY": {
       "name": "LAMBDA_ACCOUNT_CONCURRENCY",
@@ -3804,6 +4065,35 @@
       ],
       "default": "300"
     },
+    "LOCALSTACK_HOSTNAME": {
+      "name": "LOCALSTACK_HOSTNAME",
+      "files": [
+        "ministack/core/lambda_runtime.py",
+        "ministack/services/lambda_svc.py"
+      ],
+      "default": ""
+    },
+    "LOCALSTACK_PERSISTENCE": {
+      "name": "LOCALSTACK_PERSISTENCE",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": null
+    },
+    "LOCALSTACK_SFN_MOCK_CONFIG": {
+      "name": "LOCALSTACK_SFN_MOCK_CONFIG",
+      "files": [
+        "ministack/services/stepfunctions.py"
+      ],
+      "default": null
+    },
+    "LOG_LEVEL": {
+      "name": "LOG_LEVEL",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": "INFO"
+    },
     "MINISTACK_ACCOUNT_ID": {
       "name": "MINISTACK_ACCOUNT_ID",
       "files": [
@@ -3815,6 +4105,21 @@
         "ministack/services/iot.py"
       ],
       "default": "000000000000"
+    },
+    "MINISTACK_APIGW_JWKS_TIMEOUT_SECONDS": {
+      "name": "MINISTACK_APIGW_JWKS_TIMEOUT_SECONDS",
+      "files": [
+        "ministack/services/apigateway.py"
+      ],
+      "default": 5.0
+    },
+    "MINISTACK_APIGW_PROXY_TIMEOUT_SECONDS": {
+      "name": "MINISTACK_APIGW_PROXY_TIMEOUT_SECONDS",
+      "files": [
+        "ministack/services/apigateway.py",
+        "ministack/services/apigateway_v1.py"
+      ],
+      "default": 30.0
     },
     "MINISTACK_AUTOCREATE_AWS_MANAGED": {
       "name": "MINISTACK_AUTOCREATE_AWS_MANAGED",
@@ -4057,6 +4362,27 @@
       ],
       "default": "64"
     },
+    "MWAA_AIRFLOW_IMAGE": {
+      "name": "MWAA_AIRFLOW_IMAGE",
+      "files": [
+        "ministack/services/mwaa.py"
+      ],
+      "default": "apache/airflow:3.0.6"
+    },
+    "MWAA_BASE_PORT": {
+      "name": "MWAA_BASE_PORT",
+      "files": [
+        "ministack/services/mwaa.py"
+      ],
+      "default": "18080"
+    },
+    "MWAA_PERSIST": {
+      "name": "MWAA_PERSIST",
+      "files": [
+        "ministack/services/mwaa.py"
+      ],
+      "default": "0"
+    },
     "OPENSEARCH_BASE_PORT": {
       "name": "OPENSEARCH_BASE_PORT",
       "files": [
@@ -4099,6 +4425,58 @@
       ],
       "default": "opensearchproject/opensearch:2.15.0"
     },
+    "PERSIST_STATE": {
+      "name": "PERSIST_STATE",
+      "files": [
+        "ministack/core/persistence.py"
+      ],
+      "default": "0"
+    },
+    "RDS_BASE_PORT": {
+      "name": "RDS_BASE_PORT",
+      "files": [
+        "ministack/services/rds.py"
+      ],
+      "default": "15432"
+    },
+    "RDS_PERSIST": {
+      "name": "RDS_PERSIST",
+      "files": [
+        "ministack/services/rds.py"
+      ],
+      "default": "0"
+    },
+    "RDS_TMPFS_SIZE": {
+      "name": "RDS_TMPFS_SIZE",
+      "files": [
+        "ministack/services/rds.py"
+      ],
+      "default": "256m"
+    },
+    "REDIS_HOST": {
+      "name": "REDIS_HOST",
+      "files": [
+        "ministack/services/elasticache.py"
+      ],
+      "default": "redis"
+    },
+    "REDIS_PORT": {
+      "name": "REDIS_PORT",
+      "files": [
+        "ministack/services/elasticache.py"
+      ],
+      "default": "6379"
+    },
+    "S3_DATA_DIR": {
+      "name": "S3_DATA_DIR",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/glue.py",
+        "ministack/services/athena.py",
+        "ministack/services/s3.py"
+      ],
+      "default": "/tmp/ministack-data/s3"
+    },
     "S3_PERSIST": {
       "name": "S3_PERSIST",
       "files": [
@@ -4106,6 +4484,93 @@
         "ministack/services/s3.py"
       ],
       "default": "0"
+    },
+    "SERVICES": {
+      "name": "SERVICES",
+      "files": [
+        "ministack/app.py"
+      ],
+      "default": ""
+    },
+    "SFN_MOCK_CONFIG": {
+      "name": "SFN_MOCK_CONFIG",
+      "files": [
+        "ministack/services/stepfunctions.py"
+      ],
+      "default": null
+    },
+    "SFN_WAIT_SCALE": {
+      "name": "SFN_WAIT_SCALE",
+      "files": [
+        "ministack/services/stepfunctions.py"
+      ],
+      "default": "1"
+    },
+    "SFTP_BASE_PORT": {
+      "name": "SFTP_BASE_PORT",
+      "files": [
+        "ministack/services/transfer.py"
+      ],
+      "default": "2300"
+    },
+    "SFTP_ENABLED": {
+      "name": "SFTP_ENABLED",
+      "files": [
+        "ministack/app.py",
+        "ministack/services/transfer.py"
+      ],
+      "default": ""
+    },
+    "SFTP_HOST": {
+      "name": "SFTP_HOST",
+      "files": [
+        "ministack/services/transfer.py"
+      ],
+      "default": "0.0.0.0"
+    },
+    "SFTP_PORT": {
+      "name": "SFTP_PORT",
+      "files": [
+        "ministack/services/transfer.py"
+      ],
+      "default": "2222"
+    },
+    "SFTP_PORT_PER_SERVER": {
+      "name": "SFTP_PORT_PER_SERVER",
+      "files": [
+        "ministack/services/transfer.py"
+      ],
+      "default": null
+    },
+    "SMTP_HOST": {
+      "name": "SMTP_HOST",
+      "files": [
+        "ministack/services/ses.py"
+      ],
+      "default": null
+    },
+    "STATE_DIR": {
+      "name": "STATE_DIR",
+      "files": [
+        "ministack/core/persistence.py",
+        "ministack/services/cognito.py"
+      ],
+      "default": "/tmp/ministack-state"
+    },
+    "TRANSLATE_JOB_RUN_SECONDS": {
+      "name": "TRANSLATE_JOB_RUN_SECONDS",
+      "files": [
+        "ministack/services/translate.py"
+      ],
+      "default": "2"
+    },
+    "USE_SSL": {
+      "name": "USE_SSL",
+      "files": [
+        "ministack/core/tls.py",
+        "ministack/services/glue.py"
+      ],
+      "default": ""
     }
   }
 }
