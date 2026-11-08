@@ -947,6 +947,7 @@
     "GetTokensFromRefreshToken",
     "GetUICustomization",
     "GetUser",
+    "GetUserAttributeVerificationCode",
     "GetUserPoolMfaConfig",
     "GlobalSignOut",
     "InitiateAuth",
@@ -983,7 +984,8 @@
     "UpdateUserPool",
     "UpdateUserPoolClient",
     "UpdateUserPoolDomain",
-    "VerifySoftwareToken"
+    "VerifySoftwareToken",
+    "VerifyUserAttribute"
   ],
   "cur": [
     "DeleteReportDefinition",
@@ -2544,9 +2546,11 @@
     "ListSecrets",
     "PutResourcePolicy",
     "PutSecretValue",
+    "RemoveRegionsFromReplication",
     "ReplicateSecretToRegions",
     "RestoreSecret",
     "RotateSecret",
+    "StopReplicationToReplica",
     "TagResource",
     "UntagResource",
     "UpdateSecret",

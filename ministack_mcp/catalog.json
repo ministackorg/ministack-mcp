@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.38",
-  "generated_at": "2026-11-05T21:18:44Z",
+  "ministack_version": "1.5.39",
+  "generated_at": "2026-11-08T17:55:29Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1117,6 +1117,7 @@
         "GetTokensFromRefreshToken",
         "GetUICustomization",
         "GetUser",
+        "GetUserAttributeVerificationCode",
         "GetUserPoolMfaConfig",
         "GlobalSignOut",
         "InitiateAuth",
@@ -1153,9 +1154,10 @@
         "UpdateUserPool",
         "UpdateUserPoolClient",
         "UpdateUserPoolDomain",
-        "VerifySoftwareToken"
+        "VerifySoftwareToken",
+        "VerifyUserAttribute"
       ],
-      "operation_count": 99,
+      "operation_count": 101,
       "extraction_sources": [
         "pinned"
       ]
@@ -3119,16 +3121,18 @@
         "ListSecrets",
         "PutResourcePolicy",
         "PutSecretValue",
+        "RemoveRegionsFromReplication",
         "ReplicateSecretToRegions",
         "RestoreSecret",
         "RotateSecret",
+        "StopReplicationToReplica",
         "TagResource",
         "UntagResource",
         "UpdateSecret",
         "UpdateSecretVersionStage",
         "ValidateResourcePolicy"
       ],
-      "operation_count": 20,
+      "operation_count": 22,
       "extraction_sources": [
         "pinned"
       ]
