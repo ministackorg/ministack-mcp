@@ -1559,6 +1559,7 @@
   ],
   "glue": [
     "BatchCreatePartition",
+    "BatchDeletePartition",
     "BatchDeleteTable",
     "BatchGetPartition",
     "BatchGetTableOptimizer",
@@ -2666,6 +2667,7 @@
     "PutConfigurationSetSuppressionOptions",
     "PutConfigurationSetTrackingOptions",
     "PutConfigurationSetVdmOptions",
+    "PutEmailIdentityConfigurationSetAttributes",
     "PutTenantSuppressionAttributes",
     "SendEmail",
     "TagResource",

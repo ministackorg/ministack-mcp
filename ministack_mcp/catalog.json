@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.39",
-  "generated_at": "2026-11-08T17:55:29Z",
+  "ministack_version": "1.5.40",
+  "generated_at": "2026-11-11T18:02:42Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1863,6 +1863,7 @@
       "name": "glue",
       "operations": [
         "BatchCreatePartition",
+        "BatchDeletePartition",
         "BatchDeleteTable",
         "BatchGetPartition",
         "BatchGetTableOptimizer",
@@ -1946,7 +1947,7 @@
         "UpdateUserDefinedFunction",
         "UpdateWorkflow"
       ],
-      "operation_count": 83,
+      "operation_count": 84,
       "extraction_sources": [
         "pinned"
       ]
@@ -3262,6 +3263,7 @@
         "PutConfigurationSetSuppressionOptions",
         "PutConfigurationSetTrackingOptions",
         "PutConfigurationSetVdmOptions",
+        "PutEmailIdentityConfigurationSetAttributes",
         "PutTenantSuppressionAttributes",
         "SendEmail",
         "TagResource",
@@ -3269,7 +3271,7 @@
         "UpdateConfigurationSetEventDestination",
         "UpdateEmailTemplate"
       ],
-      "operation_count": 45,
+      "operation_count": 46,
       "extraction_sources": [
         "pinned"
       ]
