@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.40",
-  "generated_at": "2026-11-11T18:02:42Z",
+  "ministack_version": "1.5.41",
+  "generated_at": "2026-11-14T20:56:06Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
