@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.41",
-  "generated_at": "2026-11-14T20:56:06Z",
+  "ministack_version": "1.5.42",
+  "generated_at": "2026-11-18T13:28:26Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1519,16 +1519,24 @@
         "BatchDeleteImage",
         "BatchGetImage",
         "CompleteLayerUpload",
+        "CreatePullThroughCacheRule",
         "CreateRepository",
+        "CreateRepositoryCreationTemplate",
         "DeleteLifecyclePolicy",
+        "DeletePullThroughCacheRule",
+        "DeleteRegistryPolicy",
         "DeleteRepository",
+        "DeleteRepositoryCreationTemplate",
         "DeleteRepositoryPolicy",
         "DescribeImages",
+        "DescribePullThroughCacheRules",
         "DescribeRegistry",
         "DescribeRepositories",
+        "DescribeRepositoryCreationTemplates",
         "GetAuthorizationToken",
         "GetDownloadUrlForLayer",
         "GetLifecyclePolicy",
+        "GetRegistryPolicy",
         "GetRepositoryPolicy",
         "InitiateLayerUpload",
         "ListImages",
@@ -1537,12 +1545,16 @@
         "PutImageScanningConfiguration",
         "PutImageTagMutability",
         "PutLifecyclePolicy",
+        "PutRegistryPolicy",
         "SetRepositoryPolicy",
         "TagResource",
         "UntagResource",
-        "UploadLayerPart"
+        "UpdatePullThroughCacheRule",
+        "UpdateRepositoryCreationTemplate",
+        "UploadLayerPart",
+        "ValidatePullThroughCacheRule"
       ],
-      "operation_count": 26,
+      "operation_count": 38,
       "extraction_sources": [
         "pinned"
       ]
