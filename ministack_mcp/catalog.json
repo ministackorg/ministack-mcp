@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "ministack_version": "1.5.42",
-  "generated_at": "2026-11-18T13:28:26Z",
+  "ministack_version": "1.5.44",
+  "generated_at": "2026-11-23T00:53:56Z",
   "endpoint": {
     "default_url": "http://localhost:4566",
     "default_port": 4566,
@@ -1056,6 +1056,7 @@
       "name": "cognito",
       "operations": [
         "AddCustomAttributes",
+        "AddUserPoolClientSecret",
         "AdminAddUserToGroup",
         "AdminConfirmSignUp",
         "AdminCreateUser",
@@ -1096,6 +1097,7 @@
         "DeleteUser",
         "DeleteUserPool",
         "DeleteUserPoolClient",
+        "DeleteUserPoolClientSecret",
         "DeleteUserPoolDomain",
         "DescribeIdentity",
         "DescribeIdentityPool",
@@ -1127,6 +1129,7 @@
         "ListIdentityProviders",
         "ListResourceServers",
         "ListTagsForResource",
+        "ListUserPoolClientSecrets",
         "ListUserPoolClients",
         "ListUserPools",
         "ListUsers",
@@ -1157,7 +1160,7 @@
         "VerifySoftwareToken",
         "VerifyUserAttribute"
       ],
-      "operation_count": 101,
+      "operation_count": 104,
       "extraction_sources": [
         "pinned"
       ]
@@ -1331,6 +1334,8 @@
         "AssociateDhcpOptions",
         "AssociateIamInstanceProfile",
         "AssociateRouteTable",
+        "AssociateTransitGatewayRouteTable",
+        "AssociateVpcCidrBlock",
         "AttachInternetGateway",
         "AttachNetworkInterface",
         "AttachVerifiedAccessTrustProvider",
@@ -1361,6 +1366,10 @@
         "CreateSnapshot",
         "CreateSubnet",
         "CreateTags",
+        "CreateTransitGateway",
+        "CreateTransitGatewayRoute",
+        "CreateTransitGatewayRouteTable",
+        "CreateTransitGatewayVpcAttachment",
         "CreateVerifiedAccessEndpoint",
         "CreateVerifiedAccessGroup",
         "CreateVerifiedAccessInstance",
@@ -1391,6 +1400,10 @@
         "DeleteSnapshot",
         "DeleteSubnet",
         "DeleteTags",
+        "DeleteTransitGateway",
+        "DeleteTransitGatewayRoute",
+        "DeleteTransitGatewayRouteTable",
+        "DeleteTransitGatewayVpcAttachment",
         "DeleteVerifiedAccessEndpoint",
         "DeleteVerifiedAccessGroup",
         "DeleteVerifiedAccessInstance",
@@ -1440,6 +1453,10 @@
         "DescribeSpotInstanceRequests",
         "DescribeSubnets",
         "DescribeTags",
+        "DescribeTransitGatewayAttachments",
+        "DescribeTransitGatewayRouteTables",
+        "DescribeTransitGatewayVpcAttachments",
+        "DescribeTransitGateways",
         "DescribeVerifiedAccessEndpoints",
         "DescribeVerifiedAccessGroups",
         "DescribeVerifiedAccessInstanceLoggingConfigurations",
@@ -1463,13 +1480,19 @@
         "DetachVerifiedAccessTrustProvider",
         "DetachVolume",
         "DetachVpnGateway",
+        "DisableTransitGatewayRouteTablePropagation",
         "DisableVgwRoutePropagation",
         "DisassociateAddress",
         "DisassociateIamInstanceProfile",
         "DisassociateRouteTable",
+        "DisassociateTransitGatewayRouteTable",
+        "DisassociateVpcCidrBlock",
+        "EnableTransitGatewayRouteTablePropagation",
         "EnableVgwRoutePropagation",
         "EnableVolumeIO",
         "GetManagedPrefixListEntries",
+        "GetTransitGatewayRouteTableAssociations",
+        "GetTransitGatewayRouteTablePropagations",
         "GetVerifiedAccessEndpointPolicy",
         "GetVerifiedAccessGroupPolicy",
         "ImportKeyPair",
@@ -1480,6 +1503,8 @@
         "ModifySecurityGroupRules",
         "ModifySnapshotAttribute",
         "ModifySubnetAttribute",
+        "ModifyTransitGateway",
+        "ModifyTransitGatewayVpcAttachment",
         "ModifyVerifiedAccessEndpoint",
         "ModifyVerifiedAccessEndpointPolicy",
         "ModifyVerifiedAccessGroup",
@@ -1503,11 +1528,12 @@
         "RevokeSecurityGroupEgress",
         "RevokeSecurityGroupIngress",
         "RunInstances",
+        "SearchTransitGatewayRoutes",
         "StartInstances",
         "StopInstances",
         "TerminateInstances"
       ],
-      "operation_count": 181,
+      "operation_count": 204,
       "extraction_sources": [
         "pinned"
       ]
@@ -3347,6 +3373,7 @@
       "name": "sqs",
       "operations": [
         "AddPermission",
+        "CancelMessageMoveTask",
         "ChangeMessageVisibility",
         "ChangeMessageVisibilityBatch",
         "CreateQueue",
@@ -3355,6 +3382,7 @@
         "DeleteQueue",
         "GetQueueAttributes",
         "GetQueueUrl",
+        "ListMessageMoveTasks",
         "ListQueueTags",
         "ListQueues",
         "PurgeQueue",
@@ -3363,10 +3391,11 @@
         "SendMessage",
         "SendMessageBatch",
         "SetQueueAttributes",
+        "StartMessageMoveTask",
         "TagQueue",
         "UntagQueue"
       ],
-      "operation_count": 19,
+      "operation_count": 22,
       "extraction_sources": [
         "pinned"
       ]
